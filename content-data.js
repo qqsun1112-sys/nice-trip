@@ -1,9 +1,17 @@
 /* NICE TRIP content registry
    日後新增／替換活動與文章，優先修改本檔資料，不必重做頁面。
    活動 service: city | temple | meditation | relaxation
-   status: open | full | ended | upcoming
+   status: open | full | ended | upcoming | cancelled | postponed
 */
 window.NICE_TRIP_CONTENT = {
+  settings: {
+    registrationPrimary: "official",
+    officialPayment: "bank-transfer",
+    alternatePaymentProvider: "ACCUPASS",
+    archiveEndedActivities: true,
+    homepageActivityLimit: 3,
+    homepageArticleLimit: 3
+  },
   activityServices: {
     city: { name: "城市故事行旅", subtitle: "文化教育", label: "探索" },
     temple: { name: "廟語心聲", subtitle: "信仰文化", label: "閱讀" },
@@ -18,7 +26,8 @@ window.NICE_TRIP_CONTENT = {
       date: "2026-10-24",
       time: "10:00–12:00",
       status: "open",
-      visuals: { home: "", listing: "", detail: "assets/images/activity-xinzhuang.jpg" },
+      visuals: { home: "", listing: "", detail: "assets/images/activity-xinzhuang.jpg", social: "" },
+      registrationDeadline: "",
       imageAlt: "新莊小旅行活動主視覺",
       officialUrl: "activity-xinzhuang.html",
       payment: "bank-transfer",
@@ -32,7 +41,8 @@ window.NICE_TRIP_CONTENT = {
       date: "2026-10-31",
       time: "10:00–12:00",
       status: "upcoming",
-      visuals: { home: "", listing: "", detail: "assets/images/activity-sheliao.jpg" },
+      visuals: { home: "", listing: "", detail: "assets/images/activity-sheliao.jpg", social: "" },
+      registrationDeadline: "",
       imageAlt: "社寮小旅行活動主視覺",
       officialUrl: "",
       payment: "bank-transfer",
@@ -43,7 +53,8 @@ window.NICE_TRIP_CONTENT = {
       service: "city",
       title: "艋舺小旅行",
       summary: "老城、信仰與街區故事。",
-      visuals: { home: "", listing: "", detail: "" },
+      visuals: { home: "", listing: "", detail: "", social: "" },
+      registrationDeadline: "",
       imageAlt: "艋舺小旅行活動主視覺",
       status: "upcoming",
       officialUrl: "",
@@ -55,7 +66,8 @@ window.NICE_TRIP_CONTENT = {
       service: "city",
       title: "關渡小旅行",
       summary: "河岸、聚落與文化風景。",
-      visuals: { home: "", listing: "", detail: "" },
+      visuals: { home: "", listing: "", detail: "", social: "" },
+      registrationDeadline: "",
       imageAlt: "關渡小旅行活動主視覺",
       date: "2026-11-21",
       status: "upcoming",
@@ -96,6 +108,9 @@ window.NiceTripContent = {
   },
   activitiesByService(service) {
     return this.activeActivities().filter(a => a.service === service);
+  },
+  statusLabel(status) {
+    return ({open:"開放報名",full:"已額滿",ended:"活動結束",upcoming:"即將公布",cancelled:"活動取消",postponed:"活動延期"})[status] || status;
   },
   latestArticles(limit) {
     return [...window.NICE_TRIP_CONTENT.articles]

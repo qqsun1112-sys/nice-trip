@@ -1,0 +1,1 @@
+Shared header/footer source is duplicated intentionally for this zero-build Phase 1 prototype. In production, implement as reusable components/templates.

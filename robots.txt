@@ -1,0 +1,3 @@
+# Phase 5 preview build — do not index the free test site.
+User-agent: *
+Disallow: /

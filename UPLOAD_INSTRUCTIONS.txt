@@ -1,0 +1,9 @@
+美遊記 NICE TRIP｜GitHub Pages 顯示修正版
+
+用途：覆蓋目前 nice-trip Repository 內的同名網站檔案。
+修正：
+1. CSS/JS 已內嵌至 HTML，不再依賴 assets 路徑。
+2. 移除首頁 Phase 5 / Deployment Candidate 對外測試字樣。
+3. 保留 noindex,nofollow，測試期間不讓搜尋引擎索引。
+
+上傳時：將本資料夾內所有檔案上傳到 Repository 根目錄並覆蓋同名檔案。

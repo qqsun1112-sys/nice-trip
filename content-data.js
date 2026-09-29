@@ -18,6 +18,8 @@ window.NICE_TRIP_CONTENT = {
       date: "2026-10-24",
       time: "10:00–12:00",
       status: "open",
+      visuals: { home: "", listing: "", detail: "assets/images/activity-xinzhuang.jpg" },
+      imageAlt: "新莊小旅行活動主視覺",
       officialUrl: "activity-xinzhuang.html",
       payment: "bank-transfer",
       accupassUrl: "https://www.accupass.com/event/2608161009211123836604"
@@ -30,6 +32,8 @@ window.NICE_TRIP_CONTENT = {
       date: "2026-10-31",
       time: "10:00–12:00",
       status: "upcoming",
+      visuals: { home: "", listing: "", detail: "assets/images/activity-sheliao.jpg" },
+      imageAlt: "社寮小旅行活動主視覺",
       officialUrl: "",
       payment: "bank-transfer",
       accupassUrl: "https://www.accupass.com/event/2608240420081031009753"
@@ -39,6 +43,8 @@ window.NICE_TRIP_CONTENT = {
       service: "city",
       title: "艋舺小旅行",
       summary: "老城、信仰與街區故事。",
+      visuals: { home: "", listing: "", detail: "" },
+      imageAlt: "艋舺小旅行活動主視覺",
       status: "upcoming",
       officialUrl: "",
       payment: "bank-transfer",
@@ -49,6 +55,8 @@ window.NICE_TRIP_CONTENT = {
       service: "city",
       title: "關渡小旅行",
       summary: "河岸、聚落與文化風景。",
+      visuals: { home: "", listing: "", detail: "" },
+      imageAlt: "關渡小旅行活動主視覺",
       date: "2026-11-21",
       status: "upcoming",
       officialUrl: "",
@@ -57,16 +65,21 @@ window.NICE_TRIP_CONTENT = {
     }
   ],
   articles: [
-    { category:"faith", publisher:"輕旅行", date:"2026-08-20", title:"旅行不一定要去遠方！走進松山霞海城隍廟", url:"https://travel.yam.com/article/141045" },
-    { category:"city", publisher:"輕旅行", date:"2026-09-02", title:"你以為只是一面牆，它卻裝下了兩千多年的文化", url:"https://travel.yam.com/article/140883" },
-    { category:"travel", publisher:"女子漾", date:"2026-08-31", title:"走進上高地，才發現最美的不是風景", url:"https://woman.udn.com/woman/story/123162/9724628" },
-    { category:"travel", publisher:"輕旅行", date:"2026-08-22", title:"清津峽", url:"https://travel.yam.com/article/140763" },
-    { category:"faith", publisher:"輕旅行", title:"臺灣廟宇文化", url:"https://travel.yam.com/article/140664" },
-    { category:"city", publisher:"女子漾", title:"閱讀城市", url:"https://woman.udn.com/woman/story/123162/9669005" }
+    { category:"faith", publisher:"輕旅行", date:"2026-08-20", image:"", imageAlt:"松山霞海城隍廟文章主視覺", title:"旅行不一定要去遠方！走進松山霞海城隍廟", url:"https://travel.yam.com/article/141045" },
+    { category:"city", publisher:"輕旅行", date:"2026-09-02", image:"assets/images/article-confucius.jpg", imageAlt:"臺北孔子廟萬仞宮牆", title:"你以為只是一面牆，它卻裝下了兩千多年的文化", url:"https://travel.yam.com/article/140883" },
+    { category:"travel", publisher:"女子漾", date:"2026-08-31", image:"assets/images/article-kamikochi.jpg", imageAlt:"日本上高地自然風景", title:"走進上高地，才發現最美的不是風景", url:"https://woman.udn.com/woman/story/123162/9724628" },
+    { category:"travel", publisher:"輕旅行", date:"2026-08-22", image:"assets/images/article-kiyotsu.jpg", imageAlt:"日本新潟清津峽", title:"清津峽", url:"https://travel.yam.com/article/140763" },
+    { category:"faith", publisher:"輕旅行", image:"", imageAlt:"臺灣廟宇文化文章主視覺", title:"臺灣廟宇文化", url:"https://travel.yam.com/article/140664" },
+    { category:"city", publisher:"女子漾", image:"", imageAlt:"閱讀城市文章主視覺", title:"閱讀城市", url:"https://woman.udn.com/woman/story/123162/9669005" }
   ]
 };
 
 window.NiceTripContent = {
+  visual(item, placement) {
+    if (!item) return "";
+    if (item.visuals) return item.visuals[placement] || "";
+    return item.image || "";
+  },
   activeActivities() {
     const today = new Date();
     today.setHours(0,0,0,0);

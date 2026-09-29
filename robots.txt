@@ -1,3 +1,4 @@
-# Phase 5 preview build — do not index the free test site.
 User-agent: *
 Disallow: /
+
+# NICE TRIP V2 staging branch remains noindex until launch.

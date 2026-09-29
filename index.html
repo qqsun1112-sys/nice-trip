@@ -32,6 +32,23 @@ radial-gradient(ellipse at 96% 4%,rgba(189,124,18,.10),transparent 20%);pointer-
 @media(min-width:901px){.heroCopy{padding-top:72px}.serviceImage{height:230px}.activity img{height:245px}.story:first-child{height:310px}.storyGrid{align-items:center}}
 @media(max-width:560px){.hero{background-position:58% center}.heroCopy{padding-top:58px}.hero h1{line-height:1.22}.serviceImage{height:235px}.activityBody{padding:18px 20px}.story{height:235px}}
 </style>
+
+<style id="v11-unique-image-system">
+/* V11 — image uniqueness + editorial art system */
+.serviceArt{height:230px;display:grid;place-items:center;position:relative;overflow:hidden;background:#f4f0e7}
+.serviceArt:before,.serviceArt:after{content:"";position:absolute;border-radius:999px;opacity:.72}
+.serviceArt:before{width:210px;height:210px;right:-45px;top:-60px;background:rgba(255,255,255,.72)}
+.serviceArt:after{width:150px;height:150px;left:-38px;bottom:-55px;border:1px solid rgba(8,83,86,.2)}
+.serviceArt span{font-family:"Noto Serif TC",serif;font-size:72px;font-weight:700;line-height:1;z-index:1;letter-spacing:.08em}
+.serviceArt--city{background:linear-gradient(145deg,#e7f2ef,#f7efe0);color:#0c6967}
+.serviceArt--temple{background:linear-gradient(145deg,#f8e8df,#f6f0e5);color:#a8452f}
+.serviceArt--mind{background:linear-gradient(145deg,#edf2e5,#e7f1f3);color:#657d45}
+.serviceArt--body{background:linear-gradient(145deg,#e7f1f6,#f6efe1);color:#2678a0}
+.storyArt{height:100%;min-height:260px;display:flex;align-items:flex-end;padding:28px;border-radius:inherit;background:linear-gradient(135deg,#f5eee2,#e7f1ef);position:relative;overflow:hidden}
+.storyArt:before{content:"";position:absolute;width:260px;height:260px;border:1px solid rgba(8,83,86,.18);border-radius:50%;right:-80px;top:-95px}
+.storyArt span{font-family:"Noto Serif TC",serif;font-size:28px;font-weight:700;color:#07575a;letter-spacing:.12em}
+@media(max-width:560px){.serviceArt{height:210px}.serviceArt span{font-size:62px}.storyArt{min-height:220px}}
+</style>
 </head>
 <body>
 <header><div class="wrap nav"><a class="brand" href="index.html">美遊記<small>NICE TRIP</small></a><span class="tagline">走進城市・讀懂文化・遇見自己</span><nav class="links"><a href="index.html">首頁</a><div class="drop"><button class="dropBtn">四大服務⌄</button><div class="dropMenu"><a href="city-walk.html">城市故事行旅｜文化教育</a><a href="temple-culture.html">廟語心聲｜信仰文化</a><a href="meditation-108.html">百八鐘靜心運動｜心理健康</a><a href="body-relaxation.html">身心放鬆術｜健康促進</a></div></div><a href="activities.html">近期活動</a><a href="articles.html">精選閱讀</a><a href="group-booking.html">團體預約</a><a href="about.html">關於美遊記</a></nav><button class="mobileBtn" aria-label="開啟選單">☰</button></div></header>
@@ -51,7 +68,7 @@ radial-gradient(ellipse at 96% 4%,rgba(189,124,18,.10),transparent 20%);pointer-
 </div><a class="btn" href="activities.html">查看全部活動 →</a></div></section>
 <section class="section impact"><div class="wrap"><div class="sectionTitle"><div class="eyebrow">CITY WALK IMPACT</div><h2>城市故事行旅｜參與者回饋</h2></div><div class="stats"><div class="stat"><strong>4.89/5</strong><span>整體滿意度</span></div><div class="stat"><strong>98.7%</strong><span>正向評價率</span></div><div class="stat"><strong>4.92/5</strong><span>文化保存認同</span></div><div class="stat"><strong>4.91/5</strong><span>導覽專業度</span></div></div><div class="source">資料來源｜《2026 美遊記城市故事行旅社會影響力報告》；數據範圍為城市故事行旅參與者回饋。</div></div></section>
 <section class="section group"><div class="wrap groupGrid"><div><div class="eyebrow">GROUP EXPERIENCES</div><h2>為團體，設計一場剛剛好的體驗</h2><p>依參與對象、時間與需求，規劃文化走讀、身心健康或組合式活動。</p><a class="btn" href="group-booking.html">團體活動洽詢 →</a></div><div class="uses"><div><b>企業／EAP</b><br>員工活動・教育訓練</div><div><b>學校／社區</b><br>文化教育・健康促進</div><div><b>團體包場</b><br>專屬路線・客製體驗</div></div></div></section>
-<section class="section reading"><div class="wrap"><div class="sectionTitle"><div class="eyebrow">SELECTED STORIES</div><h2>精選閱讀</h2><p>用文字，走進更深的風景。</p></div><div class="storyGrid"><a class="story" href="articles.html"><img src="assets/images/temple-detail.webp" alt="廟宇建築文化細節"><span>走進松山霞海城隍廟</span></a><a class="story" href="articles.html"><img src="assets/images/article-confucius.jpg" alt="臺北孔子廟"><span>臺北孔子廟的萬仞宮牆</span></a><a class="story" href="articles.html"><img src="assets/images/article-kamikochi.jpg" alt="日本上高地"><span>走進上高地，看見保育與旅行</span></a></div><a class="btn" href="articles.html">查看更多文章 →</a></div></section>
+<section class="section reading"><div class="wrap"><div class="sectionTitle"><div class="eyebrow">SELECTED STORIES</div><h2>精選閱讀</h2><p>用文字，走進更深的風景。</p></div><div class="storyGrid"><a class="story" href="articles.html"><div class="storyArt storyArt--faith" aria-hidden="true"><span>信仰文化</span></div><span>走進松山霞海城隍廟</span></a><a class="story" href="articles.html"><img src="assets/images/article-confucius.jpg" alt="臺北孔子廟"><span>臺北孔子廟的萬仞宮牆</span></a><a class="story" href="articles.html"><img src="assets/images/article-kamikochi.jpg" alt="日本上高地"><span>走進上高地，看見保育與旅行</span></a></div><a class="btn" href="articles.html">查看更多文章 →</a></div></section>
 <section class="about"><div class="wrap"><div class="eyebrow">ABOUT NICE TRIP</div><h2>關於美遊記</h2><p>用文化，走出更健康、更有意義的生活。從城市文化出發，透過走讀、文化體驗與身心活動，重新認識城市，也重新感受生活。</p><a class="btn" href="about.html">了解美遊記 →</a></div></section>
 </main>
 <footer class="footer"><div class="wrap foot"><div><strong>美遊記 NICE TRIP</strong><br>薪展新創文化有限公司<br>文化 × 健康 × 公益 × 永續</div><div>聯絡信箱｜rodney.xinzhan@gmail.com<br><a href="privacy.html">隱私權政策</a>｜<a href="terms.html">服務條款</a><br>© 2026 薪展新創文化有限公司 版權所有 All Rights Reserved.</div></div></footer>

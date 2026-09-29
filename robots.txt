@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
 
-# NICE TRIP V2 staging branch remains noindex until launch.
+Sitemap: https://qqsun1112-sys.github.io/nice-trip/sitemap.xml

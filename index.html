@@ -48,6 +48,27 @@ section>.wrap>.eyebrow{margin-bottom:8px}
 @media(max-width:1100px){.heroGrid{grid-template-columns:.9fr 1.1fr;gap:30px}.hero h1{font-size:48px}}
 @media(max-width:850px){.hero{background:linear-gradient(180deg,#fbfcfa,#e4f0ec)}.heroGrid{grid-template-columns:1fr;gap:0}.heroGrid>div:first-child{padding:44px 0 8px}.heroVisual.heroBrand{margin:18px 0 42px!important;background-size:contain!important}.hero h1{font-size:44px}}
 @media(max-width:520px){.heroGrid>div:first-child{padding-top:34px}.hero h1{font-size:38px}.hero p{font-size:17px}.heroVisual.heroBrand{margin:12px 0 32px!important}.services{margin-top:20px}}
+
+/* NICE TRIP unified section + card language */
+:root{--nt-space:84px;--nt-title:clamp(36px,4vw,52px);--nt-goldline:#d8c79f;--nt-paper:#fffdf9}
+.activitiesEditorial,.storiesSection,.groupExperience,.aboutBrand{padding:var(--nt-space) 0!important}
+.activityHead,.storiesHead{grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr)!important;gap:56px!important;margin-bottom:32px!important}
+.activityHead h2,.storiesHead h2,.groupCopy h2,.aboutBrandCopy h2{font:700 var(--nt-title)/1.22 serif!important;letter-spacing:-.018em;color:var(--ink)!important}
+.activityHead p,.storiesHead p,.groupCopy>p,.aboutBrandCopy p{font-size:16px!important;line-height:1.9!important;color:#5b7378!important}
+.activitiesEditorial .cards,.editorialReading{gap:20px!important}
+.activitiesEditorial .card,.editorialReading .reading{border-radius:0!important;box-shadow:none!important;transition:transform .2s ease,box-shadow .2s ease!important}
+.activitiesEditorial .card{border:0!important;border-top:2px solid #b89048!important;padding:28px 26px!important;background:#fff!important}
+.activitiesEditorial .card:hover,.editorialReading .reading:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(20,75,87,.08)!important}
+.activitiesEditorial .card small,.editorialReading small{font-size:12px!important;font-weight:800!important;letter-spacing:.08em!important;color:#9a7331!important}
+.activitiesEditorial .card h3,.editorialReading strong{font:700 25px/1.4 serif!important;color:var(--ink)!important}
+.activitiesEditorial .card p,.editorialReading em{font-size:14px!important;line-height:1.8!important;color:#667b80!important}
+.groupOptions{gap:0!important;border-top:1px solid var(--nt-goldline);border-bottom:1px solid var(--nt-goldline)}
+.groupOptions div{border:0!important;border-bottom:1px solid #e7dcc3!important;border-left:0!important;background:transparent!important;padding:16px 4px!important}
+.groupOptions div:last-child{border-bottom:0!important}
+.brandValues{border-color:var(--nt-goldline)!important}
+.brandValues div{border-color:#e7dcc3!important}
+@media(max-width:800px){:root{--nt-space:58px}.activityHead,.storiesHead{grid-template-columns:1fr!important;gap:14px!important}.activitiesEditorial .cards,.editorialReading{grid-template-columns:1fr!important}.groupExperienceGrid,.aboutBrandGrid{grid-template-columns:1fr!important;gap:34px!important}}
+@media(max-width:520px){:root{--nt-space:48px;--nt-title:32px}.activitiesEditorial .card{padding:22px 18px!important}.activitiesEditorial .card h3,.editorialReading strong{font-size:23px!important}.brandValues{grid-template-columns:1fr 1fr!important}}
 </style><script src="content-data.js" defer></script><style id="nt-dynamic-home-css">#homeActivityGrid .activity{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}#homeActivityGrid .homeActivityArt{min-height:160px;background:var(--soft);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;text-align:center}#homeActivityGrid .activityBody{padding:18px}#homeActivityGrid .activityBody h3{margin:4px 0}#homeActivityGrid .activityBody p{margin:0}/* homepage V3 hero: brand visual is the lead, not a side illustration */
 .heroV3{min-height:0!important;padding:0!important;background:#f7faf8!important;display:block!important}
 .heroV3>.wrap{width:min(1320px,calc(100% - 40px));padding:34px 0 42px}

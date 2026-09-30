@@ -20,6 +20,21 @@ window.NICE_TRIP_CONTENT = {
   },
   activities: [
     {
+      id: "temple-songshan-20261026",
+      service: "temple",
+      title: "廟語心聲：松山霞海城隍廟",
+      summary: "閱讀建築・閱讀文化・閱讀人生；用一小時，從建築與文化重新閱讀一座廟。",
+      date: "2026-10-26",
+      time: "15:00–16:00",
+      status: "open",
+      visuals: { home: "", listing: "", detail: "", social: "" },
+      registrationDeadline: "",
+      imageAlt: "廟語心聲松山霞海城隍廟文化講座活動主視覺",
+      officialUrl: "",
+      payment: "free",
+      accupassUrl: "https://www.accupass.com/event/2608250728484011067760"
+    },
+    {
       id: "xinzhuang-20261024",
       service: "city",
       title: "新莊小旅行",

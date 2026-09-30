@@ -21,6 +21,26 @@ html,body{max-width:100%;overflow-x:hidden}img,svg,video{max-width:100%;height:a
  .ntMobilePanel a{color:#163d43;text-decoration:none;padding:8px 0}
  .ntMobilePanel .sub{padding-left:16px;font-size:14px;color:#55706f}
 }
+
+/* Header alignment lock — keep articles navigation identical to the main site */
+header.header{height:64px!important;display:block!important}
+header.header>.wrap.nav{
+  width:min(var(--max),calc(100% - 40px))!important;
+  max-width:var(--max)!important;
+  height:64px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:24px!important;
+}
+header.header .brand{flex:0 0 auto!important;margin:0!important}
+header.header .links{margin-left:auto!important;gap:22px!important}
+@media(max-width:860px){
+  header.header>.wrap.nav{width:min(var(--max),calc(100% - 28px))!important}
+  header.header .links{display:none!important}
+}
 </style><script src="content-data.js" defer></script></head><body><header class="header"><div class="wrap nav"><a class="brand" href="index.html">美遊記<small>NICE TRIP</small></a><nav class="links"><a href="index.html">首頁</a><span class="dropdown">四大服務⌄<span class="drop"><a href="city-walk.html">城市故事行旅</a><a href="temple-culture.html">廟語心聲</a><a href="meditation-108.html">百八鐘靜心運動</a><a href="body-relaxation.html">身心放鬆術</a></span></span><a href="activities.html">近期活動</a><a class="active" href="articles.html">精選閱讀</a><a href="group-booking.html">團體預約</a><a href="about.html">關於美遊記</a></nav><button class="ntMobileBtn" type="button" aria-label="開啟選單" aria-expanded="false">☰</button></div><nav class="ntMobilePanel" aria-label="手機導覽"><a href="index.html">首頁</a><a class="sub" href="city-walk.html">城市故事行旅</a><a class="sub" href="temple-culture.html">廟語心聲</a><a class="sub" href="meditation-108.html">百八鐘靜心運動</a><a class="sub" href="body-relaxation.html">身心放鬆術</a><a href="activities.html"><strong>近期活動</strong></a><a href="articles.html">精選閱讀</a><a href="group-booking.html">團體預約</a><a href="about.html">關於美遊記</a></nav></header><main><section class="hero"><div class="wrap heroGrid"><div class="heroCopy"><h1>精選閱讀</h1><h2>用文字，走進更深的風景。</h2><div class="rule"></div><p>城市、文化、旅行與生活，<br>記錄那些值得慢慢閱讀的發現。</p></div><div class="feature"><a class="featureCard" href="https://tora1612.pixnet.net/blog/posts/930990893018082223" target="_blank" rel="noopener"><small>本期精選｜信仰文化｜2026.09.21</small><h3>當我們走進廟宇，<br>還看得懂它在說什麼？</h3><p>從建築、匠藝與文化符號出發，重新學習如何看懂一座廟，讓熟悉的信仰空間再次被閱讀。</p><span class="arrow">→</span></a></div></div></section><div class="wrap"><div class="filters"><button class="filter active" data-f="all">全部文章</button><button class="filter" data-f="city">城市文化</button><button class="filter" data-f="faith">信仰文化</button><button class="filter" data-f="travel">旅行觀察</button><button class="filter" data-f="wellness">身心生活</button></div></div><section class="articles"><div class="wrap"><h2 class="title">│ 最新文章 ─</h2><div class="grid">
 <a class="card" data-cat="faith" href="https://tora1612.pixnet.net/blog/posts/930990893018082223" target="_blank" rel="noopener"><div class="visual">松山霞海城隍廟</div><div class="body"><div class="meta">信仰文化　｜　2026.09.21</div><h3>當我們走進廟宇，還看得懂它在說什麼？</h3><p>從建築、匠藝與文化符號出發，重新學習如何看懂一座廟。</p><span class="more">→</span></div></a>
 <a class="card" data-cat="city" href="https://tora1612.pixnet.net/blog/posts/935883371277936732" target="_blank" rel="noopener"><div class="visual">臺北孔子廟・萬仞宮牆</div><div class="body"><div class="meta">城市文化　｜　2026.09.02</div><h3>你以為只是一面牆，它卻裝下了兩千多年的文化</h3><p>從《論語》、孔德成到鴟吻、通天筒與團壽瓦當，讀懂萬仞宮牆。</p><span class="more">→</span></div></a>

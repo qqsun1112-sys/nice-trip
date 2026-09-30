@@ -127,7 +127,7 @@ window.NiceTripContent.remote = {
   async get(table, orderColumn) {
     const endpoint = this.url + "/rest/v1/" + table + "?published=eq.true&select=*&order=" + orderColumn;
     const response = await fetch(endpoint, {
-      headers: { apikey: this.key, Authorization: "Bearer " + this.key }
+      headers: { apikey: this.key }
     });
     if (!response.ok) throw new Error("content fetch failed");
     return response.json();

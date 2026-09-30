@@ -24,7 +24,7 @@ GitHub Pages 基準網址：`https://qqsun1112-sys.github.io/nice-trip/`
 
 活動日期以 `Asia/Taipei` 判斷；取消與延期活動不會因原活動日期已過而被誤列為「活動足跡」。
 
-精選閱讀正式來源目前允許：輕旅行（travel.yam.com）、女子漾（woman.udn.com）、公民新聞（peopo.org）。後台發布時會檢查媒體名稱與網址來源一致。
+精選閱讀正式來源目前允許：輕旅行（travel.yam.com）、女子漾（woman.udn.com）、公民新聞（peopo.org）、台灣產經新聞網（news.taiwannet.com.tw）。後台發布時會檢查媒體名稱與網址來源一致。
 
 ## 報名
 官網報名為主要流程，目前付款方式為銀行電匯。
@@ -48,3 +48,10 @@ GitHub Pages 基準網址：`https://qqsun1112-sys.github.io/nice-trip/`
 網站版型／功能：修改 repository 後由 GitHub Pages 部署。
 
 若未來改用自訂網域，需同步更新 canonical、sitemap、robots 與 Supabase Edge Function CORS allowlist。
+
+## 品牌與視覺規範
+- 四大服務固定順序：01 百八鐘靜心運動｜心理健康、02 身心放鬆術｜健康促進、03 城市故事行旅｜文化教育、04 廟語心聲｜信仰文化。
+- 首頁四大服務識別字：靜／鬆／走／讀。
+- 城市故事行旅完整產品資產為北北基 20 條文化探索路線：台北 13、新北 5、基隆 2；「近期活動」只代表目前開放或即將開放場次。
+- 同一張主要圖片全站只使用一次；正式換圖後必須再次執行圖片唯一性檢查。
+- 圖片以 AI 情境視覺為主、實景為輔；避免 QR Code、非必要主辦 LOGO、神像作為主要視覺，以及未經核實的寺廟文字／招牌。

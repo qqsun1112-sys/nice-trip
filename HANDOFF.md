@@ -76,3 +76,20 @@ ACCUPASS 連結已保存，但官網仍是未來主要入口。
 - 官網報名優先；ACCUPASS 是其他金流備援。
 - 同一張圖片不跨版位重複使用。
 - 不確定的日期、票價、地點一律不自行補寫。
+
+
+## F. 2026-09-30 最終技術 QA 更新
+
+- 10 個公開頁：每頁單一 H1，title / description / canonical 完整。
+- 公開頁無空白 `href="#"`、無已知 broken internal HTML link。
+- 舊版 `ntMobilePanel / ntMobileBtn` 與無效 `none center` 背景已清除。
+- 公開頁靜態圖片跨頁重複檢查：0。
+- 首頁與活動頁使用 `Asia/Taipei` 判斷活動日期，避免海外瀏覽器時區造成日期誤判。
+- 活動足跡不會把取消／延期活動錯標成活動結束。
+- 官網報名為主要入口；ACCUPASS 僅作信用卡／其他金流備用入口。
+- Supabase 公開內容讀取使用 publishable `apikey`，活動與文章均保留本機 fallback。
+- 後台發布文章允許：輕旅行、女子漾、公民新聞，並檢查網址網域與媒體名稱一致。
+- 後台圖片唯一性已跨 `site_activities` 與 `site_articles` 檢查。
+- `sitemap.xml` 僅收錄 10 個公開頁；privacy / terms / admin 不收錄。
+
+仍需管理者本人執行的真人驗收維持不變：登入 admin → 建立未發布測試活動 → 上傳圖片 → 儲存 → 發布 → 前台確認 → 下架／刪除測試資料。

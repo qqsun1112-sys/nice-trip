@@ -118,3 +118,26 @@ window.NiceTripContent = {
       .slice(0, limit || window.NICE_TRIP_CONTENT.articles.length);
   }
 };
+
+
+/* Remote content sync: public read only. Static registry above remains the fallback. */
+window.NiceTripContent.remote = {
+  url: "https://eanxqqctblwfhtdrhwuk.supabase.co",
+  key: "sb_publishable_C_5cBiXJWq2zVyWmgnMZbQ_W4aonYIy",
+  async get(table, orderColumn) {
+    const endpoint = this.url + "/rest/v1/" + table + "?published=eq.true&select=*&order=" + orderColumn;
+    const response = await fetch(endpoint, {
+      headers: { apikey: this.key, Authorization: "Bearer " + this.key }
+    });
+    if (!response.ok) throw new Error("content fetch failed");
+    return response.json();
+  },
+  async activities() {
+    try { return await this.get("site_activities", "event_date.asc.nullslast,sort_order.asc"); }
+    catch (e) { return window.NICE_TRIP_CONTENT.activities; }
+  },
+  async articles() {
+    try { return await this.get("site_articles", "published_at.desc.nullslast,sort_order.asc"); }
+    catch (e) { return window.NICE_TRIP_CONTENT.articles; }
+  }
+};

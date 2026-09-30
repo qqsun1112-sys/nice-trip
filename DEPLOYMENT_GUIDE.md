@@ -20,7 +20,11 @@ GitHub Pages 基準網址：`https://qqsun1112-sys.github.io/nice-trip/`
 - 活動狀態與報名截止管理
 
 後台資料：Supabase
-公開前台只讀取 `published=true` 的活動與文章；讀取失敗時保留靜態 fallback。
+公開前台只讀取 `published=true` 的活動與文章；讀取失敗時保留靜態 fallback。公開 REST 讀取只使用 Supabase publishable `apikey`，不使用 service-role／secret key。
+
+活動日期以 `Asia/Taipei` 判斷；取消與延期活動不會因原活動日期已過而被誤列為「活動足跡」。
+
+精選閱讀正式來源目前允許：輕旅行（travel.yam.com）、女子漾（woman.udn.com）、公民新聞（peopo.org）。後台發布時會檢查媒體名稱與網址來源一致。
 
 ## 報名
 官網報名為主要流程，目前付款方式為銀行電匯。

@@ -20,6 +20,32 @@ window.NICE_TRIP_CONTENT = {
   },
   activities: [
     {
+      id: "meditation-108-accupass-260814",
+      service: "meditation",
+      title: "百八鐘靜心運動｜實體活動",
+      summary: "百八鐘靜心運動實體體驗活動；活動日期、時間、地點與票種以 ACCUPASS 活動頁最新公告為準。",
+      status: "upcoming",
+      visuals: { home: "", listing: "", detail: "", social: "" },
+      registrationDeadline: "",
+      imageAlt: "百八鐘靜心運動實體活動主視覺",
+      officialUrl: "",
+      payment: "accupass",
+      accupassUrl: "https://www.accupass.com/event/2608140740241653305881"
+    },
+    {
+      id: "body-relaxation-accupass-260720",
+      service: "relaxation",
+      title: "身心放鬆術｜實體活動",
+      summary: "身心放鬆術實體體驗活動；活動日期、時間、地點與票種以 ACCUPASS 活動頁最新公告為準。",
+      status: "upcoming",
+      visuals: { home: "", listing: "", detail: "", social: "" },
+      registrationDeadline: "",
+      imageAlt: "身心放鬆術實體活動主視覺",
+      officialUrl: "",
+      payment: "accupass",
+      accupassUrl: "https://www.accupass.com/event/2607200101301082030862"
+    },
+    {
       id: "temple-songshan-20261026",
       service: "temple",
       title: "廟語心聲：松山霞海城隍廟",

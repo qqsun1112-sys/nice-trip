@@ -87,23 +87,28 @@ window.NICE_TRIP_CONTENT = {
 };
 
 window.NiceTripContent = {
+  todayTaipei() {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Taipei", year: "numeric", month: "2-digit", day: "2-digit"
+    }).formatToParts(new Date());
+    const m = Object.fromEntries(parts.filter(x => x.type !== "literal").map(x => [x.type, x.value]));
+    return m.year + "-" + m.month + "-" + m.day;
+  },
   visual(item, placement) {
     if (!item) return "";
     if (item.visuals) return item.visuals[placement] || "";
     return item.image || "";
   },
   activeActivities() {
-    const today = new Date();
-    today.setHours(0,0,0,0);
+    const today = this.todayTaipei();
     return window.NICE_TRIP_CONTENT.activities
-      .filter(a => a.status !== "ended" && (!a.date || new Date(a.date + "T00:00:00") >= today))
+      .filter(a => !["ended","cancelled"].includes(a.status) && (!a.date || a.date >= today))
       .sort((a,b) => (a.date || "9999-12-31").localeCompare(b.date || "9999-12-31"));
   },
   pastActivities() {
-    const today = new Date();
-    today.setHours(0,0,0,0);
+    const today = this.todayTaipei();
     return window.NICE_TRIP_CONTENT.activities
-      .filter(a => a.status === "ended" || (a.date && new Date(a.date + "T00:00:00") < today))
+      .filter(a => a.status === "ended" || (a.date && a.date < today && !["cancelled","postponed"].includes(a.status)))
       .sort((a,b) => (b.date || "").localeCompare(a.date || ""));
   },
   activitiesByService(service) {

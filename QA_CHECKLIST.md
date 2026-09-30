@@ -13,6 +13,7 @@
 - [x] 報名截止後前台停止顯示可報名 CTA
 - [x] 活動結束自動進入「活動足跡」；取消／延期不會因原日期已過而誤歸檔
 - [x] 活動日期以 Asia/Taipei 判斷，避免海外裝置時區造成日期誤判
+- [x] 報名截止欄位於後台以台灣時間顯示，儲存時明確轉為 +08:00 對應 ISO 時間
 - [x] 官網報名為主要入口；ACCUPASS 僅作其他金流備用入口
 - [x] 新莊官網報名與匯款回報 Edge Functions 已部署且 ACTIVE
 - [x] registrations、content tables 均啟用 RLS

@@ -20,6 +20,19 @@ window.NICE_TRIP_CONTENT = {
   },
   activities: [
     {
+      id: "body-relaxation-accupass-260814",
+      service: "relaxation",
+      title: "身心放鬆術｜實體活動",
+      summary: "身心放鬆術實體體驗活動，開放報名中。",
+      status: "open",
+      visuals: { home: "", listing: "", detail: "", social: "" },
+      registrationDeadline: "",
+      imageAlt: "身心放鬆術實體活動主視覺",
+      officialUrl: "",
+      payment: "accupass",
+      accupassUrl: "https://www.accupass.com/event/2608140740241653305881"
+    },
+    {
       id: "temple-songshan-20261026",
       service: "temple",
       title: "廟語心聲：松山霞海城隍廟",

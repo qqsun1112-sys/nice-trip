@@ -86,19 +86,19 @@ html,body{max-width:100%;overflow-x:hidden}img,svg,video{max-width:100%;height:a
 @media(max-width:760px){section{padding-top:52px;padding-bottom:52px}}
 </style><style id="nt-activity-image-fit-final">
 /* Uploaded activity posters: show the full artwork, never crop it. */
-#activityGrid .activityPoster:has(img){height:auto!important;min-height:0!important;padding:0!important;display:block!important;background:#f6f1e7!important}
-#activityGrid .activityPoster:has(img)::before,#activityGrid .activityPoster:has(img)::after{display:none!important}
-#activityGrid .activityPoster:has(img) img{width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;object-fit:contain!important;display:block!important;transform:none!important}
+#activityGrid .activityCover:has(img){height:auto!important;min-height:0!important;padding:0!important;display:block!important;background:#f6f1e7!important}
+#activityGrid .activityCover:has(img)::before,#activityGrid .activityCover:has(img)::after{display:none!important}
+#activityGrid .activityCover:has(img) img{width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;object-fit:contain!important;display:block!important;transform:none!important}
 @media(max-width:760px){
- #activityGrid .activityPoster:has(img){height:auto!important}
- #activityGrid .activityPoster:has(img) img{height:auto!important;min-height:0!important;object-fit:contain!important}
+ #activityGrid .activityCover:has(img){height:auto!important}
+ #activityGrid .activityCover:has(img) img{height:auto!important;min-height:0!important;object-fit:contain!important}
 }
 </style><style id="nt-activity-cards-release">
 #activityGrid{align-items:stretch!important}
 #activityGrid .card{display:flex!important;flex-direction:column!important;height:100%!important;overflow:hidden!important;background:#fff!important}
 #activityGrid .activityPoster{flex:0 0 auto}
-#activityGrid .activityPoster:has(img){background:#f3efe6!important;border-bottom:1px solid rgba(12,83,84,.08)!important}
-#activityGrid .activityPoster:has(img) img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;display:block!important}
+#activityGrid .activityCover:has(img){background:#f3efe6!important;border-bottom:1px solid rgba(12,83,84,.08)!important}
+#activityGrid .activityCover:has(img) img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;display:block!important}
 #activityGrid .cardBody{display:flex!important;flex-direction:column!important;flex:1 1 auto!important}
 #activityGrid .cardBody .btn,#activityGrid .cardBody .pendingOfficial{margin-top:auto!important;align-self:flex-start}
 @media(max-width:760px){
@@ -113,7 +113,7 @@ html,body{max-width:100%;overflow-x:hidden}img,svg,video{max-width:100%;height:a
 #activityGrid .cardBody{flex:0 0 auto!important;min-height:0!important}
 #activityGrid .cardBody .btn,#activityGrid .cardBody .pendingOfficial{margin-top:18px!important}
 @media(max-width:760px){#activityGrid .card{height:auto!important;min-height:0!important}}
-</style><style id="nt-activity-poster-uniform-final">/* Keep uploaded activity artwork in one consistent card frame. */#activityGrid .activityPoster:has(img){height:270px!important;min-height:270px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;background:#f3efe6!important}#activityGrid .activityPoster:has(img) img{width:100%!important;height:100%!important;min-height:0!important;object-fit:contain!important;display:block!important}@media(max-width:760px){#activityGrid .activityPoster:has(img){height:220px!important;min-height:220px!important}}</style><style id="nt-nav-color-final">
+</style><style id="nt-activity-poster-uniform-final">/* Keep uploaded activity artwork in one consistent card frame. */#activityGrid .activityCover:has(img){height:270px!important;min-height:270px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;background:#f3efe6!important}#activityGrid .activityCover:has(img) img{width:100%!important;height:100%!important;min-height:0!important;object-fit:contain!important;display:block!important}@media(max-width:760px){#activityGrid .activityCover:has(img){height:220px!important;min-height:220px!important}}</style><style id="nt-nav-color-final">
 /* Keep global navigation color consistent with the rest of NICE TRIP */
 header .links,header nav{color:#163d43!important}
 header .links>a,header nav>a,header .serviceDropBtn{color:#163d43!important}

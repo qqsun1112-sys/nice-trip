@@ -20,6 +20,19 @@ window.NICE_TRIP_CONTENT = {
   },
   activities: [
     {
+      id: "meditation-108-accupass-260720",
+      service: "meditation",
+      title: "百八鐘靜心運動｜實體活動",
+      summary: "百八鐘靜心運動實體體驗活動，開放報名中。",
+      status: "open",
+      visuals: { home: "", listing: "", detail: "", social: "" },
+      registrationDeadline: "",
+      imageAlt: "百八鐘靜心運動實體活動主視覺",
+      officialUrl: "",
+      payment: "accupass",
+      accupassUrl: "https://www.accupass.com/event/2607200101301082030862"
+    },
+    {
       id: "body-relaxation-accupass-260814",
       service: "relaxation",
       title: "身心放鬆術｜實體活動",

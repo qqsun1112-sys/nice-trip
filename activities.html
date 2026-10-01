@@ -113,6 +113,15 @@ html,body{max-width:100%;overflow-x:hidden}img,svg,video{max-width:100%;height:a
 #activityGrid .cardBody{flex:0 0 auto!important;min-height:0!important}
 #activityGrid .cardBody .btn,#activityGrid .cardBody .pendingOfficial{margin-top:18px!important}
 @media(max-width:760px){#activityGrid .card{height:auto!important;min-height:0!important}}
+</style><style id="nt-activity-row-alignment-final">
+/* Final row alignment: actual dynamic card content uses .body (not .cardBody). */
+@media (min-width:761px){
+ #activityGrid{align-items:stretch!important}
+ #activityGrid .card{display:flex!important;flex-direction:column!important;height:100%!important;align-self:stretch!important}
+ #activityGrid .body{display:flex!important;flex-direction:column!important;flex:1 1 auto!important}
+ #activityGrid .body .btn{margin-top:auto!important;align-self:flex-start!important}
+ #activityGrid .body .pendingOfficial{margin-top:auto!important}
+}
 </style><style id="nt-activity-card-baseline">#activityGrid .visual.activityCover{height:300px!important;min-height:300px!important;max-height:300px!important;overflow:hidden!important;background:#f3efe6!important}#activityGrid .visual.activityCover>img{width:100%!important;height:100%!important;max-height:none!important;object-fit:cover!important;object-position:center!important;display:block!important}#activityGrid .body h2{margin-bottom:16px!important}@media(max-width:760px){#activityGrid .visual.activityCover{height:230px!important;min-height:230px!important;max-height:230px!important}}</style><style id="nt-nav-color-final">
 /* Keep global navigation color consistent with the rest of NICE TRIP */
 header .links,header nav{color:#163d43!important}

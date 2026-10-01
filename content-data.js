@@ -10,7 +10,10 @@ window.NICE_TRIP_CONTENT = {
     alternatePaymentProvider: "ACCUPASS",
     archiveEndedActivities: true,
     homepageActivityLimit: 3,
-    homepageArticleLimit: 3
+    homepageArticleLimit: 3,
+    articleListingBatchSize: 15,
+    launchMinimumActivities: 15,
+    launchMinimumArticles: 15
   },
   activityServices: {
     city: { name: "城市故事行旅", subtitle: "文化教育", label: "探索" },

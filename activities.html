@@ -140,7 +140,7 @@ ntApplyActivityFilter('all');
    The public listing is rendered from the local NICE_TRIP_CONTENT registry.
    This keeps paid/free classification and fallback behavior deterministic.
    Remote CMS data may be re-enabled after its schema is normalized. */
-(async()=>{
+document.addEventListener("DOMContentLoaded",async()=>{
   if(!window.NICE_TRIP_CONTENT?.activities)return;
   const data=window.NICE_TRIP_CONTENT.activities;
   const todayTW=ntTodayTW();
@@ -177,8 +177,7 @@ ntApplyActivityFilter('all');
     return `<article class="card" data-cat="${ntEsc(a.service)}" data-pay="${payClass}" data-activity-id="${ntEsc(a.id)}"><div class="visual activityCover activityPoster">${visual}</div><div class="body"><div class="meta">${ntEsc(ntService(a.service))}｜${isFree?"免費公益":"文化教育"} <span class="status">${ntEsc(ntStatus(a.status))}</span></div><h2>${ntEsc(a.title)}${a.summary?`｜${ntEsc(a.summary)}`:""}</h2><div class="facts">${facts}</div>${action}</div></article>`;
   }).join("");
   ntApplyActivityFilter(document.querySelector(".filter.active")?.dataset.f||"all");
-})();
-</script><script>
+});</script><script>
 /* NICE TRIP: non-invasive image reuse deterrence. Keeps text selection, links and accessibility intact. */
 document.addEventListener("dragstart",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});
 document.addEventListener("contextmenu",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});

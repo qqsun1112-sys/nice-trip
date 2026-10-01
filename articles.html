@@ -59,17 +59,19 @@ header.header .links{margin-left:auto!important;gap:22px!important}
 <a class="card" data-cat="city" href="https://woman.udn.com/woman/story/123162/9669005" target="_blank" rel="noopener"><div class="visual articleCover"><img src="assets/images/當旅行不再只是打卡jpg.jpg" alt="閱讀城市文章主視覺" loading="lazy"></div><div class="body"><div class="meta">城市文化　｜　2026.08.04</div><h3>當旅行不再只是打卡，而是閱讀城市</h3><p>從79位城市讀者的回饋，看見文化走讀如何讓人重新理解一座城市。</p><span class="more">→</span></div></a>
 </div><div class="center"><a class="btn" href="#latest-articles">查看更多文章　→</a></div></div></section><div class="mountain"></div></main><footer class="footer"><div class="wrap foot"><div><strong>美遊記 NICE TRIP</strong><br>薪展新創文化有限公司<br>文化 × 健康 × 公益 × 永續</div><div>聯絡信箱｜<a href="mailto:rodney.xinzhan@gmail.com">rodney.xinzhan@gmail.com</a><br>Facebook｜<a href="https://www.facebook.com/torateng" target="_blank" rel="noopener noreferrer">美遊記 NICE TRIP 粉絲專頁</a><br><a href="privacy.html">隱私權政策</a>｜<a href="terms.html">服務條款</a><br>© 2026 薪展新創文化有限公司 版權所有 All Rights Reserved.</div></div></footer><script>
 const m=document.querySelector('.menu'),p=document.querySelector('.ntMobilePanel');if(m&&p)m.onclick=()=>p.classList.toggle('open');
-const NT_ARTICLE_PAGE_SIZE=6;
-function ntUpdateMoreButton(){const cards=[...document.querySelectorAll('.articles .card')];const center=document.querySelector('.articles .center');if(center)center.hidden=cards.length<=NT_ARTICLE_PAGE_SIZE}
+const NT_ARTICLE_PAGE_SIZE=15;
+let ntArticleVisibleLimit=NT_ARTICLE_PAGE_SIZE;
+function ntUpdateMoreButton(){const filter=document.querySelector('.filter.active')?.dataset.f||'all';const cards=[...document.querySelectorAll('.articles .card')].filter(card=>filter==='all'||card.dataset.cat===filter);const center=document.querySelector('.articles .center');if(center)center.hidden=cards.length<=ntArticleVisibleLimit}
+function ntRenderArticleVisibility(filter){let n=0;document.querySelectorAll('.articles .card').forEach(card=>{const match=filter==='all'||card.dataset.cat===filter;if(match)n++;card.hidden=!match||n>ntArticleVisibleLimit});ntUpdateMoreButton()}
 function ntApplyArticleFilter(filter){
   document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x.dataset.f===filter));
   let visible=0;
-  document.querySelectorAll('.articles .card').forEach(card=>{const show=filter==='all'||card.dataset.cat===filter;card.hidden=!show;if(show)visible++});
+  document.querySelectorAll('.articles .card').forEach(card=>{const show=filter==='all'||card.dataset.cat===filter;if(show)visible++});ntArticleVisibleLimit=NT_ARTICLE_PAGE_SIZE;ntRenderArticleVisibility(filter);
   let empty=document.querySelector('.articles .emptyState');
   if(!empty){empty=document.createElement('div');empty.className='emptyState';empty.textContent='目前尚無此分類文章。';document.querySelector('.articles .grid')?.after(empty)}
   empty.hidden=visible!==0;
 }
-document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>ntApplyArticleFilter(b.dataset.f)));ntUpdateMoreButton();
+document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>ntApplyArticleFilter(b.dataset.f)));document.querySelector('.articles .center .btn')?.addEventListener('click',e=>{e.preventDefault();ntArticleVisibleLimit+=NT_ARTICLE_PAGE_SIZE;ntRenderArticleVisibility(document.querySelector('.filter.active')?.dataset.f||'all')});ntUpdateMoreButton();
 </script><script id="nt-dynamic-articles">function ntEsc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 function ntDate(s){if(!s)return "日期即將公布";const d=new Date(s+"T00:00:00");return new Intl.DateTimeFormat("zh-TW",{year:"numeric",month:"2-digit",day:"2-digit",weekday:"short"}).format(d).replaceAll("/",".")}
 function ntService(s){return ({city:"城市故事行旅",temple:"廟語心聲",meditation:"百八鐘靜心運動",relaxation:"身心放鬆術"})[s]||s}

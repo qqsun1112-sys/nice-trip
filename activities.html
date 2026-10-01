@@ -135,12 +135,50 @@ function ntApplyActivityFilter(f){
 }
 document.querySelectorAll('.filter').forEach(function(b){b.addEventListener('click',function(){ntApplyActivityFilter(b.dataset.f);});});
 ntApplyActivityFilter('all');
-</script><script id="nt-unified-shell-js">document.querySelector('.ntUnifiedMenu')?.addEventListener('click',function(){const p=document.querySelector('.ntUnifiedPanel');const open=p.classList.toggle('open');this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'×':'☰';});</script><script id="nt-dynamic-activities">function ntEsc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-function ntDate(s){if(!s)return "日期即將公布";const d=new Date(s+"T00:00:00");return new Intl.DateTimeFormat("zh-TW",{year:"numeric",month:"2-digit",day:"2-digit",weekday:"short"}).format(d).replaceAll("/",".")}
-function ntService(s){return ({city:"城市故事行旅",temple:"廟語心聲",meditation:"百八鐘靜心運動",relaxation:"身心放鬆術"})[s]||s}
-function ntStatus(s){return ({open:"開放報名",full:"已額滿",ended:"活動結束",upcoming:"即將公布",cancelled:"活動取消",postponed:"活動延期"})[s]||s}
-function ntTodayTW(){const parts=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Taipei",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const m=Object.fromEntries(parts.filter(x=>x.type!=="literal").map(x=>[x.type,x.value]));return m.year+"-"+m.month+"-"+m.day}
-(async()=>{if(!window.NiceTripContent?.remote)return;try{const data=await NiceTripContent.remote.activities();const now=new Date(),todayTW=ntTodayTW();const upcoming=data.filter(a=>!["ended","cancelled"].includes(a.status)&&(!a.event_date||a.event_date>=todayTW)).sort((a,b)=>{const bookA=a.status==="open"&&!!a.official_url&&!(a.registration_deadline&&new Date(a.registration_deadline)<=now);const bookB=b.status==="open"&&!!b.official_url&&!(b.registration_deadline&&new Date(b.registration_deadline)<=now);if(bookA!==bookB)return bookA?-1:1;return (a.event_date||"9999-12-31").localeCompare(b.event_date||"9999-12-31")||(Number(a.sort_order)||0)-(Number(b.sort_order)||0)});const grid=document.getElementById("activityGrid");if(upcoming.length&&grid)grid.innerHTML=upcoming.map(a=>{const imageMap={"xinzhuang-20261024":"assets/images/新莊小旅行.png","sheliao-20261031":"assets/images/activity-sheliao.jpg","monga":"assets/images/艋舺小旅行.png","guandu-20261121":"assets/images/關渡小旅行.png"};const localItem=(window.NICE_TRIP_CONTENT?.activities||[]).find(x=>x.id===a.id||x.title===a.title);const registryImage=localItem?.visuals?.listing||localItem?.visuals?.home||localItem?.image||"";const imageSrc=a.listing_image||a.home_image||a.detail_image||a.image_url||a.image||a.cover_image||a.visuals?.listing||a.visuals?.home||registryImage||imageMap[a.id]||imageMap[a.slug]||imageMap[a.activity_id]||imageMap[a.official_url?.replace(/^activity-|\.html$/g,"")]||imageMap[a.title.includes("新莊")?"xinzhuang-20261024":a.title.includes("社寮")?"sheliao-20261031":a.title.includes("艋舺")?"monga":a.title.includes("關渡")?"guandu-20261121":""];const visual=imageSrc?`<img src="${ntEsc(imageSrc)}" alt="${ntEsc(a.title)}活動主視覺" loading="lazy">`:`<small>${ntEsc(ntService(a.service))}</small><b>${ntEsc(a.title.replace("小旅行",""))}</b><em>${ntEsc(a.summary||"文化 × 健康 × 公益 × 永續")}</em><span>${ntEsc(a.event_date?a.event_date.slice(5).replace("-","."):"NEW")}</span>`;let facts=ntDate(a.event_date)+(a.start_time?` ${ntEsc(a.start_time.slice(0,5))}${a.end_time?"–"+ntEsc(a.end_time.slice(0,5)):""}`:"")+(a.meeting_point?`<br>集合｜${ntEsc(a.meeting_point)}`:"")+(a.price_label?`<br>${ntEsc(a.price_label)}`:"");const closedByDeadline=a.registration_deadline&&new Date(a.registration_deadline)<=now;let action;if(a.status==="full")action=`<div class="pendingOfficial"><small>本場已額滿，感謝支持</small></div>`;else if(a.status==="postponed")action=`<div class="pendingOfficial"><small>活動延期，新日期確認後於官網公告</small></div>`;else if(a.status==="cancelled")action=`<div class="pendingOfficial"><small>本場活動取消</small></div>`;else if(closedByDeadline)action=`<div class="pendingOfficial"><small>本場已截止報名</small></div>`;else if(a.status!=="open")action=`<div class="pendingOfficial"><small>報名資訊即將公布</small></div>`;else if(a.official_url)action=`<a class="btn" href="${ntEsc(a.official_url)}">美遊記官網報名 →</a>${a.accupass_url?`<div class="pendingOfficial"><small>ACCUPASS 外部活動頁</small><a class="btn btnSecondary" href="${ntEsc(a.accupass_url)}" target="_blank" rel="noopener noreferrer">查看活動頁 ↗</a></div>`:""}`;else if(a.accupass_url)action=`<div class="pendingOfficial"><small>美遊記官網報名頁準備中</small><a class="btn btnSecondary" href="${ntEsc(a.accupass_url)}" target="_blank" rel="noopener noreferrer">查看 ACCUPASS 活動頁 ↗</a></div>`;else action=`<div class="pendingOfficial"><small>報名資訊準備中</small></div>`;const serviceKey=String(a.service||"").toLowerCase();const freeServices=["meditation","relaxation","temple"];const payClass=freeServices.includes(serviceKey)?"free":"paid";return `<article class="card" data-cat="${ntEsc(a.service)}" data-pay="${payClass}"><div class="visual activityCover activityPoster" style="display:block!important;height:245px!important;min-height:245px!important;max-height:245px!important;padding:0!important;overflow:hidden!important">${imageSrc?`<img src="${ntEsc(imageSrc)}" alt="${ntEsc(a.title)}活動主視覺" loading="lazy" style="width:100%!important;height:245px!important;min-height:245px!important;max-height:245px!important;object-fit:cover!important;object-position:center!important;display:block!important">`:visual}</div><div class="body" style="display:block!important;height:auto!important;min-height:0!important"><div class="meta">${ntEsc(ntService(a.service))} <span class="status">${ntEsc(ntStatus(a.status))}</span></div><h2>${ntEsc(a.title)}${a.summary?`｜${ntEsc(a.summary)}`:""}</h2><div class="facts">${facts}</div>${action}</div></article>`}).join("");const activeFilter=document.querySelector('.filter.active')?.dataset.f||'all';ntApplyActivityFilter(activeFilter);const past=data.filter(a=>a.status==="ended"||(a.event_date&&a.event_date<todayTW&&!["cancelled","postponed"].includes(a.status))).sort((a,b)=>(b.event_date||"").localeCompare(a.event_date||""));const pg=document.getElementById("pastActivityGrid"),ps=document.getElementById("pastActivities");if(pg&&ps){if(!past.length){ps.style.display="none"}else{pg.innerHTML=past.map(a=>`<article class="card" data-cat="${ntEsc(a.service)}"><div class="visual activityCover activityPoster">${`<small>${ntEsc(ntService(a.service))}</small><b>${ntEsc(a.title.replace("小旅行",""))}</b><em>${ntEsc(a.summary||"活動足跡")}</em><span>足跡</span>`}</div><div class="body"><div class="meta">${ntEsc(ntService(a.service))} <span class="status">活動結束</span></div><h2>${ntEsc(a.title)}</h2><div class="facts">${ntDate(a.event_date)}</div></div></article>`).join("")}}}catch(e){console.warn("NICE TRIP content fallback active")}})();</script><script>
+</script><script id="nt-unified-shell-js">document.querySelector('.ntUnifiedMenu')?.addEventListener('click',function(){const p=document.querySelector('.ntUnifiedPanel');const open=p.classList.toggle('open');this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'×':'☰';});</script><script id="nt-dynamic-activities">
+/* Activity source policy:
+   The public listing is rendered from the local NICE_TRIP_CONTENT registry.
+   This keeps paid/free classification and fallback behavior deterministic.
+   Remote CMS data may be re-enabled after its schema is normalized. */
+(async()=>{
+  if(!window.NICE_TRIP_CONTENT?.activities)return;
+  const data=window.NICE_TRIP_CONTENT.activities;
+  const todayTW=ntTodayTW();
+  const grid=document.getElementById("activityGrid");
+  const norm=a=>{
+    const time=String(a.time||"").split(/[–—-]/).map(s=>s.trim());
+    return {
+      ...a,
+      event_date:a.event_date||a.date||"",
+      start_time:a.start_time||(time[0]||""),
+      end_time:a.end_time||(time[1]||""),
+      official_url:a.official_url||a.officialUrl||"",
+      accupass_url:a.accupass_url||a.accupassUrl||"",
+      registration_deadline:a.registration_deadline||a.registrationDeadline||"",
+      image_url:a.listing_image||a.home_image||a.image_url||a.visuals?.listing||a.visuals?.home||a.image||"",
+      price_label:a.price_label||(a.payment==="free"?"免費公益":"NT$850／人；另有公開優惠票種")
+    };
+  };
+  const items=data.map(norm).filter(a=>!["ended","cancelled"].includes(a.status)&&(!a.event_date||a.event_date>=todayTW))
+    .sort((a,b)=>(a.event_date||"9999-12-31").localeCompare(b.event_date||"9999-12-31"));
+  if(!grid||!items.length)return;
+  grid.innerHTML=items.map(a=>{
+    const isFree=["meditation","relaxation","temple"].includes(String(a.service||"").toLowerCase());
+    const payClass=isFree?"free":"paid";
+    const visual=a.image_url
+      ? `<img src="${ntEsc(a.image_url)}" alt="${ntEsc(a.imageAlt||a.title+"活動主視覺")}" loading="lazy">`
+      : `<small>${ntEsc(ntService(a.service))}</small><b>${ntEsc(a.title.replace("小旅行",""))}</b><em>${ntEsc(a.summary||"文化 × 健康 × 公益 × 永續")}</em><span>${ntEsc(a.event_date?a.event_date.slice(5).replace("-","."):"公益")}</span>`;
+    const facts=ntDate(a.event_date)+(a.start_time?` ${ntEsc(a.start_time)}${a.end_time?"–"+ntEsc(a.end_time):""}`:"")+(a.meeting_point?`<br>集合｜${ntEsc(a.meeting_point)}`:"")+`<br>${ntEsc(a.price_label)}`;
+    let action="";
+    if(a.status==="full") action='<div class="pendingOfficial"><small>本場已額滿，感謝支持</small></div>';
+    else if(a.status==="postponed") action='<div class="pendingOfficial"><small>活動延期，新日期確認後於官網公告</small></div>';
+    else if(a.status==="open"&&a.official_url) action=`<a class="btn" href="${ntEsc(a.official_url)}">美遊記官網報名 →</a>`;
+    else action='<div class="pendingOfficial"><small>報名資訊即將公布</small></div>';
+    return `<article class="card" data-cat="${ntEsc(a.service)}" data-pay="${payClass}" data-activity-id="${ntEsc(a.id)}"><div class="visual activityCover activityPoster">${visual}</div><div class="body"><div class="meta">${ntEsc(ntService(a.service))}｜${isFree?"免費公益":"文化教育"} <span class="status">${ntEsc(ntStatus(a.status))}</span></div><h2>${ntEsc(a.title)}${a.summary?`｜${ntEsc(a.summary)}`:""}</h2><div class="facts">${facts}</div>${action}</div></article>`;
+  }).join("");
+  ntApplyActivityFilter(document.querySelector(".filter.active")?.dataset.f||"all");
+})();
+</script><script>
 /* NICE TRIP: non-invasive image reuse deterrence. Keeps text selection, links and accessibility intact. */
 document.addEventListener("dragstart",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});
 document.addEventListener("contextmenu",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});

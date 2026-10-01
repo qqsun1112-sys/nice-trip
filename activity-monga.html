@@ -86,4 +86,9 @@ document.getElementById('transferForm')?.addEventListener('submit',async functio
  }catch(err){
   msg.className='transferMsg err';msg.textContent=err.message==='not_found'?'找不到相符的報名資料，請確認報名編號與 Email。':'目前無法完成回報，請稍後再試或來信聯絡美遊記。';
  }finally{btn.disabled=false;btn.textContent='回報匯款';}
-});</script><script id="nt-unified-shell-js">document.querySelector('.ntUnifiedMenu')?.addEventListener('click',function(){const p=document.querySelector('.ntUnifiedPanel');const open=p.classList.toggle('open');this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'×':'☰';});</script></body></html>
+});</script><script id="nt-unified-shell-js">document.querySelector('.ntUnifiedMenu')?.addEventListener('click',function(){const p=document.querySelector('.ntUnifiedPanel');const open=p.classList.toggle('open');this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'×':'☰';});</script><script>
+/* NICE TRIP: non-invasive image reuse deterrence. Keeps text selection, links and accessibility intact. */
+document.addEventListener("dragstart",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});
+document.addEventListener("contextmenu",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});
+document.querySelectorAll("img").forEach(function(img){img.setAttribute("draggable","false")});
+</script></body></html>

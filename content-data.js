@@ -81,11 +81,11 @@ window.NICE_TRIP_CONTENT = {
       summary: "一座小島，讀懂基隆數百年的海洋故事。",
       date: "2026-10-31",
       time: "10:00–12:00",
-      status: "upcoming",
+      status: "open",
       visuals: { home: "assets/images/社寮小旅行.png", listing: "assets/images/社寮小旅行.png", detail: "assets/images/activity-sheliao.jpg", social: "" },
       registrationDeadline: "",
       imageAlt: "社寮小旅行活動主視覺",
-      officialUrl: "",
+      officialUrl: "activity-sheliao.html",
       payment: "bank-transfer",
       accupassUrl: "https://www.accupass.com/event/2608240420081031009753"
     },
@@ -94,13 +94,15 @@ window.NICE_TRIP_CONTENT = {
       service: "city",
       title: "艋舺小旅行",
       summary: "老城、信仰與街區故事。",
+      date: "2026-11-07",
+      time: "10:00–12:00",
       visuals: { home: "assets/images/艋舺小旅行.png", listing: "assets/images/艋舺小旅行.png", detail: "", social: "" },
       registrationDeadline: "",
       imageAlt: "艋舺小旅行活動主視覺",
-      status: "upcoming",
-      officialUrl: "",
+      status: "open",
+      officialUrl: "activity-monga.html",
       payment: "bank-transfer",
-      accupassUrl: ""
+      accupassUrl: "https://www.accupass.com/event/2608290620481899528172"
     },
     {
       id: "guandu-20261121",
@@ -111,10 +113,11 @@ window.NICE_TRIP_CONTENT = {
       registrationDeadline: "",
       imageAlt: "關渡小旅行活動主視覺",
       date: "2026-11-21",
-      status: "upcoming",
-      officialUrl: "",
+      time: "10:00–12:00",
+      status: "open",
+      officialUrl: "activity-guandu.html",
       payment: "bank-transfer",
-      accupassUrl: ""
+      accupassUrl: "https://www.accupass.com/event/2609121231291837452375"
     }
   ],
   articles: [

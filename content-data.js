@@ -31,8 +31,8 @@ window.NICE_TRIP_CONTENT = {
       visuals: { home: "", listing: "", detail: "", social: "" },
       registrationDeadline: "",
       imageAlt: "百八鐘靜心運動實體活動主視覺",
-      officialUrl: "",
-      payment: "accupass",
+      officialUrl: "activity-register.html?event=meditation-108-accupass-260720",
+      payment: "free",
       accupassUrl: "https://www.accupass.com/event/2607200101301082030862"
     },
     {
@@ -44,8 +44,8 @@ window.NICE_TRIP_CONTENT = {
       visuals: { home: "", listing: "", detail: "", social: "" },
       registrationDeadline: "",
       imageAlt: "身心放鬆術實體活動主視覺",
-      officialUrl: "",
-      payment: "accupass",
+      officialUrl: "activity-register.html?event=body-relaxation-accupass-260814",
+      payment: "free",
       accupassUrl: "https://www.accupass.com/event/2608140740241653305881"
     },
     {
@@ -59,7 +59,7 @@ window.NICE_TRIP_CONTENT = {
       visuals: { home: "", listing: "", detail: "", social: "" },
       registrationDeadline: "",
       imageAlt: "廟語心聲松山霞海城隍廟文化講座活動主視覺",
-      officialUrl: "",
+      officialUrl: "activity-register.html?event=temple-songshan-20261026",
       payment: "free",
       accupassUrl: "https://www.accupass.com/event/2608250728484011067760"
     },

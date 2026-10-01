@@ -210,4 +210,9 @@ try{
  const arts=(await NiceTripContent.remote.articles()).slice(0,3);
  const sg=document.querySelector(".storyGrid");if(arts.length&&sg)sg.innerHTML=arts.map(a=>`<a class="story" href="${ntEsc(a.external_url)}" target="_blank" rel="noopener noreferrer"><div class="storyArt">${a.image?`<img src="${ntEsc(a.image)}" alt="${ntEsc(a.image_alt||a.title)}" loading="lazy" style="width:100%;height:auto;object-fit:contain">`:`<span>${ntEsc(a.publisher)}｜${ntEsc(a.category)}</span>`}</div><span>${ntEsc(a.title)}</span></a>`).join("");
 }catch(e){console.warn("NICE TRIP content fallback active")}
-})();</script></body></html>
+})();</script><script>
+/* NICE TRIP: non-invasive image reuse deterrence. Keeps text selection, links and accessibility intact. */
+document.addEventListener("dragstart",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});
+document.addEventListener("contextmenu",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});
+document.querySelectorAll("img").forEach(function(img){img.setAttribute("draggable","false")});
+</script></body></html>

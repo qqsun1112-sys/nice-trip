@@ -138,9 +138,8 @@ document.querySelectorAll('.filter').forEach(function(b){b.addEventListener('cli
 ntApplyActivityFilter('all');
 </script><script id="nt-unified-shell-js">document.querySelector('.ntUnifiedMenu')?.addEventListener('click',function(){const p=document.querySelector('.ntUnifiedPanel');const open=p.classList.toggle('open');this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'×':'☰';});</script><script id="nt-dynamic-activities">
 /* Activity source policy:
-   The public listing is rendered from the local NICE_TRIP_CONTENT registry.
-   This keeps paid/free classification and fallback behavior deterministic.
-   Remote CMS data may be re-enabled after its schema is normalized. */
+   Published Supabase activities are the primary public source.
+   The local registry remains the visual/fallback source so established artwork is preserved. */
 document.addEventListener("DOMContentLoaded",async()=>{
   if(!window.NICE_TRIP_CONTENT?.activities)return;
   const ntEsc=v=>String(v??"").replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
@@ -148,7 +147,12 @@ document.addEventListener("DOMContentLoaded",async()=>{
   const ntDate=v=>v?String(v).replace(/-/g,"."):"日期請見活動頁";
   const ntService=v=>({city:"城市故事行旅",meditation:"百八鐘靜心運動",relaxation:"身心放鬆術",temple:"廟語心聲"}[String(v||"").toLowerCase()]||"美遊記活動");
   const ntStatus=v=>window.NiceTripContent?.statusLabel?.(v)||({open:"開放報名",full:"已額滿",ended:"活動結束",upcoming:"即將公布",cancelled:"活動取消",postponed:"活動延期"}[v]||v||"");
-  const data=window.NICE_TRIP_CONTENT.activities;
+  const localData=window.NICE_TRIP_CONTENT.activities;
+  let data=localData;
+  try{
+    const remoteData=await window.NiceTripContent?.remote?.activities?.();
+    if(Array.isArray(remoteData)&&remoteData.length)data=remoteData;
+  }catch(_){data=localData;}
   const todayTW=ntTodayTW();
   const grid=document.getElementById("activityGrid");
   const norm=a=>{
@@ -161,7 +165,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
       official_url:a.official_url||a.officialUrl||"",
       accupass_url:a.accupass_url||a.accupassUrl||"",
       registration_deadline:a.registration_deadline||a.registrationDeadline||"",
-      image_url:a.listing_image||a.home_image||a.image_url||a.visuals?.listing||a.visuals?.home||a.image||"",
+      image_url:a.listing_image||a.home_image||a.image_url||a.visuals?.listing||a.visuals?.home||a.image||localData.find(x=>x.id===a.slug||x.id===a.id||x.title===a.title)?.visuals?.listing||localData.find(x=>x.id===a.slug||x.id===a.id||x.title===a.title)?.visuals?.home||"",
       price_label:a.price_label||(a.payment==="free"?"免費公益":"NT$850／人；另有公開優惠票種")
     };
   };
@@ -169,7 +173,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     .sort((a,b)=>(a.event_date||"9999-12-31").localeCompare(b.event_date||"9999-12-31"));
   if(!grid||!items.length)return;
   grid.innerHTML=items.map(a=>{
-    const isFree=["meditation","relaxation","temple"].includes(String(a.service||"").toLowerCase());
+    const isFree=a.payment==="free"||(!a.payment&&["meditation","relaxation","temple"].includes(String(a.service||"").toLowerCase()));
     const payClass=isFree?"free":"paid";
     const visual=a.image_url
       ? `<img src="${ntEsc(a.image_url)}" alt="${ntEsc(a.imageAlt||a.title+"活動主視覺")}" loading="lazy">`

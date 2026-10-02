@@ -117,13 +117,215 @@ window.NICE_TRIP_CONTENT = {
     }
   ],
   articles: [
-    { category:"wellness", publisher:"台灣產經新聞網", date:"2026-09-16", image:"assets/images/身心放鬆術中和樂齡.jpg", imageAlt:"身心放鬆術與樂齡健康促進報導", title:"樂齡學習從「學習」走向「健康生活」｜身心放鬆術走進中和樂齡學習中心", url:"https://news.taiwannet.com.tw/news/219916/" },
-    { category:"faith", publisher:"輕旅行", date:"2026-08-20", image:"assets/images/旅行不一定要去遠方.jpg", imageAlt:"松山霞海城隍廟文章主視覺", title:"旅行不一定要去遠方！走進松山霞海城隍廟", url:"https://travel.yam.com/article/141045" },
-    { category:"city", publisher:"輕旅行", date:"2026-09-02", image:"assets/images/萬仞宮牆.jpg", imageAlt:"臺北孔子廟萬仞宮牆", title:"你以為只是一面牆，它卻裝下了兩千多年的文化", url:"https://travel.yam.com/article/140883" },
-    { category:"travel", publisher:"女子漾", date:"2026-08-31", image:"assets/images/article-kamikochi.jpg", imageAlt:"日本上高地自然風景", title:"走進上高地，才發現最美的不是風景", url:"https://woman.udn.com/woman/story/123162/9724628" },
-    { category:"travel", publisher:"輕旅行", date:"2026-08-22", image:"assets/images/article-kiyotsu.jpg", imageAlt:"日本新潟清津峽", title:"清津峽", url:"https://travel.yam.com/article/140763" },
-    { category:"faith", publisher:"輕旅行", image:"assets/images/當我們不再看懂廟宇.png", imageAlt:"臺灣廟宇文化文章主視覺", title:"臺灣廟宇文化", url:"https://travel.yam.com/article/140664" },
-    { category:"city", publisher:"女子漾", image:"assets/images/當旅行不再只是打卡jpg.jpg", imageAlt:"閱讀城市文章主視覺", title:"閱讀城市", url:"https://woman.udn.com/woman/story/123162/9669005" }
+    {
+      "slug": "songshan-trip-20260928",
+      "category": "city",
+      "publisher": "女子漾",
+      "date": "2026-09-28",
+      "image": "assets/images/LINE_ALBUM_2026.9.27 松山_261001_1.jpg",
+      "imageAlt": "松山小旅行文章主視覺",
+      "title": "松山小旅行｜沿著一條彎曲的河，走進錫口的繁華與日常",
+      "excerpt": "從松山車站的光穹、慈祐宮到基隆河與饒河街，重新閱讀錫口的城市記憶。",
+      "url": "https://woman.udn.com/woman/story/123162/9781612"
+    },
+    {
+      "slug": "songshan-xiahai-20260921",
+      "category": "faith",
+      "publisher": "女子漾",
+      "date": "2026-09-21",
+      "image": "assets/images/旅行不一定要去遠方.jpg",
+      "imageAlt": "松山霞海文化小旅行文章主視覺",
+      "title": "旅行不一定要去遠方！走進松山霞海城隍廟，重新認識我們每天經過的城市",
+      "excerpt": "從寺廟、建築、信仰與街道記憶重新閱讀熟悉的松山。",
+      "url": "https://woman.udn.com/woman/story/123162/9767348"
+    },
+    {
+      "slug": "songshan-xiahai-499-20260921",
+      "category": "faith",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-09-21",
+      "image": "assets/images/旅行不一定要去遠方.jpg",
+      "imageAlt": "松山霞海文化小旅行滿意度報導",
+      "title": "寺廟變身城市教室｜「廟語心聲」獲中高齡參與者高度肯定",
+      "excerpt": "松山霞海文化小旅行滿意度 4.99 分，文化走讀串起終身學習、地方認同與文化永續。",
+      "url": "https://news.taiwannet.com.tw/news/220473/"
+    },
+    {
+      "slug": "body-relaxation-zhonghe-senior-learning",
+      "category": "wellness",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-09-16",
+      "image": "assets/images/身心放鬆術中和樂齡.jpg",
+      "imageAlt": "身心放鬆術與樂齡健康促進報導",
+      "title": "樂齡學習從「學習」走向「健康生活」｜身心放鬆術走進中和樂齡學習中心",
+      "excerpt": "從呼吸、伸展與身體動作開始，把健康促進帶回每天的生活，也讓樂齡學習走向更完整的自我照顧。",
+      "url": "https://news.taiwannet.com.tw/news/219916/"
+    },
+    {
+      "slug": "confucius-wall",
+      "category": "city",
+      "publisher": "輕旅行",
+      "date": "2026-09-02",
+      "image": "assets/images/萬仞宮牆.jpg",
+      "imageAlt": "臺北孔子廟萬仞宮牆",
+      "title": "你以為只是一面牆，它卻裝下了兩千多年的文化",
+      "excerpt": "從《論語》、孔德成到鴟吻、通天筒與團壽瓦當，讀懂萬仞宮牆。",
+      "url": "https://travel.yam.com/article/140883"
+    },
+    {
+      "slug": "kamikochi",
+      "category": "travel",
+      "publisher": "女子漾",
+      "date": "2026-08-31",
+      "image": "assets/images/article-kamikochi.jpg",
+      "imageAlt": "日本上高地自然風景",
+      "title": "走進上高地，才發現最美的不是風景",
+      "excerpt": "從大正池到明神池，看見旅行如何與自然保持剛剛好的距離。",
+      "url": "https://woman.udn.com/woman/story/123162/9724628"
+    },
+    {
+      "slug": "kiyotsu",
+      "category": "travel",
+      "publisher": "輕旅行",
+      "date": "2026-08-22",
+      "image": "assets/images/article-kiyotsu.jpg",
+      "imageAlt": "日本新潟清津峽",
+      "title": "一條隧道，如何把峽谷變成藝術？",
+      "excerpt": "走進750公尺的黑暗與光之間，重新學會觀看自然。",
+      "url": "https://travel.yam.com/article/140763"
+    },
+    {
+      "slug": "songshan-xiahai",
+      "category": "faith",
+      "publisher": "輕旅行",
+      "date": "2026-08-20",
+      "image": "assets/images/旅行不一定要去遠方.jpg",
+      "imageAlt": "松山霞海城隍廟文章主視覺",
+      "title": "旅行不一定要去遠方！走進松山霞海城隍廟",
+      "excerpt": "從建築、匠藝與文化符號出發，重新學習如何看懂一座廟。",
+      "url": "https://travel.yam.com/article/141045"
+    },
+    {
+      "slug": "temple-voice-20260819",
+      "category": "faith",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-08-19",
+      "image": "assets/images/當我們不再看懂廟宇.png",
+      "imageAlt": "廟語心聲文化講座報導",
+      "title": "當我們走進廟宇，還看得懂它在說什麼？",
+      "excerpt": "松山霞海城隍廟《廟語心聲》從一小時文化講座，看見傳統文化重新被閱讀的可能。",
+      "url": "https://news.taiwannet.com.tw/news/216093/"
+    },
+    {
+      "slug": "temple-reading",
+      "category": "faith",
+      "publisher": "輕旅行",
+      "date": "2026-08-11",
+      "image": "assets/images/當我們不再看懂廟宇.png",
+      "imageAlt": "臺灣廟宇文化文章主視覺",
+      "title": "當我們不再看懂廟宇：臺灣傳統文化如何重新被閱讀？",
+      "excerpt": "從匠師工藝、地方故事與人生智慧，重新理解廟宇的公共文化價值。",
+      "url": "https://travel.yam.com/article/140664"
+    },
+    {
+      "slug": "reading-city",
+      "category": "city",
+      "publisher": "女子漾",
+      "date": "2026-08-04",
+      "image": "assets/images/當旅行不再只是打卡jpg.jpg",
+      "imageAlt": "閱讀城市文章主視覺",
+      "title": "當旅行不再只是打卡，而是閱讀城市",
+      "excerpt": "從79位城市讀者的回饋，看見文化走讀如何讓人重新理解一座城市。",
+      "url": "https://woman.udn.com/woman/story/123162/9669005"
+    },
+    {
+      "slug": "reading-city-peopo-20260804",
+      "category": "city",
+      "publisher": "公民新聞",
+      "date": "2026-08-04",
+      "image": "assets/images/當旅行不再只是打卡jpg.jpg",
+      "imageAlt": "城市故事行旅社會影響力文章主視覺",
+      "title": "當旅行不再只是打卡，而是閱讀城市─79位城市讀者帶給我們的啟發",
+      "excerpt": "從79位參與者的回饋，看見文化走讀如何帶來文化理解與地方連結。",
+      "url": "https://www.peopo.org/news/853900"
+    },
+    {
+      "slug": "reading-city-taiwannet-20260803",
+      "category": "city",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-08-03",
+      "image": "assets/images/當旅行不再只是打卡jpg.jpg",
+      "imageAlt": "城市故事行旅社會影響力報導",
+      "title": "當旅行不再只是打卡，而是閱讀城市──79位城市讀者帶給我們的啟發",
+      "excerpt": "從城市故事行旅社會影響力報告，看見文化走讀如何連結地方、學習與永續。",
+      "url": "https://news.taiwannet.com.tw/news/214170/"
+    },
+    {
+      "slug": "temple-voice-brand-20260727",
+      "category": "faith",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-07-27",
+      "image": "assets/images/當我們不再看懂廟宇.png",
+      "imageAlt": "廟語心聲品牌發表報導",
+      "title": "《廟語心聲》文化教育品牌正式發表",
+      "excerpt": "以閱讀建築、閱讀文化、閱讀人生開啟臺灣文化閱讀新視角。",
+      "url": "https://news.taiwannet.com.tw/news/213260/"
+    },
+    {
+      "slug": "community-health-20260708",
+      "category": "wellness",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-07-08",
+      "image": "assets/images/美遊記身心平衡之旅 (1).png",
+      "imageAlt": "美遊記社區健康促進計畫報導",
+      "title": "從社區開始打造健康臺灣｜美遊記發起《社區健康促進計畫》",
+      "excerpt": "邀雙北里辦公處共同推動幸福社區，將健康促進帶回日常生活。",
+      "url": "https://news.taiwannet.com.tw/news/211093/"
+    },
+    {
+      "slug": "xinzhuang-reading-walk-20260524",
+      "category": "city",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-05-24",
+      "image": "assets/images/新莊小旅行.png",
+      "imageAlt": "新莊文化走讀活動成果報導",
+      "title": "當閱讀走進老街巷弄｜《城市故事行旅》帶民眾重新認識新莊百年記憶",
+      "excerpt": "2026年5月24日新莊文化走讀實際活動成果，從老街、廟宇與巷弄重新閱讀新莊百年城市記憶。",
+      "url": "https://news.taiwannet.com.tw/news/206054/"
+    },
+    {
+      "slug": "nice-trip-city-experience-20260430",
+      "category": "city",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-04-30",
+      "image": "assets/images/城市故事行旅.jpg",
+      "imageAlt": "美遊記城市文化與健康品牌報導",
+      "title": "不是導覽，是一場讓人重新愛上土地的行動",
+      "excerpt": "美遊記用走讀與呼吸重寫城市體驗，串聯文化、健康與永續旅行。",
+      "url": "https://news.taiwannet.com.tw/news/203531/"
+    },
+    {
+      "slug": "xikou-low-carbon-20260309",
+      "category": "faith",
+      "publisher": "女子漾",
+      "date": "2026-03-09",
+      "image": "assets/images/松山霞海城隍廟文章.jpg",
+      "imageAlt": "松山霞海低碳小旅行文章主視覺",
+      "title": "錫口信念永續轉型！低碳小旅行寫下「全滿分」標竿紀錄",
+      "excerpt": "從松山霞海文化小旅行，看見信仰文化、低碳旅行與地方共好的實踐。",
+      "url": "https://woman.udn.com/woman/story/123162/9369277"
+    },
+    {
+      "slug": "chihlee-108-meditation-20260108",
+      "category": "wellness",
+      "publisher": "台灣產經新聞網",
+      "date": "2026-01-08",
+      "image": "assets/images/百八鐘靜心運動.png",
+      "imageAlt": "致理科技大學百八鐘靜心運動活動成果報導",
+      "title": "滿意度近滿分｜美遊記攜手致理科大「百八鐘靜心運動」",
+      "excerpt": "百八鐘靜心運動走進致理科技大學，以實際參與回饋呈現高齡心理健康與身心安定的活動成果。",
+      "url": "https://news.taiwannet.com.tw/news/192019/"
+    }
   ]
 };
 

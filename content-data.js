@@ -11,9 +11,9 @@ window.NICE_TRIP_CONTENT = {
     archiveEndedActivities: true,
     homepageActivityLimit: 3,
     homepageArticleLimit: 3,
-    articleListingBatchSize: 15,
-    launchMinimumActivities: 15,
-    launchMinimumArticles: 15
+    articleListingBatchSize: 24,
+    launchMinimumActivities: 18,
+    launchMinimumArticles: 19
   },
   activityServices: {
     city: { name: "城市故事行旅", subtitle: "文化教育", label: "探索" },

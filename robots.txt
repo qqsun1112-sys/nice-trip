@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://qqsun1112-sys.github.io/nice-trip/sitemap.xml
+Sitemap: https://nicetrip.tw/sitemap.xml

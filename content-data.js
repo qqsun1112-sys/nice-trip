@@ -32,8 +32,7 @@ window.NICE_TRIP_CONTENT = {
       registrationDeadline: "",
       imageAlt: "百八鐘靜心運動實體活動主視覺",
       officialUrl: "activity-register.html?event=body-relaxation-accupass-260720",
-      payment: "free",
-      accupassUrl: "https://www.accupass.com/event/2607200101301082030862"
+      payment: "free"
     },
     {
       id: "meditation-108-accupass-260814",
@@ -45,8 +44,7 @@ window.NICE_TRIP_CONTENT = {
       registrationDeadline: "",
       imageAlt: "身心放鬆術實體活動主視覺",
       officialUrl: "activity-register.html?event=meditation-108-accupass-260814",
-      payment: "free",
-      accupassUrl: "https://www.accupass.com/event/2608140740241653305881"
+      payment: "free"
     },
     {
       id: "temple-songshan-20261026",
@@ -60,8 +58,7 @@ window.NICE_TRIP_CONTENT = {
       registrationDeadline: "",
       imageAlt: "廟語心聲松山霞海城隍廟文化講座活動主視覺",
       officialUrl: "activity-register.html?event=temple-songshan-20261026",
-      payment: "free",
-      accupassUrl: "https://www.accupass.com/event/2608250728484011067760"
+      payment: "free"
     },
     {
       id: "xinzhuang-20261024",
@@ -73,9 +70,8 @@ window.NICE_TRIP_CONTENT = {
       visuals: { home: "assets/images/新莊小旅行.png", listing: "assets/images/新莊小旅行.png", detail: "assets/images/activity-xinzhuang.jpg", social: "" },
       registrationDeadline: "",
       imageAlt: "新莊小旅行活動主視覺",
-      officialUrl: "activity-xinzhuang.html",
-      payment: "bank-transfer",
-      accupassUrl: "https://www.accupass.com/event/2608161009211123836604"
+      officialUrl: "activity-register.html?event=xinzhuang-20261024",
+      payment: "bank-transfer"
     },
     {
       id: "sheliao-20261031",
@@ -88,9 +84,8 @@ window.NICE_TRIP_CONTENT = {
       visuals: { home: "assets/images/社寮小旅行.png", listing: "assets/images/社寮小旅行.png", detail: "assets/images/activity-sheliao.jpg", social: "" },
       registrationDeadline: "",
       imageAlt: "社寮小旅行活動主視覺",
-      officialUrl: "activity-sheliao.html",
-      payment: "bank-transfer",
-      accupassUrl: "https://www.accupass.com/event/2608240420081031009753"
+      officialUrl: "activity-register.html?event=sheliao-20261031",
+      payment: "bank-transfer"
     },
     {
       id: "monga",
@@ -103,9 +98,8 @@ window.NICE_TRIP_CONTENT = {
       registrationDeadline: "",
       imageAlt: "艋舺小旅行活動主視覺",
       status: "open",
-      officialUrl: "activity-monga.html",
-      payment: "bank-transfer",
-      accupassUrl: "https://www.accupass.com/event/2608290620481899528172"
+      officialUrl: "activity-register.html?event=monga",
+      payment: "bank-transfer"
     },
     {
       id: "guandu-20261121",
@@ -118,9 +112,8 @@ window.NICE_TRIP_CONTENT = {
       date: "2026-11-21",
       time: "10:00–12:00",
       status: "open",
-      officialUrl: "activity-guandu.html",
-      payment: "bank-transfer",
-      accupassUrl: "https://www.accupass.com/event/2609121231291837452375"
+      officialUrl: "activity-register.html?event=guandu-20261121",
+      payment: "bank-transfer"
     }
   ],
   articles: [

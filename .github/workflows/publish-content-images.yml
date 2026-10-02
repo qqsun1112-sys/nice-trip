@@ -1,0 +1,44 @@
+name: Publish remaining content images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-content-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Copy prepared NICE TRIP content images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/images
+          copy_first() {
+            out="$1"; shift
+            for src in "$@"; do
+              if [ -f "$src" ]; then cp "$src" "$out"; echo "$src -> $out"; return 0; fi
+            done
+            echo "No source found for $out" >&2
+            return 1
+          }
+          # Only copy from existing repository originals; never redraw.
+          copy_first assets/images/activity-temple-songshan-xiahai.jpg "assets/images/廟語心聲松山霞海(3).png" "assets/images/廟語心聲.png"
+          # Other content images are intentionally left untouched unless an exact source exists in-repo.
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images
+          if ! git diff --cached --quiet; then
+            git commit -m "Add verified content image assets [skip ci]"
+            git push
+          fi

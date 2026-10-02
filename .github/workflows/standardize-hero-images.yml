@@ -1,4 +1,4 @@
-name: Standardize hero image canvases
+name: Standardize primary hero image canvases
 
 on:
   push:

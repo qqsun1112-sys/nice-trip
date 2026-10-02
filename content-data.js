@@ -385,7 +385,7 @@ window.NiceTripContent.remote = {
     catch (e) { return window.NICE_TRIP_CONTENT.activities; }
   },
   async articles() {
-    try { return await this.get("site_articles", "published_at.desc.nullslast,sort_order.asc"); }
+    try { return await this.get("site_articles", "sort_order.asc,published_at.desc.nullslast"); }
     catch (e) { return window.NICE_TRIP_CONTENT.articles; }
   }
 };

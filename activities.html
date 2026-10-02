@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
       accupass_url:a.accupass_url||a.accupassUrl||"",
       registration_deadline:a.registration_deadline||a.registrationDeadline||"",
       image_url:a.listing_image||a.home_image||a.image_url||a.visuals?.listing||a.visuals?.home||a.image||localData.find(x=>x.id===a.slug||x.id===a.id||x.title===a.title)?.visuals?.listing||localData.find(x=>x.id===a.slug||x.id===a.id||x.title===a.title)?.visuals?.home||"",
-      price_label:a.price_label||(a.payment==="free"?"免費公益":"NT$850／人；另有公開優惠票種")
+      price_label:a.payment==="free"?"公益免費":(a.price_label||"票價請見活動頁")
     };
   };
   const items=data.map(norm).filter(a=>!["ended","cancelled"].includes(a.status)&&(!a.event_date||a.event_date>=todayTW))

@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
   const ntTodayTW=()=>window.NiceTripContent?.todayTaipei?.()||new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Taipei",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
   const ntDate=v=>v?String(v).replace(/-/g,"."):"日期請見活動頁";
   const ntService=v=>({city:"城市故事行旅",meditation:"百八鐘靜心運動",relaxation:"身心放鬆術",temple:"廟語心聲"}[String(v||"").toLowerCase()]||"美遊記活動");
-  const ntStatus=v=>window.NiceTripContent?.statusLabel?.(v)||({open:"開放報名",full:"已額滿",ended:"活動結束",upcoming:"即將公布",cancelled:"活動取消",postponed:"活動延期"}[v]||v||"");
+  const ntStatus=v=>window.NiceTripContent?.statusLabel?.(v)||({open:"開放報名",full:"已額滿",ended:"活動結束",upcoming:"即將公布",paused:"暫停報名",closed:"停止報名",cancelled:"活動取消",postponed:"活動延期"}[v]||v||"");
   const localData=window.NICE_TRIP_CONTENT.activities;
   let data=localData;
   try{

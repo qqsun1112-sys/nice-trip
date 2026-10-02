@@ -163,7 +163,7 @@ window.NiceTripContent = {
     return this.activeActivities().filter(a => a.service === service);
   },
   statusLabel(status) {
-    return ({open:"開放報名",full:"已額滿",ended:"活動結束",upcoming:"即將公布",cancelled:"活動取消",postponed:"活動延期"})[status] || status;
+    return ({open:"開放報名",full:"已額滿",ended:"活動結束",upcoming:"即將公布",paused:"暫停報名",closed:"停止報名",cancelled:"活動取消",postponed:"活動延期"})[status] || status;
   },
   latestArticles(limit) {
     return [...window.NICE_TRIP_CONTENT.articles]

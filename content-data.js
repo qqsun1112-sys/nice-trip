@@ -54,7 +54,7 @@ window.NICE_TRIP_CONTENT = {
       date: "2026-10-26",
       time: "15:00–16:00",
       status: "open",
-      visuals: { home: "assets/images/廟語心聲.png", listing: "assets/images/廟語心聲.png", detail: "assets/images/廟語心聲.png", social: "" },
+      visuals: { home: "assets/images/廟語心聲松山霞海.png", listing: "assets/images/廟語心聲松山霞海.png", detail: "assets/images/廟語心聲松山霞海.png", social: "assets/images/廟語心聲松山霞海.png" },
       registrationDeadline: "",
       imageAlt: "廟語心聲松山霞海城隍廟文化講座活動主視覺",
       officialUrl: "activity-register.html?event=temple-songshan-20261026",

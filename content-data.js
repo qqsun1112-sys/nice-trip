@@ -201,18 +201,7 @@ window.NICE_TRIP_CONTENT = {
           "url": "https://travel.yam.com/article/140664",
           "sortOrder": 7
       },
-      {
-          "slug": "xikou-low-carbon-20260309",
-          "category": "faith",
-          "publisher": "女子漾",
-          "date": "2026-03-09",
-          "image": "assets/images/松山霞海城隍廟文章.jpg",
-          "imageAlt": "松山霞海低碳小旅行文章主視覺",
-          "title": "錫口信念永續轉型！低碳小旅行寫下「全滿分」標竿紀錄",
-          "excerpt": "從松山霞海文化小旅行，看見信仰文化、低碳旅行與地方共好的實踐。",
-          "url": "https://woman.udn.com/woman/story/123162/9369277",
-          "sortOrder": 8
-      },
+
       {
           "slug": "ishigaki-torinji-20260304",
           "category": "travel",
@@ -261,18 +250,7 @@ window.NICE_TRIP_CONTENT = {
           "url": "https://woman.udn.com/woman/story/123162/8648283?from=udn-search_ch4087",
           "sortOrder": 12
       },
-      {
-          "slug": "nice-trip-city-experience-20260430",
-          "category": "city",
-          "publisher": "台灣產經新聞網",
-          "date": "2026-04-30",
-          "image": "assets/images/城市故事行旅.jpg",
-          "imageAlt": "美遊記城市文化與健康品牌報導",
-          "title": "不是導覽，是一場讓人重新愛上土地的行動",
-          "excerpt": "美遊記用走讀與呼吸重寫城市體驗，串聯文化、健康與永續旅行。",
-          "url": "https://news.taiwannet.com.tw/news/203531/",
-          "sortOrder": 20
-      },
+
       {
           "slug": "xinzhuang-reading-walk-20260524",
           "category": "city",
@@ -285,30 +263,8 @@ window.NICE_TRIP_CONTENT = {
           "url": "https://news.taiwannet.com.tw/news/206054/",
           "sortOrder": 21
       },
-      {
-          "slug": "temple-voice-20260819",
-          "category": "faith",
-          "publisher": "台灣產經新聞網",
-          "date": "2026-08-19",
-          "image": "assets/images/美遊記：走進一座廟.png",
-          "imageAlt": "走進一座廟文化閱讀主視覺",
-          "title": "當我們走進廟宇，還看得懂它在說什麼？",
-          "excerpt": "松山霞海城隍廟《廟語心聲》從一小時文化講座，看見傳統文化重新被閱讀的可能。",
-          "url": "https://news.taiwannet.com.tw/news/216093/",
-          "sortOrder": 22
-      },
-      {
-          "slug": "community-health-20260708",
-          "category": "wellness",
-          "publisher": "台灣產經新聞網",
-          "date": "2026-07-08",
-          "image": "assets/images/美遊記身心平衡之旅 (1).png",
-          "imageAlt": "美遊記社區健康促進計畫報導",
-          "title": "從社區開始打造健康臺灣｜美遊記發起《社區健康促進計畫》",
-          "excerpt": "邀雙北里辦公處共同推動幸福社區，將健康促進帶回日常生活。",
-          "url": "https://news.taiwannet.com.tw/news/211093/",
-          "sortOrder": 23
-      },
+
+
       {
           "slug": "body-relaxation-zhonghe-senior-learning",
           "category": "wellness",
@@ -333,18 +289,7 @@ window.NICE_TRIP_CONTENT = {
           "url": "https://news.taiwannet.com.tw/news/220473/",
           "sortOrder": 41
       },
-      {
-          "slug": "temple-voice-brand-20260727",
-          "category": "faith",
-          "publisher": "台灣產經新聞網",
-          "date": "2026-07-27",
-          "image": "assets/images/temple-activity-hq.jpg",
-          "imageAlt": "廟語心聲文化教育活動",
-          "title": "《廟語心聲》文化教育品牌正式發表",
-          "excerpt": "以閱讀建築、閱讀文化、閱讀人生開啟臺灣文化閱讀新視角。",
-          "url": "https://news.taiwannet.com.tw/news/213260/",
-          "sortOrder": 42
-      },
+
       {
           "slug": "chihlee-108-meditation-20260108",
           "category": "wellness",

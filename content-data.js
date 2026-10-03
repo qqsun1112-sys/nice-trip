@@ -214,6 +214,54 @@ window.NICE_TRIP_CONTENT = {
           "sortOrder": 8
       },
       {
+          "slug": "ishigaki-torinji-20260304",
+          "category": "travel",
+          "publisher": "輕旅行",
+          "date": "2026-03-03",
+          "image": "assets/images/日本石垣島.jpg",
+          "imageAlt": "搭乘郵輪前往日本石垣島桃林寺的旅程意象",
+          "title": "日本石垣島桃林寺｜當地獨一無二的文化瑰寶｜地表最樸素的金剛力士",
+          "excerpt": "從石垣島桃林寺的紅瓦、仁王像與四百年風雨，讀一段關於守護、節制與文化記憶的故事。",
+          "url": "https://travel.yam.com/article/139660",
+          "sortOrder": 9
+      },
+      {
+          "slug": "beppu-umijigoku-20251215",
+          "category": "travel",
+          "publisher": "輕旅行",
+          "date": "2025-12-14",
+          "image": "assets/images/日本海地獄.jpg",
+          "imageAlt": "日本九州別府海地獄自然景觀",
+          "title": "日本海地獄｜在藍的像夢一樣的地方，學會對大自然保持謙卑",
+          "excerpt": "走進九州別府海地獄，在夢幻鈷藍泉水與地熱景觀之間，重新感受自然的力量與敬意。",
+          "url": "https://travel.yam.com/article/139107",
+          "sortOrder": 10
+      },
+      {
+          "slug": "setsugekka-train-20251201",
+          "category": "travel",
+          "publisher": "輕旅行",
+          "date": "2025-12-01",
+          "image": "assets/images/地表最完美的移動空間.jpg",
+          "imageAlt": "日本新潟雪月花號景觀列車",
+          "title": "地表最完美的移動空間｜讓想像飛馳，用極緻打造的雪月花號景觀列車",
+          "excerpt": "搭上新潟雪月花號，從270度景觀、在地工藝到料理，體驗一座會移動的新潟文化展覽館。",
+          "url": "https://travel.yam.com/article/139019",
+          "sortOrder": 11
+      },
+      {
+          "slug": "taipei-shikoku-henro-20250402",
+          "category": "city",
+          "publisher": "女子漾",
+          "date": "2025-04-02",
+          "image": "assets/images/與大師同行之「台北新四國遍路」.webp",
+          "imageAlt": "台北新四國遍路朝聖文化旅行",
+          "title": "與大師同行之「台北新四國遍路」～一路相伴、你不孤單的朝聖之旅",
+          "excerpt": "從台北天后宮、臨濟護國禪寺到北投普濟寺，循著弘法大師與石佛足跡，閱讀台北的朝聖文化。",
+          "url": "https://woman.udn.com/woman/story/123162/8648283?from=udn-search_ch4087",
+          "sortOrder": 12
+      },
+      {
           "slug": "nice-trip-city-experience-20260430",
           "category": "city",
           "publisher": "台灣產經新聞網",

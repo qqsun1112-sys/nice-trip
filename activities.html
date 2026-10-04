@@ -253,6 +253,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
   const items=data.map(norm).filter(a=>!["ended","cancelled"].includes(a.status)&&(!a.event_date||a.event_date>=todayTW))
     .sort((a,b)=>(a.event_date||"9999-12-31").localeCompare(b.event_date||"9999-12-31"));
   if(!grid||!items.length)return;
+  await Promise.all(items.map(async a=>{if(a.status!=="open")return;try{const ar=await fetch("https://eanxqqctblwfhtdrhwuk.supabase.co/rest/v1/rpc/activity_public_availability",{method:"POST",headers:{apikey:"sb_publishable_5kKMSj9z2FwEEgGjD1PM9w_7MDOqQrc","Content-Type":"application/json"},body:JSON.stringify({p_slug:a.slug||a.id})}),av=await ar.json(),v=Array.isArray(av)?av[0]:av;if(ar.ok&&v&&v.remaining!=null)a.remaining=Number(v.remaining)}catch(_){}}));
+  const now=new Date();
   grid.innerHTML=items.map(a=>{
     const isFree=a.payment==="free"||(!a.payment&&["meditation","relaxation","temple"].includes(String(a.service||"").toLowerCase()));
     const payClass=isFree?"free":"paid";
@@ -261,7 +263,10 @@ document.addEventListener("DOMContentLoaded",async()=>{
       : `<small>${ntEsc(ntService(a.service))}</small><b>${ntEsc(a.title.replace("小旅行",""))}</b><em>${ntEsc(a.summary||"文化 × 健康 × 公益 × 永續")}</em><span>${ntEsc(a.event_date?a.event_date.slice(5).replace("-","."):"公益")}</span>`;
     const facts=ntDate(a.event_date)+(a.start_time?` ${ntEsc(a.start_time)}${a.end_time?"–"+ntEsc(a.end_time):""}`:"")+(a.meeting_point?`<br>集合｜${ntEsc(a.meeting_point)}`:"")+`<br>${ntEsc(a.price_label)}`;
     let action="";
-    if(a.status==="full") action='<div class="pendingOfficial"><small>本場已額滿，感謝支持</small></div>';
+    const deadlineClosed=!!(a.registration_deadline&&new Date(a.registration_deadline)<=now);
+    const capacityFull=a.remaining!=null&&Number(a.remaining)<=0;
+    if(a.status==="full"||capacityFull) action='<div class="pendingOfficial"><small>本場已額滿，感謝支持</small></div>';
+    else if(deadlineClosed) action='<div class="pendingOfficial"><small>本場報名已截止</small></div>';
     else if(a.status==="paused") action='<div class="pendingOfficial"><small>本場暫停報名，恢復後將於官網重新開放</small></div>';
     else if(a.status==="closed") action='<div class="pendingOfficial"><small>本場已停止報名</small></div>';
     else if(a.status==="postponed") action='<div class="pendingOfficial"><small>活動延期，新日期確認後於官網公告</small></div>';

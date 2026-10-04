@@ -272,20 +272,25 @@ footer .foot,.footer .foot,.ntFooterGrid{gap:28px}
 <article class="card" data-cat="city" data-pay="paid" data-activity-id="guandu-20261121"><div class="visual activityCover activityPoster"><img src="assets/images/關渡小旅行.png" alt="關渡小旅行活動主視覺" loading="lazy"></div><div class="body"><div class="meta">城市故事行旅｜文化教育 <span class="status">開放報名</span></div><h2>關渡小旅行</h2><div class="facts">2026.11.21（六）10:00–12:00<br>集合｜關渡宮（三川殿前）<br>NT$850／人；另有公開優惠票種</div><a class="btn" href="activity-guandu.html">立即報名 →</a></div></article>
 </div></div></main><footer class="ntFooter"><div class="wrap ntFooterGrid"><div><strong>美遊記 NICE TRIP</strong><p>走進城市・讀懂文化・遇見自己</p><small>薪展新創文化有限公司<br>文化 × 健康 × 公益 × 永續</small></div><div class="ntFooterContact">聯絡信箱｜<a href="mailto:rodney.xinzhan@gmail.com">rodney.xinzhan@gmail.com</a><br><a href="privacy.html">隱私權政策</a>｜<a href="terms.html">服務條款</a></div></div><div class="wrap ntCopyright">© 2026 薪展新創文化有限公司 版權所有 All Rights Reserved.</div><div class="footerSocial"><strong>追蹤美遊記</strong><span>活動消息、文化故事與最新分享</span><a href="https://www.facebook.com/torateng" target="_blank" rel="noopener noreferrer" aria-label="追蹤美遊記 Facebook 粉絲專頁">Facebook 粉絲專頁 →</a></div></footer><script id="nt-activity-filter">
 function ntApplyActivityFilter(f){
+  var service=new URLSearchParams(location.search).get('service')||'';
+  var serviceNames={city:'城市故事行旅',meditation:'百八鐘靜心運動',relaxation:'身心放鬆術',temple:'廟語心聲'};
+  if(!serviceNames[service])service='';
   document.querySelectorAll('.filter').forEach(function(x){x.classList.toggle('active',x.dataset.f===f);});
   document.querySelectorAll('#activityGrid .card').forEach(function(card){
-    var show=f==='all'||card.dataset.pay===f;
-    card.hidden=!show;
+    var payMatch=f==='all'||card.dataset.pay===f;
+    var serviceMatch=!service||card.dataset.cat===service;
+    card.hidden=!(payMatch&&serviceMatch);
   });
   var routes=document.getElementById('cityRouteNetwork');
   if(routes) routes.hidden=true;
   var infoMap={
     all:['近期活動','目前開放或即將推出的活動，可直接查看日期、費用與報名方式。'],
-    paid:['付費活動','城市故事行旅公開場次。'],
-    free:['免費活動','身心放鬆術、百八鐘靜心運動與廟語心聲講座等免費公益場次。']
+    paid:['付費活動','目前可參加的付費公開場次。'],
+    free:['免費活動','目前開放的免費公益場次。']
   };
   var info=infoMap[f]||infoMap.all,ctx=document.getElementById('filterContext');
-  if(ctx){ctx.style.display=f==='all'?'none':'';ctx.innerHTML='<div><small>ACTIVITIES</small><h2>'+info[0]+'</h2><p>'+info[1]+'</p></div>';}
+  if(service){info=[serviceNames[service]+'近期活動','以下優先顯示「'+serviceNames[service]+'」目前開放或即將推出的場次。'];}
+  if(ctx){ctx.style.display=(f==='all'&&!service)?'none':'';ctx.innerHTML='<div><small>ACTIVITIES</small><h2>'+info[0]+'</h2><p>'+info[1]+'</p></div>';}
   document.querySelectorAll('#pastActivityGrid .card').forEach(function(card){card.style.display='';});
 }
 document.querySelectorAll('.filter').forEach(function(b){b.addEventListener('click',function(){ntApplyActivityFilter(b.dataset.f);});});

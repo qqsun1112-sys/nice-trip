@@ -308,6 +308,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
   const ntTodayTW=()=>window.NiceTripContent?.todayTaipei?.()||new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Taipei",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
   const ntDate=v=>v?String(v).replace(/-/g,"."):"日期請見活動頁";
   const ntService=v=>({city:"城市故事行旅",meditation:"百八鐘靜心運動",relaxation:"身心放鬆術",temple:"廟語心聲"}[String(v||"").toLowerCase()]||"美遊記活動");
+  const ntRegion=a=>{const t=[a.title,a.subtitle,a.summary,a.meeting_point].filter(Boolean).join(" ");if(/基隆|仙洞|正濱|社寮/.test(t))return "基隆";if(/新北|汐止|新莊|淡水|三峽/.test(t))return "新北";return "台北";};
   const ntStatus=v=>window.NiceTripContent?.statusLabel?.(v)||({open:"開放報名",full:"已額滿",ended:"活動結束",upcoming:"即將公布",paused:"暫停報名",closed:"停止報名",cancelled:"活動取消",postponed:"活動延期"}[v]||v||"");
   const localData=window.NICE_TRIP_CONTENT.activities;
   let data=localData;
@@ -342,7 +343,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     const visual=a.image_url
       ? `<img src="${ntEsc(a.image_url)}" alt="${ntEsc(a.imageAlt||a.title+"活動主視覺")}" loading="lazy">`
       : `<small>${ntEsc(ntService(a.service))}</small><b>${ntEsc(a.title.replace("小旅行",""))}</b><em>${ntEsc(a.summary||"文化 × 健康 × 公益 × 永續")}</em><span>${ntEsc(a.event_date?a.event_date.slice(5).replace("-","."):"公益")}</span>`;
-    const facts=ntDate(a.event_date)+(a.start_time?` ${ntEsc(a.start_time)}${a.end_time?"–"+ntEsc(a.end_time):""}`:"")+(a.meeting_point?`<br>集合｜${ntEsc(a.meeting_point)}`:"")+`<br>${ntEsc(a.price_label)}`;
+    const facts=`${ntEsc(ntRegion(a))}｜${ntDate(a.event_date)}${a.start_time?`｜${ntEsc(String(a.start_time).slice(0,5))}${a.end_time?"–"+ntEsc(String(a.end_time).slice(0,5)):""}`:""}`;
     let action="";
     const deadlineClosed=!!(a.registration_deadline&&new Date(a.registration_deadline)<=now);
     const capacityFull=a.remaining!=null&&Number(a.remaining)<=0;

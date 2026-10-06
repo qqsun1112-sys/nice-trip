@@ -336,8 +336,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
     .sort((a,b)=>(a.event_date||"9999-12-31").localeCompare(b.event_date||"9999-12-31"));
   if(!grid||!items.length)return;
   await Promise.all(items.map(async a=>{if(a.status!=="open")return;try{const ar=await fetch("https://eanxqqctblwfhtdrhwuk.supabase.co/rest/v1/rpc/activity_public_availability",{method:"POST",headers:{apikey:"sb_publishable_C_5cBiXJWq2zVyWmgnMZbQ_W4aonYIy","Content-Type":"application/json"},body:JSON.stringify({p_slug:a.slug||a.id})}),av=await ar.json(),v=Array.isArray(av)?av[0]:av;if(ar.ok&&v&&v.remaining!=null)a.remaining=Number(v.remaining)}catch(_){}}));
-  const now=new Date();
-  const isBookable=a=>a.status==="open"&&!(a.registration_deadline&&new Date(a.registration_deadline)<=now)&&!(a.remaining!=null&&Number(a.remaining)<=0);
+  const now=new Date(),ntDeadline=v=>new Date(/[zZ]$|[+-][0-9]{2}:[0-9]{2}$/.test(v)?v:v+"+08:00");
+  const isBookable=a=>a.status==="open"&&!(a.registration_deadline&&ntDeadline(a.registration_deadline)<=now)&&!(a.remaining!=null&&Number(a.remaining)<=0);
   const bookableCount=items.filter(isBookable).length;
   const countEl=document.getElementById("ntBookableCount");
   if(countEl)countEl.textContent=String(bookableCount);
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
       : `<small>${ntEsc(ntService(a.service))}</small><b>${ntEsc(a.title.replace("小旅行",""))}</b><em>${ntEsc(a.summary||"文化 × 健康 × 公益 × 永續")}</em><span>${ntEsc(a.event_date?a.event_date.slice(5).replace("-","."):"公益")}</span>`;
     const facts=`${ntEsc(ntRegion(a))}｜${ntDate(a.event_date)}${a.start_time?`｜${ntEsc(String(a.start_time).slice(0,5))}${a.end_time?"–"+ntEsc(String(a.end_time).slice(0,5)):""}`:""}`;
     let action="";
-    const deadlineClosed=!!(a.registration_deadline&&new Date(a.registration_deadline)<=now);
+    const deadlineClosed=!!(a.registration_deadline&&ntDeadline(a.registration_deadline)<=now);
     const capacityFull=a.remaining!=null&&Number(a.remaining)<=0;
     if(a.status==="full"||capacityFull) action='<div class="pendingOfficial"><small>本場已額滿，感謝支持</small></div>';
     else if(deadlineClosed) action='<div class="pendingOfficial"><small>本場報名已截止</small></div>';

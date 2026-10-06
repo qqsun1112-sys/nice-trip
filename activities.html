@@ -335,7 +335,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
   const items=data.map(norm).filter(a=>!["ended","cancelled"].includes(a.status)&&(!a.event_date||a.event_date>=todayTW))
     .sort((a,b)=>(a.event_date||"9999-12-31").localeCompare(b.event_date||"9999-12-31"));
   if(!grid||!items.length)return;
-  await Promise.all(items.map(async a=>{if(a.status!=="open")return;try{const ar=await fetch("https://eanxqqctblwfhtdrhwuk.supabase.co/rest/v1/rpc/activity_public_availability",{method:"POST",headers:{apikey:"sb_publishable_5kKMSj9z2FwEEgGjD1PM9w_7MDOqQrc","Content-Type":"application/json"},body:JSON.stringify({p_slug:a.slug||a.id})}),av=await ar.json(),v=Array.isArray(av)?av[0]:av;if(ar.ok&&v&&v.remaining!=null)a.remaining=Number(v.remaining)}catch(_){}}));
+  await Promise.all(items.map(async a=>{if(a.status!=="open")return;try{const ar=await fetch("https://eanxqqctblwfhtdrhwuk.supabase.co/rest/v1/rpc/activity_public_availability",{method:"POST",headers:{apikey:"sb_publishable_C_5cBiXJWq2zVyWmgnMZbQ_W4aonYIy","Content-Type":"application/json"},body:JSON.stringify({p_slug:a.slug||a.id})}),av=await ar.json(),v=Array.isArray(av)?av[0]:av;if(ar.ok&&v&&v.remaining!=null)a.remaining=Number(v.remaining)}catch(_){}}));
   const now=new Date();
   const isBookable=a=>a.status==="open"&&!(a.registration_deadline&&new Date(a.registration_deadline)<=now)&&!(a.remaining!=null&&Number(a.remaining)<=0);
   const bookableCount=items.filter(isBookable).length;

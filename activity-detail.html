@@ -173,4 +173,4 @@ async function setRegistrationAction(a,key,status){
  if(a.status!=="open"){btn.classList.add("muted");btn.textContent=status;note.textContent=a.status==="paused"?"本場目前暫停報名。":"目前此場次未開放報名。";return}
  btn.href="activity-register.html?event="+encodeURIComponent(key)+"&from=detail";btn.textContent="我要報名 →";note.textContent="請先確認完整活動資訊，再進入報名表填寫資料。";
 }
-</script></body></html>
+</script><script id="nt-ga-activity-detail">document.addEventListener("click",function(e){const a=e.target.closest("#registerBtn");if(!a)return;if(typeof gtag==="function")gtag("event","activity_registration_start",{link_url:a.href,event_slug:new URLSearchParams(location.search).get("event")||""});});</script></body></html>

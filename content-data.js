@@ -48,6 +48,30 @@ window.NICE_TRIP_CONTENT = {
   ],
   articles: [
       {
+          "slug": "beitou-nongchan-water-moon-20230803",
+          "category": "faith",
+          "publisher": "女子漾",
+          "date": "2023-08-03",
+          "image": "assets/images/北投農禪寺水月道場.jpg",
+          "imageAlt": "北投農禪寺水月道場",
+          "title": "北投農禪寺水月道場｜千江有水千江月｜顛覆想像的寺院景觀",
+          "excerpt": "走進水月道場，在水、光、建築與經文之間，感受「空中花，水中月」所展開的寧靜寺院風景。",
+          "url": "https://woman.udn.com/woman/story/123162/7345338",
+          "sortOrder": 8
+      },
+      {
+          "slug": "xizhi-gongbeidian-maple-20231115",
+          "category": "faith",
+          "publisher": "女子漾",
+          "date": "2023-11-15",
+          "image": "assets/images/汐止拱北殿.jpg",
+          "imageAlt": "汐止拱北殿楓紅與寺院景觀",
+          "title": "汐止拱北殿｜北台灣最佳賞楓景點",
+          "excerpt": "從百年古剎、彼岸橋到後山步道與雙拱橋，在楓紅與山林之間感受汐止拱北殿清幽而富禪意的風景。",
+          "url": "https://woman.udn.com/woman/story/123162/7576522",
+          "sortOrder": 8.5
+      },
+      {
           "slug": "kiyotsu",
           "category": "travel",
           "publisher": "PeoPo 公民新聞",

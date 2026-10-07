@@ -356,7 +356,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     else if(a.status==="paused") action='<div class="pendingOfficial"><small>本場暫停報名，恢復後將於官網重新開放</small></div>';
     else if(a.status==="closed") action='<div class="pendingOfficial"><small>本場已停止報名</small></div>';
     else if(a.status==="postponed") action='<div class="pendingOfficial"><small>活動延期，新日期確認後於官網公告</small></div>';
-    else if(a.status==="open"){const eventKey=a.slug||a.id||""; action=eventKey?`<a class="btn" href="activity-detail.html?event=${encodeURIComponent(eventKey)}">查看活動詳情 →</a>`:'<div class="pendingOfficial"><small>報名資訊即將公布</small></div>';} 
+    else if(a.status==="open"&&!deadlineClosed&&!capacityFull){const eventKey=a.slug||a.id||""; action=eventKey?`<a class="btn" href="activity-detail.html?event=${encodeURIComponent(eventKey)}">查看活動詳情 →</a>`:'<div class="pendingOfficial"><small>報名資訊即將公布</small></div>';} else if(deadlineClosed) action='<div class="pendingOfficial"><small>本場報名已截止</small></div>'; else if(capacityFull) action='<div class="pendingOfficial"><small>本場已額滿</small></div>'; 
     else action='<div class="pendingOfficial"><small>報名資訊即將公布</small></div>';
     const displayStatus=(a.status==="full"||capacityFull)?"已額滿":deadlineClosed?"報名截止":ntStatus(a.status);return `<article class="card" data-cat="${ntEsc(a.service)}" data-pay="${payClass}" data-activity-id="${ntEsc(a.id)}"><div class="visual activityCover activityPoster">${visual}</div><div class="body"><div class="meta">${ntEsc(ntService(a.service))}｜${isFree?"免費公益":"文化教育"} <span class="status">${ntEsc(displayStatus)}</span></div><h2>${ntEsc(a.title)}${a.summary?`｜${ntEsc(a.summary)}`:""}</h2><div class="facts">${facts}</div>${action}</div></article>`;
   }).join("");

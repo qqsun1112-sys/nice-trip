@@ -138,4 +138,54 @@ document.addEventListener("dragstart",function(e){if(e.target&&e.target.closest&
 document.addEventListener("contextmenu",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});
 document.querySelectorAll("img").forEach(function(img){img.setAttribute("draggable","false")});
 </script><script src="assets/js/back-to-top.js" defer></script>
-<script id="nt-nav-current-page">(function(){const page=(location.pathname.split("/").pop()||"index.html").toLowerCase();document.querySelectorAll("header nav a,.ntMobilePanel a").forEach(a=>{const href=(a.getAttribute("href")||"").split("?")[0].split("#")[0].toLowerCase();if(href===page||(!page&&href==="index.html")){a.classList.add("ntCurrent");a.setAttribute("aria-current","page")}const strong=a.querySelector(":scope > strong");if(strong&&strong.textContent.trim()==="近期活動")strong.replaceWith(document.createTextNode(strong.textContent));});})();</script></body></html>
+<script id="nt-nav-current-page">(function(){const page=(location.pathname.split("/").pop()||"index.html").toLowerCase();document.querySelectorAll("header nav a,.ntMobilePanel a").forEach(a=>{const href=(a.getAttribute("href")||"").split("?")[0].split("#")[0].toLowerCase();if(href===page||(!page&&href==="index.html")){a.classList.add("ntCurrent");a.setAttribute("aria-current","page")}const strong=a.querySelector(":scope > strong");if(strong&&strong.textContent.trim()==="近期活動")strong.replaceWith(document.createTextNode(strong.textContent));});})();</script><script id="nt-header-runtime-lock">
+/* Runtime header normalization: overrides legacy per-page header rules without altering hero artwork. */
+(function(){
+  function lockHeader(){
+    var h=document.querySelector("body>header");
+    if(!h)return;
+    var row=h.querySelector(".nav,.ntNav");
+    var brand=h.querySelector(".brand,.ntBrand");
+    var logo=brand&&brand.querySelector("img");
+    if(row){
+      row.style.setProperty("height","96px","important");
+      row.style.setProperty("min-height","96px","important");
+      row.style.setProperty("max-height","96px","important");
+      row.style.setProperty("padding","0 54px","important");
+      row.style.setProperty("box-sizing","border-box","important");
+      row.style.setProperty("align-items","center","important");
+    }
+    if(brand){
+      brand.style.setProperty("width","126px","important");
+      brand.style.setProperty("height","72px","important");
+      brand.style.setProperty("min-width","126px","important");
+      brand.style.setProperty("max-width","126px","important");
+      brand.style.setProperty("flex","0 0 126px","important");
+      brand.style.setProperty("margin","0 28px 0 0","important");
+      brand.style.setProperty("padding","0","important");
+      brand.style.setProperty("display","flex","important");
+      brand.style.setProperty("align-items","center","important");
+      brand.style.setProperty("justify-content","flex-start","important");
+    }
+    if(logo){
+      logo.style.setProperty("width","118px","important");
+      logo.style.setProperty("height","68px","important");
+      logo.style.setProperty("max-width","118px","important");
+      logo.style.setProperty("max-height","68px","important");
+      logo.style.setProperty("min-width","0","important");
+      logo.style.setProperty("object-fit","contain","important");
+      logo.style.setProperty("object-position","left center","important");
+      logo.style.setProperty("margin","0","important");
+      logo.style.setProperty("padding","0","important");
+      logo.style.setProperty("transform","none","important");
+    }
+    if(window.innerWidth<=860){
+      if(row){row.style.setProperty("height","76px","important");row.style.setProperty("min-height","76px","important");row.style.setProperty("max-height","76px","important");row.style.setProperty("padding","0 20px","important");}
+      if(brand){brand.style.setProperty("width","108px","important");brand.style.setProperty("height","62px","important");brand.style.setProperty("min-width","108px","important");brand.style.setProperty("max-width","108px","important");brand.style.setProperty("flex","0 0 108px","important");}
+      if(logo){logo.style.setProperty("width","102px","important");logo.style.setProperty("height","58px","important");logo.style.setProperty("max-width","102px","important");logo.style.setProperty("max-height","58px","important");}
+    }
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",lockHeader);else lockHeader();
+  window.addEventListener("resize",lockHeader);
+})();
+</script></body></html>

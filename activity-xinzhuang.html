@@ -82,4 +82,14 @@ document.addEventListener("dragstart",function(e){if(e.target&&e.target.closest&
 document.addEventListener("contextmenu",function(e){if(e.target&&e.target.closest&&e.target.closest("img"))e.preventDefault()});
 document.querySelectorAll("img").forEach(function(img){img.setAttribute("draggable","false")});
 </script><script src="assets/js/back-to-top.js" defer></script>
-</body></html>
+<script id="nt-ga-registration-start">
+document.addEventListener("click",function(e){
+  const a=e.target.closest('a[href*="activity-register.html"]');
+  if(!a||typeof gtag!=="function")return;
+  const u=new URL(a.href,location.href);
+  gtag("event","activity_registration_start",{
+    event_slug:u.searchParams.get("event")||"",
+    source_page:location.pathname
+  });
+});
+</script></body></html>

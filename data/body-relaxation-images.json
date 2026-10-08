@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "status": "approved-assets-verified-and-embedded",
+  "note": "12 張經確認的 WebP 原圖已上傳測試分支，且已在對應文章中引用。",
+  "articles": [
+    {
+      "number": "01",
+      "title": "叩天鐘",
+      "page": "body-relaxation-kou-tian-zhong.html",
+      "approved_image_path": "assets/images/body-relaxation/01_kou-tian-zhong.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "02",
+      "title": "咽津",
+      "page": "body-relaxation-yan-jin.html",
+      "approved_image_path": "assets/images/body-relaxation/02_yan-jin.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "03",
+      "title": "鳴天鼓",
+      "page": "body-relaxation-ming-tian-gu.html",
+      "approved_image_path": "assets/images/body-relaxation/03_ming-tian-gu.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "04–05",
+      "title": "搓耳、扯耳",
+      "page": "body-relaxation-cuo-er-che-er.html",
+      "approved_image_path": "assets/images/body-relaxation/04-05_cuo-er-che-er.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "06",
+      "title": "指梳",
+      "page": "body-relaxation-zhi-shu.html",
+      "approved_image_path": "assets/images/body-relaxation/06_zhi-shu.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "07",
+      "title": "熨眼",
+      "page": "body-relaxation-yun-yan.html",
+      "approved_image_path": "assets/images/body-relaxation/07_yun-yan.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "08",
+      "title": "面浴",
+      "page": "body-relaxation-mian-yu.html",
+      "approved_image_path": "assets/images/body-relaxation/08_mian-yu.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "09",
+      "title": "吐納",
+      "page": "body-relaxation-tu-na.html",
+      "approved_image_path": "assets/images/body-relaxation/09_tu-na.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "10",
+      "title": "六字氣訣",
+      "page": "body-relaxation-liu-zi-qi-jue.html",
+      "approved_image_path": "assets/images/body-relaxation/10_liu-zi-qi-jue.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "11",
+      "title": "摩腹",
+      "page": "body-relaxation-mo-fu.html",
+      "approved_image_path": "assets/images/body-relaxation/11_mo-fu.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "12",
+      "title": "敦踵",
+      "page": "body-relaxation-dun-zhong.html",
+      "approved_image_path": "assets/images/body-relaxation/12_dun-zhong.webp",
+      "asset_verified": true,
+      "embedded": true
+    },
+    {
+      "number": "13",
+      "title": "轉地鼓",
+      "page": "body-relaxation-zhuan-di-gu.html",
+      "approved_image_path": "assets/images/body-relaxation/13_zhuan-di-gu.webp",
+      "asset_verified": true,
+      "embedded": true
+    }
+  ]
+}

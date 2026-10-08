@@ -1,0 +1,32 @@
+name: Relaxation article QA
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_check:
+        description: 'Run strict release gate (requires all 12 approved images)'
+        required: false
+        type: boolean
+        default: false
+  push:
+    branches:
+      - test/body-relaxation-articles-20261008
+    paths:
+      - 'body-relaxation*.html'
+      - 'scripts/check_relaxation_articles.py'
+      - 'data/body-relaxation-images.json'
+      - '.github/workflows/relaxation-article-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check 12 article pages and links
+        run: python3 scripts/check_relaxation_articles.py
+      - name: Strict image release gate
+        if: github.event_name == 'workflow_dispatch' && inputs.release_check
+        run: python3 scripts/check_relaxation_articles.py --release

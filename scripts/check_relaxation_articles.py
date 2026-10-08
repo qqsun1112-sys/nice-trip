@@ -2,6 +2,7 @@
 """Static QA for NICE TRIP relaxation articles. Run: python3 scripts/check_relaxation_articles.py"""
 from html.parser import HTMLParser
 from pathlib import Path
+import json
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -87,6 +88,30 @@ for i, p in enumerate(PAGES):
     for href in ins.links:
         if href.startswith("#") and href[1:] not in ins.ids:
             errors.append(f"{p}: broken in-page anchor {href}")
+
+# The normal test-branch check verifies structure. Release checks additionally
+# block publication until all twelve approved visuals are present and embedded.
+if "--release" in sys.argv:
+    manifest_path = ROOT / "data/body-relaxation-images.json"
+    if not manifest_path.is_file():
+        errors.append("Release gate: approved-image manifest missing")
+    else:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        records = manifest.get("articles", [])
+        if len(records) != len(PAGES):
+            errors.append("Release gate: expected exactly 12 approved-image records")
+        for item in records:
+            page = item.get("page", "")
+            img = item.get("approved_image_path", "")
+            if page not in PAGES:
+                errors.append(f"Release gate: unexpected page {page}")
+                continue
+            if not item.get("asset_verified") or not item.get("embedded"):
+                errors.append(f"Release gate: image approval/embedding incomplete for {page}")
+            if not img or not (ROOT / img).is_file():
+                errors.append(f"Release gate: approved image missing for {page}: {img}")
+            elif f'src="{img}"' not in (ROOT / page).read_text(encoding="utf-8"):
+                errors.append(f"Release gate: article does not reference approved image {page}")
 
 if errors:
     print("FAIL: " + str(len(errors)) + " problem(s)")

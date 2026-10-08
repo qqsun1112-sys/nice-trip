@@ -1,0 +1,22 @@
+name: Relaxation article QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - test/body-relaxation-articles-20261008
+    paths:
+      - 'body-relaxation*.html'
+      - 'scripts/check_relaxation_articles.py'
+      - '.github/workflows/relaxation-article-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check 12 article pages and links
+        run: python3 scripts/check_relaxation_articles.py

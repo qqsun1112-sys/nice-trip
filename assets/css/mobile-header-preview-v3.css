@@ -16,3 +16,12 @@ body>header .ntMobilePanel.open,body>header .ntUnifiedPanel.open{top:76px!import
     float:none!important;margin:0!important;transform:none!important;
   }
 }
+
+/* Mobile alignment verified against user screenshots (group-booking reference):
+   B pages were ~16px farther left for the logo and ~20px farther right for the menu.
+   Keep header height, logo dimensions and menu behavior unchanged. */
+@media(max-width:860px){
+  body>header .brand,body>header .ntBrand{left:36px!important}
+  body>header .ntMobileBtn,body>header .ntUnifiedMenu{right:40px!important}
+  body>header.ntHeader>.wrap.ntNav>button.ntUnifiedMenu{right:40px!important}
+}

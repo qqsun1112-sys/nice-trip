@@ -62,8 +62,9 @@ for i, p in enumerate(PAGES):
         errors.append(f"{p}: lang must be zh-Hant")
     if not ins.has_viewport or not ins.has_description:
         errors.append(f"{p}: missing viewport or description")
-    if ins.headings < 4:
-        errors.append(f"{p}: insufficient section headings")
+    # Original manuscripts may have no subheadings; do not invent headings to satisfy QA.
+    if "<article" not in html or "</article>" not in html:
+        errors.append(f"{p}: article element missing")
     if len(ins.ids) != len(set(ins.ids)):
         errors.append(f"{p}: duplicate IDs")
     if "Responsive and keyboard accessibility enhancements" not in html:

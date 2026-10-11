@@ -377,7 +377,12 @@ window.NICE_TRIP_CONTENT = {
           "excerpt": "百八鐘靜心運動走進致理科技大學，以實際參與回饋呈現高齡心理健康與身心安定的活動成果。",
           "url": "https://news.taiwannet.com.tw/news/192019/",
           "sortOrder": 43
-      }
+      },
+      { slug:"north-coast-double-bay", category:"travel", publisher:"PeoPo 公民新聞", image:"assets/images/雙灣自行車道.jpg", imageAlt:"北海岸淺水灣海岸景觀與藝術裝置", title:"北海岸最浪漫的一段旅程～雙灣自行車道、芝蘭海上觀景平台", excerpt:"沿著北海岸迎風騎行，感受雙灣自行車道與芝蘭海上觀景平台的海岸風光。", url:"https://www.peopo.org/news/592163", sortOrder:44 },
+      { slug:"sanzhi-qingshan-terraces", category:"travel", publisher:"精選閱讀", image:"assets/images/青山瀑布來相伴、石砌梯田任我行.jpg", imageAlt:"三芝山間石砌水梯田", title:"青山瀑布來相伴、石砌梯田任我行", excerpt:"從山林瀑布走向層層石砌梯田，欣賞三芝山間的自然與農村地景。", url:"https://pse.is/9qhuz6", sortOrder:45 },
+      { slug:"jinguashi-three-level-bridge", category:"travel", publisher:"媽媽寶寶", image:"assets/images/全台絕無僅有的三層橋.jpg", imageAlt:"金瓜石三層橋與溪流景觀", title:"全台絕無僅有的三層橋｜摸乳巷、石頭公園、山尖路觀光步道全部一次收納", excerpt:"沿著山尖路尋訪獨特的三層橋，串起金瓜石的山城巷弄與自然步道。", url:"https://www.mombaby.com.tw/articles/9920757", sortOrder:46 },
+      { slug:"northeast-three-wonders", category:"travel", publisher:"精選閱讀", image:"assets/images/東北角三美.jpg", imageAlt:"鼻頭角山海步道與海岬景觀", title:"新北鼻頭角步道、南雅奇岩、鼻洞國小｜此生不可錯過的東北角三美", excerpt:"走進鼻頭角的山海步道，探索南雅奇岩與東北角海岸的壯闊景色。", url:"https://pse.is/9qhva2", sortOrder:47 },
+      { slug:"pinglin-jingualiao-fern-trail", category:"travel", publisher:"精選閱讀", image:"assets/images/金瓜寮魚蕨步道.jpg", imageAlt:"坪林茶園綠色景觀", title:"可與大自然產生對話的金瓜寮魚蕨步道｜全球百大綠色旅遊目的地", excerpt:"走進坪林的綠色山林與茶鄉景觀，感受自然生態與慢旅行的魅力。", url:"https://pse.is/9qhvcy", sortOrder:48 },
   ]
 };
 

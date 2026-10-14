@@ -166,6 +166,7 @@ async function setRegistrationAction(a,key,status){
  const deadline=a.registration_deadline||a.registrationDeadline||"",deadlineClosed=!!(deadline&&ntDeadline(deadline)<=now);
  const date=a.event_date||a.date||"",end=a.end_time?String(a.end_time).slice(0,8):(String(a.time||"").split("–")[1]||"23:59:59"),eventEnd=date?new Date(date+"T"+end+"+08:00"):null,eventEnded=!!(eventEnd&&!Number.isNaN(eventEnd.getTime())&&now>=eventEnd);
  const full=a.status==="full"||(remaining!=null&&remaining<=0);
+ const jsonLdNode=document.getElementById("nt-event-jsonld");if(jsonLdNode){try{const eventSchema=JSON.parse(jsonLdNode.textContent);if(eventSchema.offers&&remaining!=null&&remaining<=0){eventSchema.offers.availability="https://schema.org/SoldOut";jsonLdNode.textContent=JSON.stringify(eventSchema)}}catch(_){}}
  btn.classList.remove("muted");btn.removeAttribute("href");
  if(eventEnded){btn.classList.add("muted");btn.textContent="活動已結束";note.textContent="感謝您的參與與關注。";return}
  if(full){btn.classList.add("muted");btn.textContent="本場已額滿";note.textContent="目前暫停接受新報名。";return}

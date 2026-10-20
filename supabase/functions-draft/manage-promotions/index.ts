@@ -10,7 +10,10 @@ Deno.serve(async(req)=>{
  const origin=req.headers.get("origin"),h=cors(origin);
  if(req.method==="OPTIONS")return new Response("ok",{headers:h});
  if(!["GET","POST","PATCH"].includes(req.method)||(origin&&!origins.has(origin)))return fail("forbidden",403,h);
- const url=Deno.env.get("SUPABASE_URL"),publishable=Deno.env.get("SUPABASE_ANON_KEY"),keys=JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS")||"{}"),secret=keys.default;
+ const url=Deno.env.get("SUPABASE_URL"),publishable=Deno.env.get("SUPABASE_ANON_KEY");
+ let keys:Record<string,string>={};
+ try{keys=JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS")||"{}")}catch{return fail("admin_not_configured",503,h)}
+ const secret=keys.default;
  const allowed=new Set((Deno.env.get("ADMIN_USER_IDS")||"").split(",").map(x=>x.trim()).filter(Boolean));
  if(!url||!publishable||!secret||!allowed.size)return fail("admin_not_configured",503,h);
  const bearer=/^Bearer (.+)$/i.exec(req.headers.get("authorization")||"");

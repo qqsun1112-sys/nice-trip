@@ -1,7 +1,7 @@
 -- DRAFT ONLY. DO NOT EXECUTE AGAINST PRODUCTION WITHOUT APPROVAL.
 -- Replaces only public.create_registration_atomic(p_row jsonb).
 -- Keeps original registration behavior for no-code orders.
--- Requires 20261020_welcome50_phase1.sql to be applied first.
+-- Requires phase1 and reusable_promotion_campaigns draft migrations to be applied first.
 CREATE OR REPLACE FUNCTION public.create_registration_atomic(p_row jsonb)
 RETURNS public.registrations
 LANGUAGE plpgsql
@@ -17,6 +17,7 @@ DECLARE
  discount integer;
  amount integer;
  unit integer;
+ campaign public.promotion_campaigns%rowtype;
 BEGIN
  SELECT * INTO a FROM public.site_activities WHERE slug=p_row->>'event_slug' FOR UPDATE;
  IF NOT FOUND OR NOT a.published OR a.status <> 'open' THEN
@@ -35,10 +36,12 @@ BEGIN
  IF promo IS NOT NULL THEN
   unit:=coalesce((p_row->>'unit_price')::integer,0);
   gross:=unit*q;
-  IF promo<>'WELCOME50' OR NOT a.welcome50_enabled OR a.service<>'city'
+  SELECT * INTO campaign FROM public.promotion_campaigns WHERE code=promo;
+  IF NOT FOUND OR NOT campaign.enabled OR now()<campaign.starts_at
+    OR now()>campaign.ends_at OR NOT (a.slug=ANY(campaign.eligible_event_slugs))
+    OR NOT a.welcome50_enabled OR a.service<>campaign.service
     OR (a.registration_deadline IS NOT NULL AND now() >= a.registration_deadline)
-    OR unit<=0 OR now()<timestamptz '2026-10-20 00:00:00+08'
-    OR now()>timestamptz '2026-12-31 23:59:59+08'
+    OR unit<=0
   THEN RAISE EXCEPTION 'coupon_not_eligible' USING errcode='P0001'; END IF;
   IF NOT EXISTS (
     SELECT 1 FROM jsonb_array_elements(coalesce(a.ticket_options,'[]'::jsonb)) AS ticket(value)
@@ -55,7 +58,7 @@ BEGIN
   ) THEN
     RAISE EXCEPTION 'coupon_ticket_mismatch' USING errcode='P0001';
   END IF;
-  discount:=least(50,unit)*q;
+  discount:=least(campaign.discount_per_person,unit)*q;
  END IF;
  -- Preserve the original registration RPC behavior for ordinary (no-code) orders:
  -- the existing endpoint's total is stored unchanged, with no new pricing gate.

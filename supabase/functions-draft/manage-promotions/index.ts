@@ -51,13 +51,8 @@ Deno.serve(async(req)=>{
   const {data:events,error:eventError}=await admin.from("site_activities").select("slug,service").in("slug",slugs);
   if(eventError||!events||events.length!==slugs.length||events.some(x=>x.service!==service))return fail("invalid_event_scope",400,h);
   const payload={code,title,discount_per_person:amount,starts_at:starts,ends_at:ends,enabled,service,eligible_event_slugs:slugs,updated_at:new Date().toISOString()};
-  const result=action==="create"?await admin.from("promotion_campaigns").insert(payload).select("*").single():await admin.from("promotion_campaigns").update(payload).eq("id",id).select("*").single();
+  const result=await admin.rpc("manage_promotion_campaign_atomic",{p_actor:userId,p_campaign:payload,p_id:action==="create"?null:id});
   if(result.error||!result.data)throw result.error||Error("write_failed");
-  const audit=await admin.from("promotion_campaign_audit").insert({campaign_id:result.data.id,actor_user_id:userId,action:action==="update"&&!enabled&&previous?.enabled?"disable":action,before_state:previous,after_state:result.data});
-  if(audit.error){
-   // Fail visibly: an unaudited mutation must not be presented as success.
-   return fail("audit_failed_manual_review_required",500,h);
-  }
   return Response.json({ok:true,campaign:result.data},{headers:h});
  }catch(e){console.error("manage_promotions_error",e);return fail("management_failed",500,h)}
 });

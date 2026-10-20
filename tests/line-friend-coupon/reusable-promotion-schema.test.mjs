@@ -13,7 +13,12 @@ for(const required of [
  "CONSTRAINT promotion_campaigns_no_blank_events CHECK (array_position(eligible_event_slugs, NULL) IS NULL",
  "CONSTRAINT promotion_campaigns_valid_period CHECK (ends_at > starts_at)",
  "ENABLE ROW LEVEL SECURITY",
- "REVOKE ALL ON public.promotion_campaigns FROM anon, authenticated"
+ "REVOKE ALL ON public.promotion_campaigns FROM anon, authenticated",
+ "CREATE TABLE IF NOT EXISTS public.promotion_campaign_audit",
+ "actor_user_id uuid NOT NULL",
+ "before_state jsonb",
+ "after_state jsonb NOT NULL",
+ "REVOKE ALL ON public.promotion_campaign_audit FROM anon, authenticated"
 ])assert.ok(sql.includes(required),`Missing promotion guard: ${required}`);
 assert.ok(!/INSERT INTO public\.promotion_campaigns/i.test(sql),"Do not auto-enable campaigns");
 console.log("Reusable promotion schema static checks passed (not a database migration test)");

@@ -19,6 +19,18 @@ CREATE TABLE IF NOT EXISTS public.promotion_campaigns (
   CONSTRAINT promotion_campaigns_valid_code CHECK (code ~ '^[A-Z0-9_-]{3,32}$'),
   CONSTRAINT promotion_campaigns_valid_period CHECK (ends_at > starts_at)
 );
+-- Immutable operator trail, written by a privileged admin function on each mutation.
+CREATE TABLE IF NOT EXISTS public.promotion_campaign_audit (
+  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  campaign_id bigint REFERENCES public.promotion_campaigns(id),
+  actor_user_id uuid NOT NULL,
+  action text NOT NULL CHECK (action IN ('create','update','disable')),
+  before_state jsonb,
+  after_state jsonb NOT NULL,
+  occurred_at timestamptz NOT NULL DEFAULT now()
+);
+ALTER TABLE public.promotion_campaign_audit ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.promotion_campaign_audit FROM anon, authenticated;
 -- Restrict access: promotions must be verified by the server, never trusted from the browser.
 ALTER TABLE public.promotion_campaigns ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON public.promotion_campaigns FROM anon, authenticated;

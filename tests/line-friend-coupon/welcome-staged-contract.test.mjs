@@ -61,4 +61,6 @@ assert.ok(rpc.includes("IF promo IS NULL THEN"),"Legacy registration path must b
 assert.ok(rpc.includes("q:=greatest(1,coalesce((p_row->>\u0027quantity\u0027)::integer,1));"),"Legacy quantity semantics must remain");
 assert.ok(rpc.includes("IF length(coalesce(p_row->>\u0027quantity\u0027"),"Coupon quantity must be validated");
 assert.ok(backend.includes("Date.parse(a.event_date+"),"Ticket deadlines must use a timezone-aware date");
+assert.equal(rpc.split("END $function$;").length - 1, 1, "Registration SQL must define exactly one function body");
+assert.ok(rpc.trimEnd().endsWith("END $function$;"), "Registration SQL must not contain trailing duplicate statements");
 console.log("Staged coupon frontend/backend/database contract checks passed");

@@ -1,0 +1,16 @@
+import assert from "node:assert/strict";
+import {resolvePromotionChoice as decide,confirmStandardRegistration as confirm} from "./optional-promotion.mjs";
+const ordinary=decide({requested:false,originalTotal:750});
+assert.equal(ordinary.status,"standard");
+assert.equal(ordinary.maySubmit,true);
+assert.equal(ordinary.total,750);
+const expired=decide({requested:true,validated:false,reason:"expired",originalTotal:750});
+assert.equal(expired.maySubmit,false);
+assert.equal(expired.requiresConfirmation,true);
+assert.equal(expired.reason,"expired");
+assert.deepEqual(confirm(expired),{promotionRequested:false,confirmedStandardPrice:750});
+assert.equal(decide({requested:true,validated:false,reason:"service_unavailable",originalTotal:500}).maySubmit,false);
+assert.equal(decide({requested:true,validated:true,originalTotal:500}).status,"promotion_verified");
+assert.throws(()=>confirm(ordinary),/confirmation_not_applicable/);
+assert.throws(()=>decide({requested:false,originalTotal:-1}),/invalid_original_total/);
+console.log("11 optional promotion fallback assertions passed");

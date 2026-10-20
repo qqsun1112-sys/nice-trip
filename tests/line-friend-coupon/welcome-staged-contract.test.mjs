@@ -55,9 +55,10 @@ assert.ok(rpc.includes("a.registration_deadline IS NOT NULL AND now() >= a.regis
 assert.ok(!rpc.includes("gross:=unit*q;\n discount:=0;"));
 assert.ok(backend.includes('error:"invalid_total_amount"'));
 assert.ok(backend.includes("Number.isSafeInteger(gross)"));
-console.log("Staged coupon frontend/backend/database contract checks passed");
+
 
 assert.ok(rpc.includes("IF promo IS NULL THEN"),"Legacy registration path must be preserved");
 assert.ok(rpc.includes("q:=greatest(1,coalesce((p_row->>\u0027quantity\u0027)::integer,1));"),"Legacy quantity semantics must remain");
 assert.ok(rpc.includes("IF length(coalesce(p_row->>\u0027quantity\u0027"),"Coupon quantity must be validated");
 assert.ok(backend.includes("Date.parse(a.event_date+"),"Ticket deadlines must use a timezone-aware date");
+console.log("Staged coupon frontend/backend/database contract checks passed");

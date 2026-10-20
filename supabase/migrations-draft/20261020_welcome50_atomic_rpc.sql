@@ -43,6 +43,7 @@ BEGIN
  END IF;
  discount:=0;
  IF promo IS NOT NULL THEN
+  IF p_row->>'ticket_code' IS DISTINCT FROM 'general' THEN RAISE EXCEPTION 'coupon_not_eligible' USING errcode='P0001'; END IF;
   IF coalesce(p_row->>'unit_price','') = '' OR coalesce(p_row->>'ticket_code','') = '' THEN
    RAISE EXCEPTION 'invalid_coupon_total' USING errcode='P0001';
   END IF;

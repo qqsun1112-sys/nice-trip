@@ -31,10 +31,10 @@ BEGIN
   WHERE event_slug=a.slug AND status IN ('pending_transfer','transfer_reported','confirmed','confirmed_free');
   IF used+q>a.capacity THEN RAISE EXCEPTION 'event_full' USING errcode='P0001'; END IF;
  END IF;
- unit:=coalesce((p_row->>'unit_price')::integer,0);
- gross:=unit*q;
  discount:=0;
  IF promo IS NOT NULL THEN
+  unit:=coalesce((p_row->>'unit_price')::integer,0);
+  gross:=unit*q;
   IF promo<>'WELCOME50' OR NOT a.welcome50_enabled OR a.service<>'city'
     OR (a.registration_deadline IS NOT NULL AND now() >= a.registration_deadline)
     OR unit<=0 OR now()<timestamptz '2026-10-20 00:00:00+08'

@@ -40,4 +40,5 @@ assert.ok(backend.includes("Number.isSafeInteger(qty)||qty<1||qty>20"));
 assert.ok(backend.includes('error:"invalid_quantity"'));
 assert.ok(backend.includes("Number.isSafeInteger(unit)||unit<0"));
 assert.ok(backend.includes('error:"invalid_ticket_price"'));
+assert.ok(rpc.includes("a.registration_deadline IS NOT NULL AND now() >= a.registration_deadline"));
 console.log("Staged coupon frontend/backend/database contract checks passed");

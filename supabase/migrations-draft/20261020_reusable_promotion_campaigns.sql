@@ -10,6 +10,9 @@ CREATE TABLE IF NOT EXISTS public.promotion_campaigns (
   ends_at timestamptz NOT NULL,
   enabled boolean NOT NULL DEFAULT false,
   service text NOT NULL DEFAULT 'city' CHECK (service = 'city'),
+  -- Empty array means no eligible activities; never enable all by omission.
+  eligible_event_slugs text[] NOT NULL DEFAULT ARRAY[]::text[],
+  CONSTRAINT promotion_campaigns_requires_events CHECK (cardinality(eligible_event_slugs) > 0),
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now(),
   CONSTRAINT promotion_campaigns_valid_code CHECK (code ~ '^[A-Z0-9_-]{3,32}$'),

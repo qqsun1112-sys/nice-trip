@@ -8,8 +8,18 @@ ALTER TABLE public.registrations
   ADD COLUMN IF NOT EXISTS promotion_code text,
   ADD COLUMN IF NOT EXISTS promotion_discount integer NOT NULL DEFAULT 0,
   ADD COLUMN IF NOT EXISTS original_total integer;
-ALTER TABLE public.registrations
-  ADD CONSTRAINT registrations_promotion_discount_nonnegative CHECK (promotion_discount >= 0);
+DO $
+BEGIN
+ IF NOT EXISTS (
+   SELECT 1 FROM pg_constraint
+   WHERE conrelid='public.registrations'::regclass
+     AND conname='registrations_promotion_discount_nonnegative'
+ ) THEN
+   ALTER TABLE public.registrations
+     ADD CONSTRAINT registrations_promotion_discount_nonnegative
+     CHECK (promotion_discount >= 0);
+ END IF;
+END $;
 -- Do not add total_amount = original_total - discount constraint until legacy data is audited.
 -- Do not turn on any activity by default. Admin must opt in explicitly.
 COMMIT;

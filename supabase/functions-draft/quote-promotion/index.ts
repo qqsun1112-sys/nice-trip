@@ -24,7 +24,7 @@ Deno.serve(async req=>{
   if(a.max_per_registration&&qty>Number(a.max_per_registration))return respond({ok:false,error:"quantity_limit"},400,h);
   const options=Array.isArray(a.ticket_options)?a.ticket_options:[],t=options.find((x:any)=>x&&x.active!==false&&String(x.code)===ticket);
   if(!t||qty<Number(t.min_qty||1)||(t.max_qty&&qty>Number(t.max_qty)))return respond({ok:false,error:"invalid_ticket"},400,h);
-  if(t.deadline_days_before){const cutoff=new Date(a.event_date+"T00:00:00+08:00");cutoff.setDate(cutoff.getDate()-Number(t.deadline_days_before));if(now>cutoff.getTime())return respond({ok:false,error:"ticket_expired"},400,h)}
+  if(t.deadline_days_before){const cutoff=new Date(Date.parse(a.event_date+"T00:00:00+08:00")-Number(t.deadline_days_before)*86400000);if(now>cutoff.getTime())return respond({ok:false,error:"ticket_expired"},400,h)}
   const unit=Number(t.unit_price),gross=unit*qty;
   if(!Number.isSafeInteger(unit)||unit<=0||!Number.isSafeInteger(gross)||gross>2147483647||t.other_coupon_applied===true)return respond({ok:false,error:"coupon_not_eligible"},400,h);
   const {data:c,error:ce}=await admin.from("promotion_campaigns").select("code,discount_per_person,starts_at,ends_at,enabled,service,eligible_event_slugs").eq("code",code).maybeSingle();

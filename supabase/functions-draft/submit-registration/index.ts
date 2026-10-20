@@ -17,7 +17,7 @@ Deno.serve(async(req)=>{
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return Response.json({ok:false,error:"invalid_email"},{status:400,headers:hs(o)});
   if(phone.length<8||phone.length>30) return Response.json({ok:false,error:"invalid_phone"},{status:400,headers:hs(o)});
   const keys=JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS")||"{}"),admin=createClient(Deno.env.get("SUPABASE_URL")!,keys.default);
-  const {data:a,error:ae}=await admin.from("site_activities").select("slug,title,event_date,status,published,ticket_options,capacity,max_per_registration,registration_deadline,service,welcome50_enabled").eq("slug",String(b.event_slug)).single();
+  const {data:a,error:ae}=await admin.from("site_activities").select("slug,title,event_date,status,published,ticket_options,capacity,max_per_registration,registration_deadline,service").eq("slug",String(b.event_slug)).single();
   if(ae||!a||!a.published||a.status!=="open"||!a.event_date)return Response.json({ok:false,error:"event_not_open"},{status:400,headers:hs(o)});
   if(a.registration_deadline&&Date.now()>=new Date(a.registration_deadline).getTime())return Response.json({ok:false,error:"registration_closed"},{status:400,headers:hs(o)});
   const qty=Number(b.quantity); if(!Number.isSafeInteger(qty)||qty<1||qty>20)return Response.json({ok:false,error:"invalid_quantity"},{status:400,headers:hs(o)}); if(a.max_per_registration&&qty>Number(a.max_per_registration)) return Response.json({ok:false,error:"quantity_limit"},{status:400,headers:hs(o)});

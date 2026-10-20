@@ -25,4 +25,9 @@ assert.ok(rpc.includes("AS ticket(value)"));
 assert.ok(rpc.includes("ticket.value->>'code'"));
 assert.ok(backend.includes('error:"coupon_ticket_mismatch"'));
 assert.ok(backend.includes('error:"coupon_status_mismatch"'));
+// Protect the original RPC's no-coupon amount and nullable unit-price behavior.
+assert.ok(rpc.includes("CASE WHEN promo IS NULL THEN nullif(p_row->>'total_amount','')::integer ELSE gross-discount END"));
+assert.ok(rpc.includes("p_row->>'status',nullif(p_row->>'unit_price','')::integer,amount"));
+assert.ok(rpc.includes("CASE WHEN promo IS NULL THEN NULL ELSE gross END"));
+assert.ok(rpc.includes("IF promo IS NOT NULL AND (\n   amount<>"));
 console.log("Staged coupon frontend/backend/database contract checks passed");

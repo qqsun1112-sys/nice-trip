@@ -1,0 +1,25 @@
+name: Isolated promotion regression tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/line-friend-coupon-staging-20261020
+    paths:
+      - 'tests/line-friend-coupon/**'
+      - '.github/workflows/promotion-isolated-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify pricing and webhook test assertions
+        run: node --test tests/line-friend-coupon/*.test.mjs

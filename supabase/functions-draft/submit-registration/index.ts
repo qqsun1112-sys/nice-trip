@@ -26,7 +26,7 @@ Deno.serve(async(req)=>{
   if(qty<Number(t.min_qty||1)||(t.max_qty&&qty>Number(t.max_qty)))return Response.json({ok:false,error:"ticket_quantity_mismatch"},{status:400,headers:hs(o)});
   if(t.deadline_days_before){const cutoff=new Date(a.event_date+"T00:00:00+08:00");cutoff.setDate(cutoff.getDate()-Number(t.deadline_days_before));if(new Date()>cutoff)return Response.json({ok:false,error:"ticket_expired"},{status:400,headers:hs(o)})}
   const unit=Number(t.unit_price); if(!Number.isSafeInteger(unit)||unit<0)return Response.json({ok:false,error:"invalid_ticket_price"},{status:400,headers:hs(o)});
-  const gross=unit*qty,coupon=String(b.promotion_code??"").trim().toUpperCase(),requested=coupon!=="";
+  const gross=unit*qty; if(!Number.isSafeInteger(gross))return Response.json({ok:false,error:"invalid_total_amount"},{status:400,headers:hs(o)}); const coupon=String(b.promotion_code??"").trim().toUpperCase(),requested=coupon!=="";
   const now=Date.now(),eligible=a.service==="city"&&a.welcome50_enabled===true&&t.other_coupon_applied!==true&&unit>0&&now>=Date.parse("2026-10-20T00:00:00+08:00")&&now<=Date.parse("2026-12-31T23:59:59+08:00");
   if(requested&&(coupon!=="WELCOME50"||!eligible))return Response.json({ok:false,error:coupon!=="WELCOME50"?"coupon_invalid_code":"coupon_not_eligible"},{status:400,headers:hs(o)});
   const promotionDiscount=requested?Math.min(50,unit)*qty:0,total=gross-promotionDiscount;

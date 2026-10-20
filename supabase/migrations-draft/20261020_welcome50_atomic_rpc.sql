@@ -40,11 +40,11 @@ BEGIN
     OR now()>timestamptz '2026-12-31 23:59:59+08'
   THEN RAISE EXCEPTION 'coupon_not_eligible' USING errcode='P0001'; END IF;
   IF NOT EXISTS (
-    SELECT 1 FROM jsonb_array_elements(coalesce(a.ticket_options,'[]'::jsonb)) AS opt
-    WHERE opt->>'code'=p_row->>'ticket_code'
-      AND coalesce((opt->>'active')::boolean,true)
-      AND coalesce((opt->>'other_coupon_applied')::boolean,false)=false
-      AND (opt->>'unit_price')::integer=unit
+    SELECT 1 FROM jsonb_array_elements(coalesce(a.ticket_options,'[]'::jsonb)) AS ticket(value)
+    WHERE ticket.value->>'code'=p_row->>'ticket_code'
+      AND coalesce((ticket.value->>'active')::boolean,true)
+      AND coalesce((ticket.value->>'other_coupon_applied')::boolean,false)=false
+      AND (ticket.value->>'unit_price')::integer=unit
   ) THEN
     RAISE EXCEPTION 'coupon_ticket_mismatch' USING errcode='P0001';
   END IF;

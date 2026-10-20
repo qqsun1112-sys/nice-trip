@@ -31,7 +31,7 @@ Deno.serve(async(req)=>{
   if(requested){
    const {data:campaign,error:campaignError}=await admin.from("promotion_campaigns").select("code,discount_per_person,starts_at,ends_at,enabled,service,eligible_event_slugs").eq("code",coupon).maybeSingle();
    const now=Date.now();
-   if(campaignError||!campaign||!campaign.enabled||now<Date.parse(campaign.starts_at)||now>Date.parse(campaign.ends_at)||campaign.service!==a.service||!Array.isArray(campaign.eligible_event_slugs)||!campaign.eligible_event_slugs.includes(a.slug)||a.welcome50_enabled!==true||t.other_coupon_applied===true||unit<=0)
+   if(campaignError||!campaign||!campaign.enabled||now<Date.parse(campaign.starts_at)||now>Date.parse(campaign.ends_at)||campaign.service!==a.service||!Array.isArray(campaign.eligible_event_slugs)||!campaign.eligible_event_slugs.includes(a.slug)||t.other_coupon_applied===true||unit<=0)
     return Response.json({ok:false,error:"coupon_not_eligible"},{status:400,headers:hs(o)});
    discountPerPerson=Number(campaign.discount_per_person);
    if(!Number.isSafeInteger(discountPerPerson)||discountPerPerson<=0)return Response.json({ok:false,error:"coupon_not_eligible"},{status:400,headers:hs(o)});

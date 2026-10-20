@@ -34,6 +34,8 @@ assert.ok(rpc.includes("q>=coalesce(nullif(ticket.value->>'min_qty'"));
 assert.ok(rpc.includes("ticket.value->>'max_qty'"));
 assert.ok(rpc.includes("ticket.value->>'deadline_days_before'"));
 assert.ok(rpc.includes("AT TIME ZONE 'Asia/Taipei'"));
+assert.ok(rpc.includes("a.event_date::timestamp\n                       - (nullif(ticket.value->>'deadline_days_before'"));
+assert.ok(!rpc.includes("a.event_date::timestamp + interval '1 day'"));
 assert.ok(backend.includes("Number.isSafeInteger(qty)||qty<1||qty>20"));
 assert.ok(backend.includes('error:"invalid_quantity"'));
 assert.ok(backend.includes("Number.isSafeInteger(unit)||unit<0"));

@@ -12,7 +12,9 @@ Deno.serve(async req=>{
   if(!body||typeof body!=="object")return respond({ok:false,error:"invalid_request"},400,h);
   const slug=String(body.event_slug||""),ticket=String(body.ticket_code||""),qty=Number(body.quantity),code=String(body.promotion_code||"").trim().toUpperCase();
   if(!/^[a-zA-Z0-9_-]{1,160}$/.test(slug)||!ticket||ticket.length>100||!Number.isSafeInteger(qty)||qty<1||qty>20||!/^[A-Z0-9_-]{3,32}$/.test(code))return respond({ok:false,error:"invalid_request"},400,h);
-  const keys=JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS")||"{}"),secret=keys.default,url=Deno.env.get("SUPABASE_URL");
+  let keys:Record<string,string>={};
+  try{keys=JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS")||"{}")}catch{return respond({ok:false,error:"unavailable"},503,h)}
+  const secret=keys.default,url=Deno.env.get("SUPABASE_URL");
   if(!url||!secret)return respond({ok:false,error:"unavailable"},503,h);
   const admin=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
   const {data:a,error:ae}=await admin.from("site_activities").select("slug,event_date,status,published,ticket_options,max_per_registration,registration_deadline,service").eq("slug",slug).maybeSingle();

@@ -8,6 +8,8 @@ for(const required of [
  "starts_at timestamptz NOT NULL",
  "ends_at timestamptz NOT NULL",
  "enabled boolean NOT NULL DEFAULT false",
+ "eligible_event_slugs text[] NOT NULL DEFAULT ARRAY[]::text[]",
+ "CONSTRAINT promotion_campaigns_requires_events CHECK (cardinality(eligible_event_slugs) > 0)",
  "CONSTRAINT promotion_campaigns_valid_period CHECK (ends_at > starts_at)",
  "ENABLE ROW LEVEL SECURITY",
  "REVOKE ALL ON public.promotion_campaigns FROM anon, authenticated"

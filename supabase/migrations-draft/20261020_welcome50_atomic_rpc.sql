@@ -45,6 +45,12 @@ BEGIN
       AND coalesce((ticket.value->>'active')::boolean,true)
       AND coalesce((ticket.value->>'other_coupon_applied')::boolean,false)=false
       AND (ticket.value->>'unit_price')::integer=unit
+      AND q>=coalesce(nullif(ticket.value->>'min_qty','')::integer,1)
+      AND (nullif(ticket.value->>'max_qty','') IS NULL OR q<=nullif(ticket.value->>'max_qty','')::integer)
+      AND (nullif(ticket.value->>'deadline_days_before','') IS NULL
+           OR now() <= ((a.event_date::timestamp + interval '1 day'
+                       - (nullif(ticket.value->>'deadline_days_before','')::integer * interval '1 day'))
+                       AT TIME ZONE 'Asia/Taipei'))
   ) THEN
     RAISE EXCEPTION 'coupon_ticket_mismatch' USING errcode='P0001';
   END IF;

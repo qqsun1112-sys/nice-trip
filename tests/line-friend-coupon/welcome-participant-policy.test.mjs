@@ -1,0 +1,18 @@
+import assert from "node:assert/strict";
+import {assessParticipants as check} from "./welcome-participant-policy.mjs";
+const p=(full_name,identity_key)=>({full_name,identity_key});
+const run=(participants,existingKeys=[],eventSlug="city-a")=>check({participants,existingKeys,eventSlug});
+assert.equal(run([p("甲","A")]).eligibleCount,1);
+assert.equal(run([p("甲","A"),p("乙","B")]).eligibleCount,2);
+assert.equal(run([p("甲","A"),p("甲","A")]).eligibleCount,1);
+assert.equal(run([p("甲","A"),p("甲","A")]).participants[1].reason,"already_used");
+assert.equal(run([p("甲","A")],["city-a|A"]).eligibleCount,0);
+assert.equal(run([p("甲","A")],["city-b|A"]).eligibleCount,1);
+assert.equal(run([p("甲","")]).participants[0].reason,"identity_verification_needed");
+assert.equal(run([p("甲","")]).requiresReview,true);
+assert.equal(run([p("甲","A"),p("乙","")]).eligibleCount,1);
+assert.throws(()=>run([p("","A")]),/participant_name_required/);
+assert.throws(()=>run([]),/invalid_participants/);
+assert.throws(()=>run([p("甲","A")],[],""),/invalid_participants/);
+assert.equal(run([p("甲","A")],["city-a|A"]).requiresReview,true);
+console.log("13 synthetic participant checks passed");

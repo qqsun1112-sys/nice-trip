@@ -28,6 +28,7 @@ Deno.serve(async(req)=>{
   const unit=Number(t.unit_price); if(!Number.isSafeInteger(unit)||unit<0)return Response.json({ok:false,error:"invalid_ticket_price"},{status:400,headers:hs(o)});
   const gross=unit*qty; if(!Number.isSafeInteger(gross)||gross>2147483647)return Response.json({ok:false,error:"invalid_total_amount"},{status:400,headers:hs(o)}); const coupon=String(b.promotion_code??"").trim().toUpperCase(),requested=coupon!=="";
   let discountPerPerson=0;
+  if(requested && code!=="general")return Response.json({ok:false,error:"coupon_not_eligible"},{status:400,headers:hs(o)});
   if(requested){
    const {data:campaign,error:campaignError}=await admin.from("promotion_campaigns").select("code,discount_per_person,starts_at,ends_at,enabled,service,eligible_event_slugs").eq("code",coupon).maybeSingle();
    const now=Date.now();

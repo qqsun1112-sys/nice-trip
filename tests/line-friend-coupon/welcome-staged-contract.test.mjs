@@ -30,4 +30,8 @@ assert.ok(rpc.includes("CASE WHEN promo IS NULL THEN nullif(p_row->>'total_amoun
 assert.ok(rpc.includes("p_row->>'status',nullif(p_row->>'unit_price','')::integer,amount"));
 assert.ok(rpc.includes("CASE WHEN promo IS NULL THEN NULL ELSE gross END"));
 assert.ok(rpc.includes("IF promo IS NOT NULL AND (\n   amount<>"));
+assert.ok(rpc.includes("q>=coalesce(nullif(ticket.value->>'min_qty'"));
+assert.ok(rpc.includes("ticket.value->>'max_qty'"));
+assert.ok(rpc.includes("ticket.value->>'deadline_days_before'"));
+assert.ok(rpc.includes("AT TIME ZONE 'Asia/Taipei'"));
 console.log("Staged coupon frontend/backend/database contract checks passed");

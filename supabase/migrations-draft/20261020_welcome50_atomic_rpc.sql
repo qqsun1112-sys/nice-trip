@@ -51,6 +51,12 @@ BEGIN
   discount:=least(50,unit)*q;
  END IF;
  amount:=gross-discount;
+ IF promo IS NOT NULL AND (
+   (amount=0 AND coalesce(p_row->>'status','')<>'confirmed_free')
+   OR (amount>0 AND coalesce(p_row->>'status','') NOT IN ('pending_transfer','transfer_reported'))
+ ) THEN
+   RAISE EXCEPTION 'coupon_status_mismatch' USING errcode='P0001';
+ END IF;
  -- Price and coupon consistency enforced inside the same transaction.
  IF amount<>coalesce((p_row->>'total_amount')::integer,-1)
  OR (promo IS NOT NULL AND (

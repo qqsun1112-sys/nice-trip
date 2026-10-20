@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS public.promotion_campaigns (
   -- Empty array means no eligible activities; never enable all by omission.
   eligible_event_slugs text[] NOT NULL DEFAULT ARRAY[]::text[],
   CONSTRAINT promotion_campaigns_requires_events CHECK (cardinality(eligible_event_slugs) > 0),
+  CONSTRAINT promotion_campaigns_no_blank_events CHECK (array_position(eligible_event_slugs, NULL) IS NULL AND array_position(eligible_event_slugs, '') IS NULL),
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now(),
   CONSTRAINT promotion_campaigns_valid_code CHECK (code ~ '^[A-Z0-9_-]{3,32}$'),

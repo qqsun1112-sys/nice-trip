@@ -26,6 +26,7 @@ Deno.serve(async req=>{
   if(!t||qty<Number(t.min_qty||1)||(t.max_qty&&qty>Number(t.max_qty)))return respond({ok:false,error:"invalid_ticket"},400,h);
   if(t.deadline_days_before){const cutoff=new Date(Date.parse(a.event_date+"T00:00:00+08:00")-Number(t.deadline_days_before)*86400000);if(now>cutoff.getTime())return respond({ok:false,error:"ticket_expired"},400,h)}
   const unit=Number(t.unit_price),gross=unit*qty;
+  if(ticket!=="general")return respond({ok:false,error:"coupon_not_eligible"},400,h);
   if(!Number.isSafeInteger(unit)||unit<=0||!Number.isSafeInteger(gross)||gross>2147483647||t.other_coupon_applied===true)return respond({ok:false,error:"coupon_not_eligible"},400,h);
   const {data:c,error:ce}=await admin.from("promotion_campaigns").select("code,discount_per_person,starts_at,ends_at,enabled,service,eligible_event_slugs").eq("code",code).maybeSingle();
   if(ce||!c||!c.enabled||now<Date.parse(c.starts_at)||now>Date.parse(c.ends_at)||c.service!==a.service||!Array.isArray(c.eligible_event_slugs)||!c.eligible_event_slugs.includes(slug))return respond({ok:false,error:"coupon_not_eligible"},400,h);

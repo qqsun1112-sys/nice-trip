@@ -35,6 +35,7 @@ BEGIN
  discount:=0;
  IF promo IS NOT NULL THEN
   unit:=coalesce((p_row->>'unit_price')::integer,0);
+  IF unit < 1 OR unit::bigint * q::bigint > 2147483647 THEN RAISE EXCEPTION 'invalid_coupon_total'; END IF;
   gross:=unit*q;
   SELECT * INTO campaign FROM public.promotion_campaigns WHERE code=promo;
   IF NOT FOUND OR NOT campaign.enabled OR now()<campaign.starts_at

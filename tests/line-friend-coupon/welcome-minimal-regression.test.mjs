@@ -17,4 +17,14 @@ assert.equal(make(2,"  welcome50  ").total_amount,1100);
 assert.throws(()=>make(2,"NOTVALID"),/coupon_invalid_code/);
 assert.throws(()=>make(2,"WELCOME50",{welcome50_enabled:false}),/coupon_not_eligible/);
 assert.equal(make(2,"",{welcome50_enabled:false}).total_amount,1200);
-console.log("WELCOME50 minimal regression: 22 assertions passed");
+console.log("WELCOME50 minimal regression: 28 assertions passed");
+
+// Additional isolated boundary tests: no production data or external requests.
+const run=(patch={})=>prepareWelcomeRegistration({activity:{...activity,...patch.activity},ticketCode:patch.ticketCode??"NORMAL",quantity:patch.quantity??1,couponCode:patch.code??"WELCOME50",now:patch.now??"2026-10-20T12:00:00+08:00"});
+assert.throws(()=>run({now:"2026-10-19T23:59:59+08:00"}),/coupon_not_started/);
+assert.throws(()=>run({now:"2027-01-01T00:00:00+08:00"}),/coupon_expired/);
+assert.throws(()=>run({activity:{service:"temple"}}),/coupon_not_eligible/);
+assert.throws(()=>run({activity:{ticket_options:[{code:"NORMAL",unit_price:0,active:true}]}}),/coupon_free_ticket/);
+assert.throws(()=>run({activity:{ticket_options:[{code:"NORMAL",unit_price:600,active:true,other_coupon_applied:true}]}}),/coupon_cannot_stack/);
+assert.equal(run({activity:{ticket_options:[{code:"NORMAL",unit_price:50,active:true}]}}).total_amount,0);
+console.log("WELCOME50 isolated boundary tests: 6 additional assertions passed");

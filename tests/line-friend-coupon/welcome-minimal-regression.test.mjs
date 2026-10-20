@@ -28,3 +28,12 @@ assert.throws(()=>run({activity:{ticket_options:[{code:"NORMAL",unit_price:0,act
 assert.throws(()=>run({activity:{ticket_options:[{code:"NORMAL",unit_price:600,active:true,other_coupon_applied:true}]}}),/coupon_cannot_stack/);
 assert.equal(run({activity:{ticket_options:[{code:"NORMAL",unit_price:50,active:true}]}}).total_amount,0);
 console.log("WELCOME50 isolated boundary tests: 6 additional assertions passed");
+
+// Extra safety checks for malformed quantities and disabled activities.
+assert.throws(()=>run({quantity:0}),/invalid_quantity/);
+assert.throws(()=>run({quantity:21}),/invalid_quantity/);
+assert.throws(()=>run({quantity:1.5}),/invalid_quantity/);
+assert.throws(()=>run({activity:{published:false}}),/event_not_open/);
+assert.throws(()=>run({activity:{status:"paused"}}),/event_not_open/);
+assert.throws(()=>run({activity:{ticket_options:[{code:"NORMAL",unit_price:600,active:false}]}}),/invalid_ticket/);
+console.log("WELCOME50 invalid-input safeguards: 6 additional assertions passed");

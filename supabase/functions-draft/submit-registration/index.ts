@@ -24,7 +24,7 @@ Deno.serve(async(req)=>{
   const code=String(b.ticket_code), opts=Array.isArray(a.ticket_options)?a.ticket_options:[],t=opts.find((x:any)=>x&&x.active!==false&&String(x.code)===code);
   if(!t)return Response.json({ok:false,error:"invalid_ticket"},{status:400,headers:hs(o)});
   if(qty<Number(t.min_qty||1)||(t.max_qty&&qty>Number(t.max_qty)))return Response.json({ok:false,error:"ticket_quantity_mismatch"},{status:400,headers:hs(o)});
-  if(t.deadline_days_before){const cutoff=new Date(a.event_date+"T00:00:00+08:00");cutoff.setDate(cutoff.getDate()-Number(t.deadline_days_before));if(new Date()>cutoff)return Response.json({ok:false,error:"ticket_expired"},{status:400,headers:hs(o)})}
+  if(t.deadline_days_before){const cutoff=new Date(Date.parse(a.event_date+"T00:00:00+08:00")-Number(t.deadline_days_before)*86400000);if(new Date()>cutoff)return Response.json({ok:false,error:"ticket_expired"},{status:400,headers:hs(o)})}
   const unit=Number(t.unit_price); if(!Number.isSafeInteger(unit)||unit<0)return Response.json({ok:false,error:"invalid_ticket_price"},{status:400,headers:hs(o)});
   const gross=unit*qty; if(!Number.isSafeInteger(gross)||gross>2147483647)return Response.json({ok:false,error:"invalid_total_amount"},{status:400,headers:hs(o)}); const coupon=String(b.promotion_code??"").trim().toUpperCase(),requested=coupon!=="";
   let discountPerPerson=0;

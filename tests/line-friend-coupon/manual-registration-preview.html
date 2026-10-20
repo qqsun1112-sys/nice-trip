@@ -1,16 +1,26 @@
 <!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>美遊記｜好友同行禮測試頁</title>
-<style>body{font-family:system-ui,"Noto Sans TC",sans-serif;background:#f3f7f7;color:#183c4a;margin:0}main{max-width:650px;margin:28px auto;padding:24px;background:white;border-radius:18px;box-shadow:0 6px 30px #1232}h1{font-size:1.55rem}label{display:block;margin:15px 0 6px;font-weight:600}select,input,button{font:inherit;padding:12px;border:1px solid #a8bdc2;border-radius:9px;max-width:100%;box-sizing:border-box}input,select{width:100%}button{background:#125a68;color:white;cursor:pointer;border:0;margin-top:16px}button:disabled{opacity:.45}section{background:#eff5f5;border-radius:12px;padding:16px;margin-top:20px}.warn{color:#9c4b0c;font-weight:700}.total{font-size:1.45rem;font-weight:700}.small{font-size:.86rem;color:#526870}</style></head>
-<body><main><p class="warn">測試專用｜不是真實報名・不收款・不發券</p><h1>美遊記・好友同行禮</h1><p>模擬活動：城市故事行旅｜LINE 優惠券測試</p><p>票價 NT$500／人。僅供驗證報名介面及優惠流程，不連接正式資料庫。</p>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>美遊記｜原報名頁優惠券區塊測試</title>
+<style>body{margin:0;background:#f7f5f0;color:#183d47;font-family:system-ui,"Noto Sans TC",sans-serif}main{max-width:720px;margin:24px auto;background:#fff;border-radius:18px;padding:26px;box-sizing:border-box}h1{font-size:1.5rem}h2{font-size:1.13rem;margin:22px 0 8px}label{display:block;margin:12px 0 6px;font-weight:650}input,select,button{font:inherit;box-sizing:border-box;padding:12px;border-radius:9px;border:1px solid #b7c7ca;width:100%}input[type=checkbox]{width:auto;accent-color:#176b75}button{background:#176b75;color:white;border:0;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.summary{background:#eaf3f0;border-radius:12px;padding:17px;margin:18px 0}.line{display:flex;justify-content:space-between;gap:10px;margin:8px 0}.strong{font-weight:800;font-size:1.25rem}.small{font-size:.86rem;color:#506a70}.warning{color:#9a4d0a}.coupon{border:1px solid #bdd4d0;padding:16px;border-radius:12px;margin:16px 0}.coupon label.inline{display:flex;gap:10px;align-items:center;margin:0}.muted{color:#597077}@media(max-width:600px){main{margin:0;padding:18px;border-radius:0}}</style></head>
+<body><main><p class="warning"><strong>介面測試｜不是真實報名、不收款、不發券</strong></p><h1>城市故事行旅｜報名表單示範</h1><p class="small">保留原有報名方式，僅在應匯款金額上方增加選填的 LINE 優惠券區塊。</p>
+<label for="ticket">票種</label><select id="ticket"><option value="600">一般優惠｜NT$600</option><option value="500">早鳥優惠｜NT$500</option></select>
 <label for="qty">參加人數</label><select id="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
-<label for="mode">報名方式</label><select id="mode"><option value="standard">一般報名（無優惠券）</option><option value="coupon">使用 LINE 好友優惠券（測試）</option></select>
-<div id="couponArea" hidden><label for="verified">模擬驗證狀態</label><select id="verified"><option value="none">尚未驗證</option><option value="ok">所有參加者資格已驗證（僅模擬）</option><option value="expired">優惠券已過期</option><option value="used">優惠券已使用</option></select><p class="small">此處不會連線 LINE，也不代表真正取得核銷資格。</p></div>
-<section aria-live="polite"><p id="original"></p><p id="discount"></p><p id="total" class="total"></p><p id="message"></p></section>
-<button id="submit">模擬送出報名</button><p id="result" role="status"></p><p class="small">不蒐集姓名、電話或電子郵件；無付款、Email、LINE 或 Supabase 連線。</p>
+<div class="coupon"><label class="inline" for="use"><input id="use" type="checkbox"> 我要使用 LINE 優惠券（選填）</label>
+<div id="fields" hidden><label for="campaign">優惠券名稱</label><select id="campaign"><option>美遊記・好友同行禮</option></select>
+<label for="code">優惠券序號／識別資訊</label><input id="code" autocomplete="off" placeholder="請填 LINE 優惠券所顯示的識別資訊">
+<label for="nickname">LINE 顯示名稱（不需提供 User ID）</label><input id="nickname" autocomplete="off" placeholder="例如：小明">
+<p class="small">LINE 顯示名稱及序號僅供核對，不等於已完成 LINE 身分驗證。請勿輸入密碼、驗證碼或其他機密。</p>
+<label for="status">測試資格狀態（僅供操作示範）</label><select id="status"><option value="pending">待核對</option><option value="verified">模擬已核對（單人）</option><option value="invalid">模擬無效或已使用</option></select>
+<p class="small warning">多人報名仍須逐人核對；此頁不會真正核銷 LINE 優惠券。</p></div></div>
+<section class="summary" aria-live="polite"><div class="line"><span>原始票價合計</span><strong id="gross"></strong></div><div class="line"><span>優惠券預估折抵</span><strong id="discount"></strong></div><hr><div class="line strong"><span id="totalLabel">應匯款金額</span><span id="total"></span></div><p id="notice" class="small"></p></section>
+<label for="last5">匯款帳號末 5 碼（示意，勿填真實資料）</label><input id="last5" disabled placeholder="正式報名原有欄位不變">
+<button id="submit">模擬送出一般報名</button><p id="result" role="status"></p><p class="small">測試頁不收集或送出任何資料，不連接 LINE、Email、Supabase 或正式報名服務。</p>
 </main><script>
 const $=id=>document.getElementById(id);
-function update(){const n=Number($("qty").value),gross=n*500,coupon=$("mode").value==="coupon",valid=$("verified").value==="ok";$("couponArea").hidden=!coupon;const discount=coupon&&valid?n*50:0;$("original").textContent="原價：NT$"+gross;$("discount").textContent="模擬折抵：NT$"+discount;$("total").textContent="試算金額：NT$"+(gross-discount);$("message").textContent=!coupon?"一般報名，不需優惠券。":valid?"僅完成模擬試算；正式核銷尚未串接。":"優惠券尚未通過驗證，不能直接折抵；可切換一般報名。";$("submit").disabled=coupon;$("result").textContent="";}
-["qty","mode","verified"].forEach(id=>$(id).addEventListener("change",update));
-$("submit").addEventListener("click",()=>{$("result").textContent="模擬成功：一般報名流程可繼續。沒有建立任何真實訂單。";});
-update();
+function render(){const qty=Number($("qty").value),price=Number($("ticket").value),use=$("use").checked,gross=qty*price,verified=$("status").value==="verified"&&qty===1,discount=use&&verified?50:0;
+$("fields").hidden=!use;$("gross").textContent="NT$"+gross;$("discount").textContent=use&&verified?"−NT$50":"NT$0";$("total").textContent="NT$"+(gross-discount);$("totalLabel").textContent=use?"試算金額（非正式應付）":"應匯款金額";
+$("notice").textContent=!use?"一般報名流程不變。":qty>1?"多人使用優惠券必須逐人核對；目前尚未提供正式核銷。":verified?"模擬核對通過；僅展示試算，不能送出折扣訂單。":"優惠券待核對或無效；請勿直接依折扣金額匯款。";
+$("submit").disabled=use;$("submit").textContent=use?"優惠券待正式核銷，暫不送單":"模擬送出一般報名";$("result").textContent="";
+}
+["ticket","qty","use","status"].forEach(id=>$(id).addEventListener("change",render));
+$("submit").addEventListener("click",()=>{$("result").textContent="一般報名模擬完成，沒有建立真實訂單。";});render();
 </script></body></html>

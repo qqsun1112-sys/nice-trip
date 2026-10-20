@@ -23,7 +23,11 @@ BEGIN
  IF NOT FOUND OR NOT a.published OR a.status <> 'open' THEN
   RAISE EXCEPTION 'event_not_open' USING errcode='P0001';
  END IF;
- IF coalesce(p_row->>'quantity','') !~ '^[0-9]{1,2}
+ IF length(coalesce(p_row->>'quantity','')) NOT BETWEEN 1 AND 2 OR translate(coalesce(p_row->>'quantity',''),'0123456789','') <> '' THEN
+  RAISE EXCEPTION 'quantity_limit';
+ END IF;
+ q:=(p_row->>'quantity')::integer;
+ IF q<1 OR q>20 THEN RAISE EXCEPTION 'quantity_limit'; END IF;
  IF a.max_per_registration IS NOT NULL AND q>a.max_per_registration THEN
   RAISE EXCEPTION 'quantity_limit' USING errcode='P0001';
  END IF;

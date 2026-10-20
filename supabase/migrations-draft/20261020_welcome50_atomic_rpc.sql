@@ -50,7 +50,9 @@ BEGIN
   END IF;
   discount:=least(50,unit)*q;
  END IF;
- amount:=gross-discount;
+ -- Preserve the original registration RPC behavior for ordinary (no-code) orders:
+ -- the existing endpoint's total is stored unchanged, with no new pricing gate.
+ amount:=CASE WHEN promo IS NULL THEN nullif(p_row->>'total_amount','')::integer ELSE gross-discount END;
  IF promo IS NOT NULL AND (
    (amount=0 AND coalesce(p_row->>'status','')<>'confirmed_free')
    OR (amount>0 AND coalesce(p_row->>'status','') NOT IN ('pending_transfer','transfer_reported'))
@@ -58,11 +60,11 @@ BEGIN
    RAISE EXCEPTION 'coupon_status_mismatch' USING errcode='P0001';
  END IF;
  -- Price and coupon consistency enforced inside the same transaction.
- IF amount<>coalesce((p_row->>'total_amount')::integer,-1)
- OR (promo IS NOT NULL AND (
-   discount<>coalesce((p_row->>'promotion_discount')::integer,-1)
+ IF promo IS NOT NULL AND (
+   amount<>coalesce((p_row->>'total_amount')::integer,-1)
+   OR discount<>coalesce((p_row->>'promotion_discount')::integer,-1)
    OR gross<>coalesce((p_row->>'original_total')::integer,-1)
- ))
+ )
  THEN RAISE EXCEPTION 'amount_mismatch' USING errcode='P0001'; END IF;
  INSERT INTO public.registrations(
   event_slug,event_title,event_date,full_name,phone,email,birth_date,national_id,
@@ -74,7 +76,7 @@ BEGIN
   nullif(p_row->>'birth_date','')::date,nullif(p_row->>'national_id',''),
   coalesce((p_row->>'insurance_opt_out')::boolean,false),p_row->>'ticket_type',q,
   nullif(p_row->>'tax_id',''),nullif(p_row->>'note',''),nullif(p_row->>'transfer_last5',''),
-  p_row->>'status',unit,amount,nullif(p_row->>'ticket_code',''),promo,discount,gross
+  p_row->>'status',nullif(p_row->>'unit_price','')::integer,amount,nullif(p_row->>'ticket_code',''),promo,discount,CASE WHEN promo IS NULL THEN NULL ELSE gross END
  ) RETURNING * INTO out_row;
  RETURN out_row;
 END $function$;

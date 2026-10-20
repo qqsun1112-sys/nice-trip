@@ -20,12 +20,12 @@ Deno.serve(async(req)=>{
   const {data:a,error:ae}=await admin.from("site_activities").select("slug,title,event_date,status,published,ticket_options,capacity,max_per_registration,registration_deadline,service,welcome50_enabled").eq("slug",String(b.event_slug)).single();
   if(ae||!a||!a.published||a.status!=="open"||!a.event_date)return Response.json({ok:false,error:"event_not_open"},{status:400,headers:hs(o)});
   if(a.registration_deadline&&Date.now()>=new Date(a.registration_deadline).getTime())return Response.json({ok:false,error:"registration_closed"},{status:400,headers:hs(o)});
-  const qty=Math.max(1,Math.min(20,Number(b.quantity)||1)); if(a.max_per_registration&&qty>Number(a.max_per_registration)) return Response.json({ok:false,error:"quantity_limit"},{status:400,headers:hs(o)});
+  const qty=Number(b.quantity); if(!Number.isSafeInteger(qty)||qty<1||qty>20)return Response.json({ok:false,error:"invalid_quantity"},{status:400,headers:hs(o)}); if(a.max_per_registration&&qty>Number(a.max_per_registration)) return Response.json({ok:false,error:"quantity_limit"},{status:400,headers:hs(o)});
   const code=String(b.ticket_code), opts=Array.isArray(a.ticket_options)?a.ticket_options:[],t=opts.find((x:any)=>x&&x.active!==false&&String(x.code)===code);
   if(!t)return Response.json({ok:false,error:"invalid_ticket"},{status:400,headers:hs(o)});
   if(qty<Number(t.min_qty||1)||(t.max_qty&&qty>Number(t.max_qty)))return Response.json({ok:false,error:"ticket_quantity_mismatch"},{status:400,headers:hs(o)});
   if(t.deadline_days_before){const cutoff=new Date(a.event_date+"T00:00:00+08:00");cutoff.setDate(cutoff.getDate()-Number(t.deadline_days_before));if(new Date()>cutoff)return Response.json({ok:false,error:"ticket_expired"},{status:400,headers:hs(o)})}
-  const unit=Math.max(0,Math.round(Number(t.unit_price)||0));
+  const unit=Number(t.unit_price); if(!Number.isSafeInteger(unit)||unit<0)return Response.json({ok:false,error:"invalid_ticket_price"},{status:400,headers:hs(o)});
   const gross=unit*qty,coupon=String(b.promotion_code??"").trim().toUpperCase(),requested=coupon!=="";
   const now=Date.now(),eligible=a.service==="city"&&a.welcome50_enabled===true&&t.other_coupon_applied!==true&&unit>0&&now>=Date.parse("2026-10-20T00:00:00+08:00")&&now<=Date.parse("2026-12-31T23:59:59+08:00");
   if(requested&&(coupon!=="WELCOME50"||!eligible))return Response.json({ok:false,error:coupon!=="WELCOME50"?"coupon_invalid_code":"coupon_not_eligible"},{status:400,headers:hs(o)});

@@ -41,4 +41,6 @@ assert.ok(backend.includes('error:"invalid_quantity"'));
 assert.ok(backend.includes("Number.isSafeInteger(unit)||unit<0"));
 assert.ok(backend.includes('error:"invalid_ticket_price"'));
 assert.ok(rpc.includes("a.registration_deadline IS NOT NULL AND now() >= a.registration_deadline"));
+assert.ok(rpc.includes("IF promo IS NOT NULL THEN\n  unit:=coalesce((p_row->>'unit_price')::integer,0);\n  gross:=unit*q;"));
+assert.ok(!rpc.includes("gross:=unit*q;\n discount:=0;"));
 console.log("Staged coupon frontend/backend/database contract checks passed");

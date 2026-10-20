@@ -43,6 +43,7 @@ BEGIN
     SELECT 1 FROM jsonb_array_elements(coalesce(a.ticket_options,'[]'::jsonb)) AS opt
     WHERE opt->>'code'=p_row->>'ticket_code'
       AND coalesce((opt->>'active')::boolean,true)
+      AND coalesce((opt->>'other_coupon_applied')::boolean,false)=false
       AND (opt->>'unit_price')::integer=unit
   ) THEN
     RAISE EXCEPTION 'coupon_ticket_mismatch' USING errcode='P0001';

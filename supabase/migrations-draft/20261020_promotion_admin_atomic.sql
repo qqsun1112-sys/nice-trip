@@ -19,6 +19,9 @@ BEGIN
   IF p_actor IS NULL OR p_campaign IS NULL OR jsonb_typeof(p_campaign) <> 'object' THEN
     RAISE EXCEPTION 'invalid_input';
   END IF;
+  IF p_id IS NOT NULL AND (jsonb_typeof(p_campaign->'enabled') IS DISTINCT FROM 'boolean') THEN
+    RAISE EXCEPTION 'invalid_campaign';
+  END IF;
   IF p_id IS NOT NULL THEN
     SELECT * INTO old_row FROM public.promotion_campaigns WHERE id=p_id FOR UPDATE;
     IF NOT FOUND THEN RAISE EXCEPTION 'campaign_not_found'; END IF;

@@ -1,0 +1,11 @@
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+const read=(path)=>readFileSync(new URL("../../"+path,import.meta.url),"utf8");
+const html=read("activity-register.html");
+const backend=read("supabase/functions-draft/submit-registration/index.ts");
+assert.ok(html.includes('name="promotion_code"'));
+assert.ok(html.includes("if(promoEntered)throw new Error"));
+assert.ok(backend.includes("promotion_discount:promotionDiscount"));
+assert.ok(backend.includes("discountSummary"));
+assert.ok(backend.includes("const free=unit===0"));
+console.log("Staged coupon frontend/backend contract checks passed");

@@ -39,7 +39,7 @@ BEGIN
   SELECT * INTO campaign FROM public.promotion_campaigns WHERE code=promo;
   IF NOT FOUND OR NOT campaign.enabled OR now()<campaign.starts_at
     OR now()>campaign.ends_at OR NOT (a.slug=ANY(campaign.eligible_event_slugs))
-    OR NOT a.welcome50_enabled OR a.service<>campaign.service
+     OR a.service<>campaign.service
     OR (a.registration_deadline IS NOT NULL AND now() >= a.registration_deadline)
     OR unit<=0
   THEN RAISE EXCEPTION 'coupon_not_eligible' USING errcode='P0001'; END IF;

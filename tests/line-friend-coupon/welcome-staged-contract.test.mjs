@@ -30,7 +30,7 @@ assert.ok(!rpc.includes("promo<>\'WELCOME50\'"));
 assert.ok(rpc.includes("coupon_status_mismatch"));
 assert.ok(rpc.includes("amount_mismatch"));
 assert.ok(rpc.includes("other_coupon_applied"));
-assert.ok(backend.includes("t.other_coupon_applied!==true"));
+assert.ok(backend.includes("t.other_coupon_applied===true"));
 assert.ok(migration.includes("DO $welcome50$"));
 assert.ok(migration.includes("END $welcome50$;"));
 assert.ok(rpc.includes("AS ticket(value)"));

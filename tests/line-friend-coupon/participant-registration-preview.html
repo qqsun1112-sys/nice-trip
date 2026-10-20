@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>多人報名與保險資料｜WELCOME50 離線預覽</title>
+<style>body{font-family:system-ui,"Noto Sans TC",sans-serif;background:#f7f5ef;color:#183b3b;margin:0;padding:20px}main{max-width:760px;margin:auto}.card{background:#fff;padding:22px;border-radius:16px;margin:15px 0}label{display:block;margin:10px 0 4px;font-weight:600}input{box-sizing:border-box;width:100%;padding:10px;border:1px solid #bbc9c4;border-radius:8px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.note{font-size:14px;color:#4f6763}.warn{background:#fff3dc;padding:12px;border-radius:8px}.btn{background:#174f4c;color:#fff;border:0;border-radius:20px;padding:12px 20px;cursor:pointer}@media(max-width:600px){.grid{grid-template-columns:1fr}}</style></head>
+<body><main><h1>多人報名與保險資料｜表單預覽</h1><p class="warn">僅供離線畫面檢查，沒有連接正式官網、LINE 或 Supabase。請勿填寫真實身分證字號或其他敏感資料。</p>
+<div class="card"><label for="qty">參加人數</label><input type="number" id="qty" min="1" max="10" value="2"><label for="code">優惠碼（選填）</label><input id="code" value="WELCOME50" autocomplete="off"><p class="note">指定付費城市故事行旅，每位符合資格參加者折 NT$50。同一人同場限用一次；實際折抵須經伺服器查驗。</p></div>
+<div id="participants"></div><div class="card"><p class="note">保險資料依投保需求填寫。若不提供，須依正式保險政策確認；本預覽不傳送或保存任何資料。</p><button class="btn" id="preview">檢查填寫完整性（不送出）</button><p id="result" role="status"></p></div></main>
+<script>
+const qty=document.getElementById("qty"),root=document.getElementById("participants");
+function render(){const n=Math.max(1,Math.min(10,Math.trunc(Number(qty.value)||1)));root.innerHTML=Array.from({length:n},(_,i)=>'<section class="card"><h2>第 '+(i+1)+' 位參加者</h2><label>姓名（必填）</label><input class="person-name" autocomplete="off" placeholder="請填寫參加者姓名"><div class="grid"><div><label>出生日期（保險資料）</label><input type="date" class="person-birth"></div><div><label>身分證明資料（保險／優惠查驗）</label><input class="person-id" autocomplete="off" placeholder="預覽請勿填寫真實資料"></div></div><label><input type="checkbox" class="person-optout" style="width:auto"> 不申請個人保險（仍須確認優惠查驗方式）</label></section>').join("");}
+qty.addEventListener("change",render);render();
+document.getElementById("preview").addEventListener("click",()=>{const names=[...document.querySelectorAll(".person-name")].map(x=>x.value.trim());document.getElementById("result").textContent=names.some(x=>!x)?"請填寫每位參加者姓名。":"表單姓名已填寫；本預覽不會驗證身分、保險或優惠資格，也不會建立報名。";});
+</script></body></html>

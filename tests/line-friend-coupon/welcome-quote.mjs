@@ -9,6 +9,6 @@ export function quoteWelcome({unitPrice,quantity,service,code,at}){
  const within=now.getTime()>=Date.parse(WELCOME_START_TAIPEI)&&now.getTime()<=Date.parse(WELCOME_END_TAIPEI);
  const eligible=matches&&service==="city"&&unitPrice>0&&within;
  // Shared code is not proof of LINE coupon possession, validity or unused status.
- const provisionalDiscount=eligible?Math.min(50,unitPrice):0;
+ const provisionalDiscount=eligible?Math.min(gross,50*quantity):0;
  return {gross,provisionalDiscount,provisionalTotal:gross-provisionalDiscount,codeRecognized:matches,eligibleForPreview:eligible,verified:false,redeemable:false};
 }

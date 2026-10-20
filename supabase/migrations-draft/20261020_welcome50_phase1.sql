@@ -1,0 +1,23 @@
+-- DRAFT ONLY: reusable promotion registration columns. NOT APPLIED.
+-- Apply only on a verified isolated Supabase development database after approval.
+-- Assumes existing public.site_activities and public.registrations schema (read-only checked 2026-10-20).
+BEGIN;
+ALTER TABLE public.registrations
+  ADD COLUMN IF NOT EXISTS promotion_code text,
+  ADD COLUMN IF NOT EXISTS promotion_discount integer NOT NULL DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS original_total integer;
+DO $welcome50$
+BEGIN
+ IF NOT EXISTS (
+   SELECT 1 FROM pg_constraint
+   WHERE conrelid='public.registrations'::regclass
+     AND conname='registrations_promotion_discount_nonnegative'
+ ) THEN
+   ALTER TABLE public.registrations
+     ADD CONSTRAINT registrations_promotion_discount_nonnegative
+     CHECK (promotion_discount >= 0);
+ END IF;
+END $welcome50$;
+-- Do not add total_amount = original_total - discount constraint until legacy data is audited.
+-- Campaign-specific eligible_event_slugs determine scope; campaigns default disabled.
+COMMIT;

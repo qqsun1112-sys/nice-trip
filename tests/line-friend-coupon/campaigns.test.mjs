@@ -1,0 +1,18 @@
+import assert from "node:assert/strict";
+import {campaignDecision as decide,resolveCampaigns} from "./campaigns.mjs";
+const now=new Date("2026-12-20T04:00:00Z");
+const base={code:"year-end",enabled:true,startDate:"2026-12-01",endDate:"2026-12-31",services:["city"],ticketCodes:["standard"]};
+const check=(c,extra={})=>decide({campaign:c,service:"city",ticketCode:"standard",now,...extra});
+assert.equal(check(base).eligible,true);
+assert.equal(check({...base,enabled:false}).reason,"disabled");
+assert.equal(check({...base,startDate:"2026-12-21"}).reason,"not_started");
+assert.equal(check({...base,endDate:"2026-12-19"}).reason,"expired");
+assert.equal(check({...base,services:["temple"]}).reason,"service_not_eligible");
+assert.equal(check({...base,ticketCodes:["member"]}).reason,"ticket_not_eligible");
+assert.equal(check({...base,eventDateStart:"2027-01-01"},{eventDate:"2026-12-26"}).reason,"event_date_not_eligible");
+assert.equal(check({...base,eventDateEnd:"2026-12-25"},{eventDate:"2026-12-26"}).reason,"event_date_not_eligible");
+assert.equal(check({...base,eventDateEnd:"2026-12-26"},{eventDate:"2026-12-26"}).eligible,true);
+assert.equal(resolveCampaigns({campaigns:[base,{...base,code:"anniversary",enabled:false}],service:"city",ticketCode:"standard",now}).filter(x=>x.eligible).length,1);
+assert.throws(()=>check({...base,code:""}),/invalid_campaign/);
+assert.throws(()=>decide({campaign:base,service:"city",ticketCode:"standard",now:new Date("invalid")}),/invalid_time/);
+console.log("12 reusable campaign eligibility assertions passed");

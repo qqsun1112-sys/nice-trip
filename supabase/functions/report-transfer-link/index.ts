@@ -7,6 +7,8 @@ const reply=(body:unknown,status:number,h:Record<string,string>)=>Response.json(
 const hash=async(s:string)=>Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)))).map(b=>b.toString(16).padStart(2,"0")).join("");
 Deno.serve(async(req)=>{
  const origin=req.headers.get("origin"),h=headers(origin);
+ const contentLength=Number(req.headers.get("content-length")||"0");
+ if(contentLength>4096)return reply({ok:false,error:"request_too_large"},413,h);
  if(req.method==="OPTIONS")return new Response(null,{headers:h});
  if(req.method!=="POST"||(origin&&!origins.has(origin)))return reply({ok:false,error:"forbidden"},403,h);
  try{
@@ -23,9 +25,9 @@ Deno.serve(async(req)=>{
   if(!/^[0-9]{5}$/.test(last5)||memo.length>60||/[\u0000-\u001f\u007f]/.test(memo))return reply({ok:false,error:"invalid_fields"},400,h);
   if(r.status==="transfer_reported")return reply({ok:true,status:"transfer_reported",already_reported:true},200,h);
   if(r.status!=="pending_transfer")return reply({ok:false,error:"status_locked"},409,h);
-  const {data:changed,error:ue}=await admin.from("registrations").update({transfer_last5:last5,transfer_memo:memo||null,status:"transfer_reported",updated_at:new Date().toISOString()}).eq("id",r.id).eq("status","pending_transfer").select("id");
+  const {data:changed,error:ue}=await admin.from("registrations").update({transfer_last5:last5,transfer_memo:memo||null,status:"transfer_reported",updated_at:new Date().toISOString()}).eq("id",r.id).eq("status","pending_transfer").eq("transfer_link_token_hash",digest).gt("transfer_link_expires_at",new Date().toISOString()).select("id");
   if(ue)return reply({ok:false,error:"update_failed"},500,h);
-  if(!changed?.length)return reply({ok:false,error:"status_changed"},409,h);
+  if(!changed?.length)return reply({ok:false,error:"status_changed_or_expired"},409,h);
   // Notify the administrator, matching the legacy report-transfer workflow.
   try{
    const key=Deno.env.get("RESEND_API_KEY");

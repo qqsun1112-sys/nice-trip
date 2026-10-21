@@ -12,7 +12,17 @@ Deno.serve(async(req)=>{
  if(req.method==="OPTIONS")return new Response(null,{headers:h});
  if(req.method!=="POST"||(origin&&!origins.has(origin)))return reply({ok:false,error:"forbidden"},403,h);
  try{
+  // Best-effort, database-backed hourly throttle. No IP address or token is logged.
+  const forwarded=req.headers.get("cf-connecting-ip")||req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()||"unknown";
+  const clientKey=await hash(forwarded+"|"+(Deno.env.get("TRANSFER_RATE_LIMIT_PEPPER")||Deno.env.get("SUPABASE_URL")||""));
   const body=await req.json(),action=String(body.action||""),no=String(body.registration_no||"").trim(),token=String(body.report_token||"").trim();
+  if(action==="submit"){
+   const keysForLimit=JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS")||"{}");
+   if(!keysForLimit.default)throw Error("missing_service_key");
+   const limiter=createClient(Deno.env.get("SUPABASE_URL")!,keysForLimit.default);
+   const {data:allowed,error:limitError}=await limiter.rpc("check_transfer_report_rate_limit",{p_client_hash:clientKey,p_registration_no:no,p_max_attempts:8});
+   if(limitError||allowed!==true)return reply({ok:false,error:"too_many_requests"},429,h);
+  }
   if(!["preview","submit"].includes(action)||!/^NT-[0-9]{8}-[A-Z0-9]{6}$/.test(no)||!/^[a-f0-9]{64}$/.test(token))return reply({ok:false,error:"invalid_link"},400,h);
   const keys=JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS")||"{}");
   if(!keys.default)throw Error("missing_service_key");

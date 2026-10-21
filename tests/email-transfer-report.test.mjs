@@ -43,3 +43,8 @@ test("Submission throttle uses database atomic RPC",()=>{
  assert.match(migration,/on conflict \(client_hash, registration_no, hour_bucket\)/);
  assert.match(migration,/revoke all on function public\.check_transfer_report_rate_limit/);
 });
+
+test("Both preview and submit are rate limited",()=>{
+ assert.match(report,/action==="preview"\|\|action==="submit"/);
+ assert.match(report,/p_max_attempts:12/);
+});

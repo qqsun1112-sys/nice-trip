@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<title>回報匯款｜美遊記 NICE TRIP</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f6f8f7;color:#243b3e;font:16px/1.7 system-ui,"Noto Sans TC",sans-serif}main{max-width:580px;margin:7vh auto;padding:30px;background:#fff;border-radius:18px;box-shadow:0 12px 36px #173b4215}h1{font-size:26px;color:#194e58;margin:0 0 12px}.brand{font-weight:750;color:#195c66;letter-spacing:.1em}.info{background:#f1f6f5;border-radius:12px;padding:16px;white-space:pre-line}label{display:block;font-weight:650;margin:18px 0 6px}input{display:block;width:100%;padding:12px;border:1px solid #bdcecb;border-radius:9px;font:inherit}button{margin-top:20px;background:#195c66;border:0;border-radius:10px;color:#fff;font:inherit;font-weight:700;padding:13px 24px;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}small{color:#637579}#msg{font-weight:650}a{color:#195c66}@media(max-width:600px){main{margin:20px 12px;padding:22px}}</style></head>
+<body><main><p class="brand">美遊記 NICE TRIP</p><h1>回報匯款資料</h1><p>請核對報名資料，完成匯款後填寫帳號末五碼。</p><div class="info" id="info">正在驗證專屬連結…</div>
+<form id="form" hidden><label for="last5">匯款帳號末五碼（必填）</label><input id="last5" inputmode="numeric" autocomplete="off" pattern="[0-9]{5}" maxlength="5" required placeholder="請輸入5位數字">
+<label for="memo">匯款備註（選填）</label><input id="memo" maxlength="60" placeholder="方便核帳的簡短備註"><button id="submit" type="submit">送出匯款回報</button></form>
+<p id="msg" role="status" aria-live="polite"></p><p><small>送出匯款回報不代表已確認收款。待美遊記核對款項並寄發正式確認信後，報名才算完成。請勿轉寄本信的專屬連結，也請勿提供銀行密碼。</small></p>
+<p><a href="https://nicetrip.tw/activities.html">返回近期活動</a></p></main>
+<script>
+"use strict";
+const params=new URLSearchParams(location.hash.slice(1)),no=params.get("no"),token=params.get("token");
+history.replaceState(null,"",location.pathname);
+const info=document.getElementById("info"),form=document.getElementById("form"),msg=document.getElementById("msg"),button=document.getElementById("submit");
+const endpoint="https://eanxqqctblwfhtdrhwuk.supabase.co/functions/v1/report-transfer-link";
+async function call(action,extra={}){const response=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},cache:"no-store",body:JSON.stringify({action,registration_no:no,report_token:token,...extra})});const data=await response.json().catch(()=>({}));if(!response.ok||!data.ok)throw new Error(data.error||"驗證失敗");return data}
+if(!no||!token){info.textContent="連結不完整，請重新開啟原始通知信。"}else{call("preview").then(d=>{info.textContent="活動："+d.event_title+"\n日期："+d.event_date+"\n報名編號："+no+"\n人數："+d.quantity+"\n應付金額：NT$ "+Number(d.total_amount).toLocaleString("zh-TW");if(d.status==="transfer_reported"){msg.textContent="此筆報名已回報匯款，正在等待查帳。"}else if(d.reportable){form.hidden=false}else{msg.textContent="目前狀態不接受匯款回報，請聯絡美遊記。"}}).catch(()=>{info.textContent="專屬連結無效或已過期，請聯絡美遊記。"})}
+form.addEventListener("submit",async e=>{e.preventDefault();if(button.disabled)return;const last5=document.getElementById("last5").value.trim(),memo=document.getElementById("memo").value.trim();if(!/^[0-9]{5}$/.test(last5)){msg.textContent="請填寫正確的5位數字。";return}button.disabled=true;msg.textContent="正在送出…";try{await call("submit",{transfer_last5:last5,transfer_memo:memo});form.hidden=true;msg.textContent="匯款資料已成功回報，請等待美遊記查帳及正式報名確認通知。"}catch(err){msg.textContent="回報未完成："+String(err.message||"請稍後再試");button.disabled=false}});
+</script></body></html>

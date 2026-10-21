@@ -26,8 +26,17 @@ Deno.serve(async(req)=>{
   const {data:changed,error:ue}=await admin.from("registrations").update({transfer_last5:last5,transfer_memo:memo||null,status:"transfer_reported",updated_at:new Date().toISOString()}).eq("id",r.id).eq("status","pending_transfer").select("id");
   if(ue)return reply({ok:false,error:"update_failed"},500,h);
   if(!changed?.length)return reply({ok:false,error:"status_changed"},409,h);
-  // TODO before production: shared notification dispatch with existing report-transfer,
-  // plus rate limiting and monitoring. No false claim that email was sent.
+  // Notify the administrator, matching the legacy report-transfer workflow.
+  try{
+   const key=Deno.env.get("RESEND_API_KEY");
+   if(key){
+    const esc=(v:unknown)=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]!));
+    const html='<div style="font-family:Arial,sans-serif;color:#333;max-width:640px"><h2>參加者已回報匯款｜請查帳</h2><p><b>活動：</b>'+esc(r.event_title)+'</p><p><b>日期：</b>'+esc(r.event_date)+'</p><p><b>報名編號：</b>'+esc(no)+'</p><p><b>人數：</b>'+esc(r.quantity)+'</p><p><b>應收金額：</b>NT$ '+Number(r.total_amount||0).toLocaleString("zh-TW")+'</p><p><b>匯款末五碼：</b>'+esc(last5)+'</p><p><b>備註：</b>'+esc(memo||"未填寫")+'</p><p>請至美遊記後台核帳確認，切勿僅憑回報認定已收款。</p></div>';
+    const mr=await fetch("https://api.resend.com/emails",{method:"POST",headers:{"Authorization":"Bearer "+key,"Content-Type":"application/json"},body:JSON.stringify({from:"美遊記 NICE TRIP <registration@send.nicetrip.tw>",to:["rodney.xinzhan@gmail.com"],subject:"【美遊記待查帳】"+r.event_title+"｜末5碼 "+last5,html})});
+    if(!mr.ok)console.error("transfer_link_admin_notification_failed",mr.status);
+   }
+  }catch(err){console.error("transfer_link_admin_notification_failed",String(err))}
+  // TODO: add server-side rate limiting and audit monitoring before production.
   return reply({ok:true,status:"transfer_reported"},200,h);
  }catch(e){console.error("transfer_link_error",e);return reply({ok:false,error:"invalid_request"},400,h)}
 });

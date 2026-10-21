@@ -1,0 +1,23 @@
+name: Free browser acceptance tests
+on:
+  pull_request:
+    paths:
+      - "report-transfer.html"
+      - "tests/report-transfer.browser.spec.mjs"
+      - ".github/workflows/transfer-browser-tests.yml"
+  workflow_dispatch:
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-save @playwright/test
+      - run: npx playwright install --with-deps chromium
+      - name: Serve static test page
+        run: python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/transfer-http.log 2>&1 &
+      - name: Browser tests with mocked Supabase responses
+        run: npx playwright test tests/report-transfer.browser.spec.mjs --browser chromium --workers 1 --reporter list

@@ -35,3 +35,11 @@ test("Migration adds token digest and expiry",()=>{
  assert.match(migration,/transfer_link_expires_at/);
  assert.match(migration,/create unique index/);
 });
+
+test("Submission throttle uses database atomic RPC",()=>{
+ assert.match(report,/check_transfer_report_rate_limit/);
+ assert.match(report,/too_many_requests/);
+ const migration=read("supabase/migrations/20261021_email_transfer_rate_limit.sql");
+ assert.match(migration,/on conflict \(client_hash, registration_no, hour_bucket\)/);
+ assert.match(migration,/revoke all on function public\.check_transfer_report_rate_limit/);
+});

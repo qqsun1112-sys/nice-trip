@@ -1,0 +1,21 @@
+name: Email transfer report checks
+on:
+  pull_request:
+    paths:
+      - "report-transfer.html"
+      - "supabase/functions/report-transfer-link/**"
+      - "supabase/functions/submit-registration/**"
+      - "supabase/migrations/20261021_email_transfer_link.sql"
+      - "tests/email-transfer-report.test.mjs"
+      - ".github/workflows/email-transfer-report.yml"
+  workflow_dispatch:
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify transfer reporting security invariants
+        run: node --test tests/email-transfer-report.test.mjs

@@ -48,6 +48,18 @@ window.NICE_TRIP_CONTENT = {
   ],
   articles: [
       {
+          "slug": "monga-guanyin-mirror-20261029",
+          "category": "city",
+          "publisher": "女子漾",
+          "date": "2026-10-29",
+          "image": "assets/images/艋舺小旅行.png",
+          "imageAlt": "艋舺龍山寺與城市文化走讀主視覺",
+          "title": "尋找觀音媽的那面鏡子｜一池消失的清水，一段跨越兩百年的艋舺記憶",
+          "excerpt": "從龍山寺前消失的「美人照鏡」水池，到池頭夫人、三面觀音與龍船雕塑，走進艋舺公園，尋找映照城市記憶與人心的那面鏡子。",
+          "url": "https://woman.udn.com/woman/story/123162/9844006",
+          "sortOrder": 0
+      },
+      {
           "slug": "beitou-nongchan-water-moon-20230803",
           "category": "faith",
           "publisher": "女子漾",

@@ -60,6 +60,18 @@ window.NICE_TRIP_CONTENT = {
           "sortOrder": 0
       },
       {
+          "slug": "qixingshan-20201105",
+          "category": "travel",
+          "publisher": "輕旅行",
+          "date": "2020-11-05",
+          "image": "assets/images/七星山.jpg",
+          "imageAlt": "陽明山七星山秋季芒花風景",
+          "title": "七星山│台北市第一高峰～欣賞浪漫的雪白芒海",
+          "excerpt": "從陽明山小油坑登山口出發，沿著步道看後火山地景與隨風搖曳的白色芒花，一路登上七星山主峰。",
+          "url": "https://travel.yam.com/article/121241",
+          "sortOrder": 0
+      },
+      {
           "slug": "beitou-nongchan-water-moon-20230803",
           "category": "faith",
           "publisher": "女子漾",

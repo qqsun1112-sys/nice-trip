@@ -486,7 +486,19 @@ function keyFor(record){
  const matches=Object.keys(DETAIL).filter(k=>base(k)===base(slug));
  return matches.length===1?matches[0]:null;
 }
-function get(record){const key=keyFor(record);return key?DETAIL[key]:null;}
+function get(record){
+ const key=keyFor(record);
+ const detail=key?DETAIL[key]:null;
+ const slug=typeof record==="string"?record:record?.slug||record?.id;
+ if(detail&&slug==="taipei-shikoku-20270220"){
+   return {
+     ...detail,
+     route:"捷運新北投站 1 號出口外（集合）→ 北投普濟寺 → 圓山護國禪寺 → 台北天后宮（賦歸）",
+     transport:""
+   };
+ }
+ return detail;
+}
 function ready(record){const d=get(record);return !!(d&&Array.isArray(d.intro)&&d.intro.length&&Array.isArray(d.features)&&d.features.length&&Array.isArray(d.highlights)&&(record.service!=="city"||(d.highlights.length&&d.route)));}
 window.NiceTripActivityDetails={keyFor,get,ready};
 })();
